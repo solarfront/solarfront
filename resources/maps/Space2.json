@@ -1,0 +1,187 @@
+{
+  "name": "SolarFrontSector2",
+  "width": 2048,
+  "height": 1818,
+  "nations": [
+    {
+      "coordinates": [533, 287],
+      "name": "Sirocco Dominion",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [733, 437],
+      "name": "Ashen Wastes Clan",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [653, 207],
+      "name": "Orion Dune League",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [1456, 493],
+      "name": "Titan Expanse",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [1636, 623],
+      "name": "Cyclone Syndicate",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1556, 413],
+      "name": "Aurelia Ringhold",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [175, 988],
+      "name": "Verdantia Republic",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [325, 1108],
+      "name": "Emerald Coalition",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [225, 1178],
+      "name": "Riverfall Tribes",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [889, 1377],
+      "name": "Glacien Union",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [1109, 1477],
+      "name": "Aurora Confederacy",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1009, 1557],
+      "name": "Frosthaven Enclave",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [1183, 307],
+      "name": "Bluewatch Outpost",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [410, 899],
+      "name": "Greyrock Pact",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [661, 1430],
+      "name": "Shadowtidel",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1315, 1374],
+      "name": "Permafrost Keep",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [1009, 511],
+      "name": "Solari Ascendancy",
+      "strength": 3,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [920, 260],
+      "name": "Starlance Prospectors",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1080, 300],
+      "name": "Cinder Belt Cartel",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1250, 350],
+      "name": "Helix Freehold",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1450, 450],
+      "name": "Rockfall Mining Guild",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1600, 650],
+      "name": "Void Nomads",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1550, 880],
+      "name": "Ironbar Collective",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1370, 1030],
+      "name": "Dustwind Confederates",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1130, 1090],
+      "name": "Outer Rim Corsairs",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [900, 1030],
+      "name": "Meteor Lords",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [780, 880],
+      "name": "Gravitas Commune",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [720, 680],
+      "name": "Riftstone Mercenaries",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [800, 460],
+      "name": "Echo Shard Syndicate",
+      "strength": 1,
+      "flag": ""
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "SolarFrontSector",
+  "width": 2048,
+  "height": 1818,
+  "nations": [
+    {
+      "coordinates": [476, 349],
+      "name": "Emberis",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1420, 656],
+      "name": "Paleon",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [718, 1166],
+      "name": "Nyx Prime",
+      "strength": 1,
+      "flag": ""
+    }
+  ]
+}

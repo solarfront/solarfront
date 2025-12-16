@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5E7EB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9CA3AF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B7280;stop-opacity:1" />
+    </linearGradient>
+    <filter id="blueGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer glow effect around entire hand -->
+  <g filter="url(#blueGlow)">
+    <!-- Palm base - smaller and more compact -->
+    <path d="M 8 20 Q 8 16 12 16 L 18 16 Q 22 16 22 20 L 22 28 Q 22 30 20 30 L 10 30 Q 8 30 8 28 Z" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Thumb - curled behind -->
+    <path d="M 6 22 Q 4 20 4 18 Q 4 16 6 16 Q 8 16 8 18 L 8 22 Q 8 24 6 24 Z" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Index finger - EXTENDED pointing (click point at tip) -->
+    <path d="M 12 16 Q 10 14 10 4 Q 10 2 12 2 Q 14 2 14 4 L 14 16" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Fingertip - the actual click point -->
+    <circle cx="12" cy="2" r="2" fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Middle finger - curled down -->
+    <path d="M 16 16 Q 14 14 14 12 Q 14 10 16 10 Q 18 10 18 12 L 18 16" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Ring finger - curled down -->
+    <path d="M 20 16 Q 18 14 18 13 Q 18 11 20 11 Q 22 11 22 13 L 22 16" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+    
+    <!-- Pinky - curled down -->
+    <path d="M 24 18 Q 22 16 22 15 Q 22 13 24 13 Q 26 13 26 15 L 26 18" 
+          fill="url(#metalGrad)" stroke="#60A5FA" stroke-width="2"/>
+  </g>
+  
+  <!-- Circuit lines -->
+  <path d="M 10 22 L 14 22 M 14 24 L 18 24 M 16 26 L 20 26" 
+        stroke="#60A5FA" stroke-width="1.2" fill="none" opacity="0.8"/>
+  
+  <!-- Joint indicators with glow -->
+  <circle cx="12" cy="8" r="1" fill="#60A5FA" opacity="0.9"/>
+  <circle cx="16" cy="13" r="0.8" fill="#60A5FA" opacity="0.7"/>
+  <circle cx="20" cy="13" r="0.8" fill="#60A5FA" opacity="0.7"/>
+  
+  <!-- Main LED power indicator -->
+  <circle cx="15" cy="23" r="1.5" fill="#60A5FA" opacity="0.9">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Click point indicator at fingertip -->
+  <circle cx="12" cy="2" r="0.8" fill="#FFFFFF" opacity="0.8">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Mechanical details -->
+  <rect x="14" y="28" width="2" height="1" fill="#60A5FA" opacity="0.8"/>
+  <rect x="10" y="15" width="1" height="2" fill="#3B82F6"/>
+  <rect x="18" y="15" width="1" height="2" fill="#3B82F6"/>
+</svg>

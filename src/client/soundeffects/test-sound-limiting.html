@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Limiting System Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .controls {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #0f3460;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #533483;
+        }
+        button:disabled {
+            background: #444;
+            cursor: not-allowed;
+        }
+        .status {
+            background: #0f3460;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .priority-high { background: #8b2635; }
+        .priority-medium { background: #b8860b; }
+        .priority-low { background: #2d5016; }
+        
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #16213e;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Sound Limiting System Test</h1>
+        <p>This tests the 10-sound limit with priority system. Try clicking multiple sounds rapidly!</p>
+        
+        <div class="controls">
+            <h3>High Priority Sounds (Explosions)</h3>
+            <div class="button-group">
+                <button class="priority-high" onclick="playSound('nuke', 'HIGH')">💥 Nuke Explosion</button>
+                <button class="priority-high" onclick="playSound('missile', 'HIGH')">🚀 Missile Launch</button>
+                <button class="priority-high" onclick="playSound('destruction', 'HIGH')">💀 Unit Destruction</button>
+                <button class="priority-high" onclick="playSound('sam', 'HIGH')">🎯 SAM Intercept</button>
+            </div>
+            
+            <h3>Medium Priority Sounds (Buildings & Ships)</h3>
+            <div class="button-group">
+                <button class="priority-medium" onclick="playSound('ship', 'MEDIUM')">🛸 Ship Firing</button>
+                <button class="priority-medium" onclick="playSound('construction', 'MEDIUM')">🔨 Building Construction</button>
+                <button class="priority-medium" onclick="playSound('complete', 'MEDIUM')">✅ Building Complete</button>
+                <button class="priority-medium" onclick="playSound('territory', 'MEDIUM')">🏳️ Territory Capture</button>
+            </div>
+            
+            <h3>Low Priority Sounds (Ambient)</h3>
+            <div class="button-group">
+                <button class="priority-low" onclick="playSound('port', 'LOW')">🏭 Port Activity</button>
+                <button class="priority-low" onclick="playSound('fallout', 'LOW')">☢️ Fallout Creation</button>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <button onclick="spamSounds()" style="background: #8b2635;">🔥 SPAM TEST (Play 20 sounds rapidly)</button>
+                <button onclick="clearAllSounds()">🛑 Clear All Sounds</button>
+                <button onclick="initAudio()" id="initBtn">🎧 Initialize Audio</button>
+            </div>
+        </div>
+        
+        <div class="status" id="status">
+            Active Sounds: 0/10<br>
+            Click "Initialize Audio" first, then test the sound limiting system!
+        </div>
+        
+        <div class="status" id="volumeScalingStatus" style="margin-top: 10px;">
+            Volume Scaling: Not initialized
+        </div>
+        
+        <div class="info">
+            <h3>How It Works:</h3>
+            <ul>
+                <li><strong>Maximum 10 sounds</strong> can play simultaneously</li>
+                <li><strong>Priority System:</strong> High priority sounds replace low priority ones</li>
+                <li><strong>Distance-based:</strong> Closer sounds have priority over distant ones</li>
+                <li><strong>Auto-cleanup:</strong> Sounds are automatically removed when they finish</li>
+                <li><strong>Compressor:</strong> Prevents audio clipping and volume spikes</li>
+                <li><strong>Volume Scaling:</strong> Identical sounds reduce volume by √(activeCount) to prevent doubling</li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="module">
+        // Mock minimal classes for testing
+        class Cell {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+        }
+        
+        class MockTransformHandler {
+            isOnScreen(position) {
+                return true; // Assume all sounds are on screen for testing
+            }
+            
+            screenCenter() {
+                return { screenX: 500, screenY: 300 }; // Mock screen center
+            }
+        }
+        
+        // Sound priority levels
+        const SoundPriority = {
+            LOW: 1,
+            MEDIUM: 2,
+            HIGH: 3
+        };
+        
+        // Mock sound engine that just creates oscillators
+        class MockSoundEngine {
+            constructor() {
+                this.audioContext = null;
+                this.initialized = false;
+            }
+            
+            async init() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                this.initialized = true;
+            }
+            
+            getContext() {
+                return this.initialized ? this.audioContext : null;
+            }
+            
+            // Mock sound methods that create simple oscillators
+            playPlasmaBurst(volume) { this.playTestTone(800, 0.3, volume); }
+            playShockwaveImpact(volume) { this.playTestTone(100, 1.0, volume); }
+            playMissileDeploy(volume) { this.playTestTone(400, 0.8, volume); }
+            playUnitDestruction(volume) { this.playTestTone(200, 0.6, volume); }
+            playSAMIntercept(volume) { this.playTestTone(1200, 0.4, volume); }
+            playBuildingConstruction(volume) { this.playTestTone(300, 0.5, volume); }
+            playPortComplete(volume) { this.playTestTone(500, 1.2, volume); }
+            playTerritoryCapture(volume) { this.playTestTone(600, 0.7, volume); }
+            playPortActivity(volume) { this.playTestTone(150, 0.8, volume); }
+            playFalloutCreation(volume) { this.playTestTone(80, 1.5, volume); }
+            
+            playTestTone(frequency, duration, volume) {
+                if (!this.audioContext) return;
+                
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.value = frequency;
+                gain.gain.value = volume * 0.1; // Keep it quiet for testing
+                
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+                
+                const now = this.audioContext.currentTime;
+                gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+                
+                osc.start(now);
+                osc.stop(now + duration);
+            }
+        }
+        
+        // Import the sound manager implementation (simplified for testing)
+        let soundManager;
+        let updateInterval;
+        
+        // Initialize the mock sound system
+        window.initAudio = async function() {
+            try {
+                // Create mock sound manager with our test implementations
+                soundManager = createMockSoundManager();
+                await soundManager.init();
+                
+                document.getElementById('initBtn').disabled = true;
+                document.getElementById('initBtn').textContent = '✅ Audio Initialized';
+                
+                // Start status updates
+                updateInterval = setInterval(updateStatus, 100);
+                
+                console.log('Mock sound system initialized');
+            } catch (error) {
+                console.error('Failed to initialize audio:', error);
+            }
+        };
+        
+        window.playSound = function(soundType, priority) {
+            if (!soundManager) {
+                alert('Click "Initialize Audio" first!');
+                return;
+            }
+            
+            // Create random position for spatial audio testing
+            const position = new Cell(
+                Math.random() * 1000,
+                Math.random() * 600
+            );
+            
+            // Map sound types to methods
+            const soundMap = {
+                'nuke': () => soundManager.playNukeDetonation(position),
+                'missile': () => soundManager.playMissileLaunch(position),
+                'destruction': () => soundManager.playUnitDestruction(position),
+                'sam': () => soundManager.playSAMIntercept(position),
+                'ship': () => soundManager.playShipFiring(position),
+                'construction': () => soundManager.playBuildingConstruction(position),
+                'complete': () => soundManager.playPortComplete(position),
+                'territory': () => soundManager.playTerritoryCapture(position),
+                'port': () => soundManager.playPortActivity(position),
+                'fallout': () => soundManager.playFalloutCreation(position)
+            };
+            
+            if (soundMap[soundType]) {
+                soundMap[soundType]();
+                console.log(`Playing ${soundType} sound (${priority} priority) at position (${Math.round(position.x)}, ${Math.round(position.y)})`);
+            }
+        };
+        
+        window.spamSounds = function() {
+            if (!soundManager) {
+                alert('Click "Initialize Audio" first!');
+                return;
+            }
+            
+            const sounds = ['nuke', 'missile', 'ship', 'construction', 'port'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const soundType = sounds[Math.floor(Math.random() * sounds.length)];
+                    const priority = Math.random() < 0.3 ? 'HIGH' : Math.random() < 0.6 ? 'MEDIUM' : 'LOW';
+                    playSound(soundType, priority);
+                }, i * 50); // 50ms apart
+            }
+        };
+        
+        window.clearAllSounds = function() {
+            if (soundManager) {
+                soundManager.clearAllActiveSounds();
+            }
+        };
+        
+        function updateStatus() {
+            if (!soundManager) return;
+            
+            const stats = soundManager.getSoundStats();
+            const activeCount = stats.totalActive;
+            const maxSounds = stats.limit;
+            
+            document.getElementById('status').innerHTML = 
+                `Active Sounds: ${activeCount}/${maxSounds}<br>` +
+                `Status: ${activeCount >= maxSounds ? '🔴 AT LIMIT' : '🟢 AVAILABLE'}<br>` +
+                `Priority system will replace lower priority sounds when at limit.`;
+            
+            // Update volume scaling status
+            const soundTypesList = Object.keys(stats.byType).length > 0 ? 
+                Object.entries(stats.byType).map(([type, count]) => {
+                    let volumeText = 'no scaling';
+                    if (count > 1) {
+                        let percentage;
+                        if (count === 2) percentage = 60;
+                        else if (count === 3) percentage = 45;
+                        else percentage = 40; // 4 or more
+                        volumeText = `vol ${percentage}% each`;
+                    }
+                    return `${type}: ${count} (${volumeText})`;
+                }).join('<br>') : 
+                'No active sounds';
+                
+            document.getElementById('volumeScalingStatus').innerHTML = 
+                `<strong>Volume Scaling by Type:</strong><br>${soundTypesList}`;
+        }
+        
+        // Create a mock sound manager that implements the same interface
+        function createMockSoundManager() {
+            return {
+                soundsV2: new MockSoundEngine(),
+                soundsV1: new MockSoundEngine(),
+                initialized: false,
+                enabled: true,
+                volume: 0.7,
+                transformHandler: new MockTransformHandler(),
+                maxAudioDistance: 1500,
+                
+                // Sound limiting system
+                activeSounds: [],
+                maxConcurrentSounds: 10,
+                soundIdCounter: 0,
+                compressor: null,
+                
+                // Sound type tracking for volume scaling
+                activeSoundTypes: new Map(),
+                
+                async init() {
+                    await this.soundsV2.init();
+                    await this.soundsV1.init();
+                    this.setupAudioCompressor();
+                    this.initialized = true;
+                },
+                
+                setupAudioCompressor() {
+                    try {
+                        const audioContext = this.soundsV2.getContext();
+                        if (!audioContext) return;
+
+                        this.compressor = audioContext.createDynamicsCompressor();
+                        this.compressor.threshold.value = -20;
+                        this.compressor.knee.value = 10;
+                        this.compressor.ratio.value = 6;
+                        this.compressor.attack.value = 0.01;
+                        this.compressor.release.value = 0.1;
+                    } catch (error) {
+                        console.warn('Failed to setup audio compressor:', error);
+                    }
+                },
+                
+                generateSoundId() {
+                    return `sound_${++this.soundIdCounter}_${Date.now()}`;
+                },
+                
+                getSoundType(methodName) {
+                    const soundTypeMap = {
+                        'playPlasmaBurst': 'ship_firing',
+                        'playShockwaveImpact': 'nuke_explosion',
+                        'playMissileDeploy': 'missile_launch',
+                        'playUnitDestruction': 'unit_destruction',
+                        'playSAMIntercept': 'sam_intercept',
+                        'playBuildingConstruction': 'building_construction',
+                        'playPortComplete': 'building_complete',
+                        'playTerritoryCapture': 'territory_capture',
+                        'playPortActivity': 'port_activity',
+                        'playFalloutCreation': 'fallout_creation'
+                    };
+                    
+                    return soundTypeMap[methodName] || 'unknown';
+                },
+                
+                calculateVolumeScaling(soundType, baseVolume) {
+                    const activeSameType = this.activeSoundTypes.get(soundType) || 0;
+                    if (activeSameType === 0) {
+                        return baseVolume;
+                    }
+                    
+                    // Apply custom volume scaling to prevent doubling
+                    // 1 sound = 100%, 2 sounds = 60% each, 3 sounds = 45% each, 4+ sounds = 40% each
+                    let volumeMultiplier;
+                    switch (activeSameType + 1) { // +1 because we're about to add this sound
+                        case 1:
+                            volumeMultiplier = 1.0;    // 100%
+                            break;
+                        case 2:
+                            volumeMultiplier = 0.6;    // 60%
+                            break;
+                        case 3:
+                            volumeMultiplier = 0.45;   // 45%
+                            break;
+                        default: // 4 or more
+                            volumeMultiplier = 0.4;    // 40%
+                            break;
+                    }
+                    
+                    return baseVolume * volumeMultiplier;
+                },
+                
+                cleanupFinishedSounds() {
+                    const now = Date.now() / 1000;
+                    const finishedSounds = [];
+                    
+                    this.activeSounds = this.activeSounds.filter(sound => {
+                        const elapsed = now - sound.startTime;
+                        const isActive = elapsed < sound.duration;
+                        
+                        if (!isActive) {
+                            finishedSounds.push(sound);
+                        }
+                        
+                        return isActive;
+                    });
+                    
+                    // Update sound type counters for finished sounds
+                    finishedSounds.forEach(sound => {
+                        const currentCount = this.activeSoundTypes.get(sound.soundType) || 0;
+                        if (currentCount > 1) {
+                            this.activeSoundTypes.set(sound.soundType, currentCount - 1);
+                        } else {
+                            this.activeSoundTypes.delete(sound.soundType);
+                        }
+                    });
+                },
+                
+                canPlaySound(priority, position) {
+                    this.cleanupFinishedSounds();
+                    
+                    if (this.activeSounds.length < this.maxConcurrentSounds) {
+                        return true;
+                    }
+
+                    const lowestPrioritySound = this.activeSounds
+                        .sort((a, b) => a.priority - b.priority)[0];
+
+                    if (priority > lowestPrioritySound.priority) {
+                        this.stopActiveSound(lowestPrioritySound.id);
+                        return true;
+                    }
+
+                    if (priority === lowestPrioritySound.priority && position && lowestPrioritySound.position) {
+                        const newDistance = this.calculateDistanceFromCenter(position);
+                        const oldDistance = this.calculateDistanceFromCenter(lowestPrioritySound.position);
+                        
+                        if (newDistance < oldDistance) {
+                            this.stopActiveSound(lowestPrioritySound.id);
+                            return true;
+                        }
+                    }
+
+                    return false;
+                },
+                
+                calculateDistanceFromCenter(position) {
+                    if (!this.transformHandler) return 0;
+                    
+                    const screenCenter = this.transformHandler.screenCenter();
+                    const centerCell = new Cell(screenCenter.screenX, screenCenter.screenY);
+                    
+                    const deltaX = Math.abs(position.x - centerCell.x);
+                    const deltaY = Math.abs(position.y - centerCell.y);
+                    return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                },
+                
+                stopActiveSound(soundId) {
+                    const soundIndex = this.activeSounds.findIndex(s => s.id === soundId);
+                    if (soundIndex !== -1) {
+                        const sound = this.activeSounds[soundIndex];
+                        
+                        // Update sound type counter
+                        const currentCount = this.activeSoundTypes.get(sound.soundType) || 0;
+                        if (currentCount > 1) {
+                            this.activeSoundTypes.set(sound.soundType, currentCount - 1);
+                        } else {
+                            this.activeSoundTypes.delete(sound.soundType);
+                        }
+                        
+                        this.activeSounds.splice(soundIndex, 1);
+                    }
+                },
+                
+                registerActiveSound(priority, duration, soundType, position, gainNode) {
+                    const soundId = this.generateSoundId();
+                    const activeSound = {
+                        id: soundId,
+                        priority,
+                        position,
+                        startTime: Date.now() / 1000,
+                        duration,
+                        gainNode,
+                        soundType
+                    };
+                    
+                    this.activeSounds.push(activeSound);
+                    
+                    // Update sound type counter
+                    const currentCount = this.activeSoundTypes.get(soundType) || 0;
+                    this.activeSoundTypes.set(soundType, currentCount + 1);
+                    
+                    setTimeout(() => {
+                        this.stopActiveSound(soundId);
+                    }, duration * 1000);
+                    
+                    return soundId;
+                },
+                
+                calculateSpatialVolume(position) {
+                    if (!this.transformHandler) return this.volume;
+
+                    if (!this.transformHandler.isOnScreen(position)) {
+                        return 0;
+                    }
+
+                    const screenCenter = this.transformHandler.screenCenter();
+                    const centerCell = new Cell(screenCenter.screenX, screenCenter.screenY);
+                    
+                    const deltaX = Math.abs(position.x - centerCell.x);
+                    const deltaY = Math.abs(position.y - centerCell.y);
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                    if (distance > this.maxAudioDistance) {
+                        return 0;
+                    }
+
+                    const distanceRatio = distance / this.maxAudioDistance;
+                    const volumeScale = Math.max(0.1, 1 - distanceRatio);
+                    
+                    return this.volume * volumeScale;
+                },
+                
+                playV2(soundMethod, methodName, priority, duration, position) {
+                    if (!this.initialized || !this.enabled) return;
+                    
+                    if (!this.canPlaySound(priority, position)) {
+                        console.log('Sound rejected due to limit/priority');
+                        return;
+                    }
+                    
+                    try {
+                        // Get sound type and calculate base volume
+                        const soundType = this.getSoundType(methodName);
+                        const baseVolume = position ? this.calculateSpatialVolume(position) : this.volume;
+                        
+                        if (baseVolume > 0) {
+                            // Apply volume scaling to prevent doubling of same-type sounds
+                            const scaledVolume = this.calculateVolumeScaling(soundType, baseVolume);
+                            
+                            // Play the sound with scaled volume
+                            soundMethod.call(this.soundsV2, scaledVolume);
+                            
+                            // Register the sound as active
+                            this.registerActiveSound(priority, duration, soundType, position);
+                        }
+                    } catch (error) {
+                        console.error('Error playing sound:', error);
+                    }
+                },
+                
+                // Public methods
+                playShipFiring(position) {
+                    this.playV2((v) => this.soundsV2.playPlasmaBurst(v), 'playPlasmaBurst', SoundPriority.MEDIUM, 0.8, position);
+                },
+                
+                playNukeDetonation(position) {
+                    this.playV2((v) => this.soundsV2.playShockwaveImpact(v), 'playShockwaveImpact', SoundPriority.HIGH, 3.0, position);
+                },
+                
+                playMissileLaunch(position) {
+                    this.playV2((v) => this.soundsV2.playMissileDeploy(v), 'playMissileDeploy', SoundPriority.HIGH, 2.5, position);
+                },
+                
+                playUnitDestruction(position) {
+                    this.playV2((v) => this.soundsV2.playUnitDestruction(v), 'playUnitDestruction', SoundPriority.HIGH, 1.5, position);
+                },
+                
+                playSAMIntercept(position) {
+                    this.playV2((v) => this.soundsV2.playSAMIntercept(v), 'playSAMIntercept', SoundPriority.HIGH, 1.3, position);
+                },
+                
+                playBuildingConstruction(position) {
+                    this.playV2((v) => this.soundsV1.playBuildingConstruction(v), 'playBuildingConstruction', SoundPriority.MEDIUM, 1.0, position);
+                },
+                
+                playPortComplete(position) {
+                    this.playV2((v) => this.soundsV2.playPortComplete(v), 'playPortComplete', SoundPriority.MEDIUM, 2.0, position);
+                },
+                
+                playTerritoryCapture(position) {
+                    this.playV2((v) => this.soundsV2.playTerritoryCapture(v), 'playTerritoryCapture', SoundPriority.MEDIUM, 1.5, position);
+                },
+                
+                playPortActivity(position) {
+                    this.playV2((v) => this.soundsV2.playPortActivity(v), 'playPortActivity', SoundPriority.LOW, 1.0, position);
+                },
+                
+                playFalloutCreation(position) {
+                    this.playV2((v) => this.soundsV2.playFalloutCreation(v), 'playFalloutCreation', SoundPriority.MEDIUM, 2.0, position);
+                },
+                
+                getActiveSoundCount() {
+                    this.cleanupFinishedSounds();
+                    return this.activeSounds.length;
+                },
+                
+                clearAllActiveSounds() {
+                    this.activeSounds = [];
+                    this.activeSoundTypes.clear();
+                },
+                
+                getSoundStats() {
+                    this.cleanupFinishedSounds();
+                    const byType = {};
+                    this.activeSoundTypes.forEach((count, type) => {
+                        byType[type] = count;
+                    });
+                    
+                    return {
+                        totalActive: this.activeSounds.length,
+                        byType,
+                        limit: this.maxConcurrentSounds
+                    };
+                }
+            };
+        }
+    </script>
+</body>
+</html>

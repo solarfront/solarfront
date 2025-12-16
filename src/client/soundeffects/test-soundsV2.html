@@ -1,0 +1,3057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarFront Sound Effects V2 - Optimized Lengths</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8899ff;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .init-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #initButton {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        #initButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .phase-section {
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .phase-title {
+            color: #00ffcc;
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phase-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .sound-button {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border: 2px solid transparent;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sound-button:hover {
+            border-color: #00ffcc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+        }
+
+        .sound-button.playing {
+            animation: pulse 0.5s;
+            border-color: #00ff00;
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .sound-name {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .sound-duration {
+            color: #ffd700;
+            font-size: 12px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .sound-description {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        #volume {
+            width: 150px;
+        }
+
+        #status {
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            min-height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Phase-specific colors */
+        .phase1 { border-left: 4px solid #ff6b6b; }
+        .phase2 { border-left: 4px solid #4ecdc4; }
+        .phase3 { border-left: 4px solid #ffe66d; }
+        .phase4 { border-left: 4px solid #a8e6cf; }
+
+        .hidden {
+            display: none;
+        }
+
+        .legend {
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 SolarFront Sound Effects V2</h1>
+        <div class="subtitle">Optimized sound lengths for gameplay</div>
+        
+        <div class="init-container">
+            <button id="initButton" onclick="initAudio()">🔊 Initialize Audio System</button>
+        </div>
+
+        <div id="status">⚡ Ready to initialize audio...</div>
+
+        <div class="legend">
+            <div class="legend-item">⚡ Quick Battle: 0.1-0.5s</div>
+            <div class="legend-item">🏗️ Building: 0.8-1.2s</div>
+            <div class="legend-item">💥 Impact: 0.3-0.8s</div>
+            <div class="legend-item">🚀 Ship: 0.6-1.0s</div>
+        </div>
+
+        <div id="soundControls" class="hidden">
+            <!-- Phase 1: Quick Battle Sounds -->
+            <div class="phase-section phase1">
+                <div class="phase-title">
+                    ⚡ Phase 1: Quick Battle Sounds
+                    <span class="phase-badge">0.1-0.7s</span>
+                </div>
+                <div class="sound-grid">
+                    <button class="sound-button" onclick="playSound('viperShellHit')">
+                        <span class="sound-duration">0.2s</span>
+                        <div class="sound-name">🚢💥 Viper Hit</div>
+                        <div class="sound-description">Shell impact (250 damage)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('defensePostShot')">
+                        <span class="sound-duration">0.4s</span>
+                        <div class="sound-name">🏰 Defense Post Shot</div>
+                        <div class="sound-description">Long-range artillery (10s cooldown)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('samLaunch')">
+                        <span class="sound-duration">0.3s</span>
+                        <div class="sound-name">🚀 SAM Launch</div>
+                        <div class="sound-description">Anti-air missile (100% hit rate)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('orbitalCannonFire')">
+                        <span class="sound-duration">0.35s</span>
+                        <div class="sound-name">🛰️ Orbital Cannon</div>
+                        <div class="sound-description">Space-based laser weapon</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('landAttackHit')">
+                        <span class="sound-duration">0.18s</span>
+                        <div class="sound-name">⚔️ Land Attack Hit</div>
+                        <div class="sound-description">Territory combat success</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('unitDestruction')">
+                        <span class="sound-duration">0.15s</span>
+                        <div class="sound-name">💀 Unit Destruction</div>
+                        <div class="sound-description">Gentle failure sound</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('uiConfirm')">
+                        <span class="sound-duration">0.1s</span>
+                        <div class="sound-name">✅ UI Confirm</div>
+                        <div class="sound-description">Interface interaction success</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('territoryCapture')">
+                        <span class="sound-duration">0.3s</span>
+                        <div class="sound-name">🏆 Territory Capture</div>
+                        <div class="sound-description">Land conquest celebration</div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Phase 2: Building Noises -->
+            <div class="phase-section phase2">
+                <div class="phase-title">
+                    🏗️ Phase 2: Building Noises & Major Achievements
+                    <span class="phase-badge">0.8-2.5s</span>
+                </div>
+                <div class="sound-grid">
+                    <button class="sound-button" onclick="playSound('portComplete')">
+                        <span class="sound-duration">1.0s</span>
+                        <div class="sound-name">🚢 Port Complete</div>
+                        <div class="sound-description">Space port construction finished</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('cityComplete')">
+                        <span class="sound-duration">1.1s</span>
+                        <div class="sound-name">🏙️ City Complete</div>
+                        <div class="sound-description">Population center ready (+250k capacity)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('defensePostComplete')">
+                        <span class="sound-duration">1.2s</span>
+                        <div class="sound-name">🏰 Defense Post Complete</div>
+                        <div class="sound-description">Fortification ready (5x defense bonus)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('missileSiloComplete')">
+                        <span class="sound-duration">1.0s</span>
+                        <div class="sound-name">🚀 Missile Silo Complete</div>
+                        <div class="sound-description">Nuclear capability unlocked</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('gold125k')">
+                        <span class="sound-duration">0.8s</span>
+                        <div class="sound-name">💰 Gold 125K</div>
+                        <div class="sound-description">First major purchasing power</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('gold750k')">
+                        <span class="sound-duration">1.0s</span>
+                        <div class="sound-name">⚛️ Gold 750K</div>
+                        <div class="sound-description">Nuclear capability threshold</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('gold1M')">
+                        <span class="sound-duration">1.2s</span>
+                        <div class="sound-name">👑 Gold 1M</div>
+                        <div class="sound-description">Ultimate purchasing power</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('playerConquest')">
+                        <span class="sound-duration">1.5s</span>
+                        <div class="sound-name">🏆 Player Conquest</div>
+                        <div class="sound-description">Complete enemy elimination</div>
+                    </button>
+                    <!-- NEW: Game state jingles -->
+                    <button class="sound-button" onclick="playSound('gameStart')">
+                        <span class="sound-duration">1.2s</span>
+                        <div class="sound-name">🎵 Game Start Jingle</div>
+                        <div class="sound-description">Upbeat reverse of defeat - ascending bright melody</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('defeatJingle')">
+                        <span class="sound-duration">1.2s</span>
+                        <div class="sound-name">😔 Defeat Jingle</div>
+                        <div class="sound-description">Respectful farewell - graceful acknowledgment</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('victory1stPlace')">
+                        <span class="sound-duration">2.5s</span>
+                        <div class="sound-name">🏆 Victory 1st Place</div>
+                        <div class="sound-description">Ultimate triumph - grand domination finale</div>
+                    </button>
+                    <!-- NEW: Phase 2 troop warnings -->
+                    <button class="sound-button" onclick="playSound('troopsWarning50')">
+                        <span class="sound-duration">0.6s</span>
+                        <div class="sound-name">⚠️ Troops Warning 50%</div>
+                        <div class="sound-description">Alert beeps - troops below half strength</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('troopsDanger20')">
+                        <span class="sound-duration">0.8s</span>
+                        <div class="sound-name">🚨 Troops DANGER 20%</div>
+                        <div class="sound-description">Critical alarm - critical troop shortage</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="phase-section phase3">
+                <div class="phase-title">
+                    💥 Phase 3: Impact Noises
+                    <span class="phase-badge">0.3-0.8s</span>
+                </div>
+                <div class="sound-grid">
+                    <button class="sound-button" onclick="playSound('nukeDetonation')">
+                        <span class="sound-duration">0.8s</span>
+                        <div class="sound-name">☢️ Nuke Detonation</div>
+                        <div class="sound-description">Massive nuclear explosion</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('hydrogenBombImpact')">
+                        <span class="sound-duration">0.8s</span>
+                        <div class="sound-name">💣 H-Bomb Impact</div>
+                        <div class="sound-description">Ultra-destructive blast (80-100 tiles)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('samIntercept')">
+                        <span class="sound-duration">0.45s</span>
+                        <div class="sound-name">🚀 SAM Intercept</div>
+                        <div class="sound-description">Missile destroyed mid-air (100% hit rate)</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('buildingDestruction')">
+                        <span class="sound-duration">0.6s</span>
+                        <div class="sound-name">🏗️ Building Destruction</div>
+                        <div class="sound-description">Structure collapse with debris</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('unitElimination')">
+                        <span class="sound-duration">0.5s</span>
+                        <div class="sound-name">🛡️ Unit Elimination</div>
+                        <div class="sound-description">Heavy unit completely destroyed</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('armorBreak')">
+                        <span class="sound-duration">0.4s</span>
+                        <div class="sound-name">⚔️ Armor Break</div>
+                        <div class="sound-description">Defense systems breached</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('falloutCreation')">
+                        <span class="sound-duration">0.7s</span>
+                        <div class="sound-name">☢️ Fallout Creation</div>
+                        <div class="sound-description">Radioactive terrain formed</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('shockwaveImpact')">
+                        <span class="sound-duration">0.6s</span>
+                        <div class="sound-name">💨 Shockwave Impact</div>
+                        <div class="sound-description">Area effect damage ripples</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="phase-section phase4">
+                <div class="phase-title">
+                    🚀 Phase 4: Ship Noises
+                    <span class="phase-badge">0.6-1.0s</span>
+                </div>
+                <div class="sound-grid">
+                    <button class="sound-button" onclick="playSound('tradeShipArrival')">
+                        <span class="sound-duration">0.8s</span>
+                        <div class="sound-name">🚢💰 Trade Ship Arrival</div>
+                        <div class="sound-description">Engine approach + docking + cargo settle</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('transportShipLoading')">
+                        <span class="sound-duration">0.9s</span>
+                        <div class="sound-name">🚢👥 Transport Ship Loading</div>
+                        <div class="sound-description">Hydraulics + boarding + departure prep</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('warshipPatrol')">
+                        <span class="sound-duration">0.7s</span>
+                        <div class="sound-name">🚢⚓ Warship Patrol</div>
+                        <div class="sound-description">Steady engine + sonar pings + wake wash</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('fleetFormation')">
+                        <span class="sound-duration">1.0s</span>
+                        <div class="sound-name">🚢🚢🚢 Fleet Formation</div>
+                        <div class="sound-description">Coordinated engines + signals + sync movement</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('portActivity')">
+                        <span class="sound-duration">0.6s</span>
+                        <div class="sound-name">🏭 Port Activity</div>
+                        <div class="sound-description">Harbor ambience + cranes + ship horns</div>
+                    </button>
+                    <button class="sound-button" onclick="playSound('navalConstruction')">
+                        <span class="sound-duration">0.9s</span>
+                        <div class="sound-name">🔧 Naval Construction</div>
+                        <div class="sound-description">Heavy construction + welding + systems</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="volume-control">
+                <label for="volume">🔊 Volume:</label>
+                <input type="range" id="volume" min="0" max="100" value="50">
+                <span id="volumeValue">50%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // WebAudioSoundsV2 class implementation (matching TypeScript)
+        class WebAudioSoundsV2 {
+            constructor() {
+                this.initialized = false;
+            }
+
+            async init() {
+                if (this.initialized) return;
+                
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                this.initialized = true;
+                
+                if (this.audioContext.state === 'suspended') {
+                    await this.audioContext.resume();
+                }
+            }
+
+            createNoiseBuffer(duration = 1) {
+                const bufferSize = this.audioContext.sampleRate * duration;
+                const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
+                const output = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                
+                return buffer;
+            }
+
+            makeDistortionCurve(amount) {
+                const samples = 44100;
+                const curve = new Float32Array(samples);
+                const deg = Math.PI / 180;
+                
+                for (let i = 0; i < samples; i++) {
+                    const x = (i * 2) / samples - 1;
+                    curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+                }
+                
+                return curve;
+            }
+
+            // PHASE 1: Quick Battle Sounds
+
+
+            playViperShellHit(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Clarity layer - Sharp ping
+                const clarityOsc = this.audioContext.createOscillator();
+                clarityOsc.type = 'triangle';
+                clarityOsc.frequency.setValueAtTime(2800, now);
+                clarityOsc.frequency.exponentialRampToValueAtTime(1400, now + 0.05);
+                
+                const clarityGain = this.audioContext.createGain();
+                clarityGain.gain.setValueAtTime(0.8, now);
+                clarityGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                
+                clarityOsc.connect(clarityGain);
+                clarityGain.connect(masterGain);
+                clarityOsc.start(now);
+                clarityOsc.stop(now + 0.05);
+
+                // Body layer - Metallic crack
+                const bodyOsc = this.audioContext.createOscillator();
+                bodyOsc.type = 'square';
+                bodyOsc.frequency.setValueAtTime(800, now + 0.005);
+                bodyOsc.frequency.exponentialRampToValueAtTime(200, now + 0.15);
+                
+                const bodyGain = this.audioContext.createGain();
+                bodyGain.gain.setValueAtTime(0.6, now + 0.005);
+                bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const bodyFilter = this.audioContext.createBiquadFilter();
+                bodyFilter.type = 'bandpass';
+                bodyFilter.frequency.value = 1200;
+                bodyFilter.Q.value = 4;
+                
+                bodyOsc.connect(bodyFilter);
+                bodyFilter.connect(bodyGain);
+                bodyGain.connect(masterGain);
+                bodyOsc.start(now + 0.005);
+                bodyOsc.stop(now + 0.15);
+
+                // Weight layer - Sub-bass thump
+                const weightOsc = this.audioContext.createOscillator();
+                weightOsc.type = 'sine';
+                weightOsc.frequency.setValueAtTime(60, now + 0.01);
+                weightOsc.frequency.exponentialRampToValueAtTime(30, now + 0.2);
+                
+                const weightGain = this.audioContext.createGain();
+                weightGain.gain.setValueAtTime(0.4, now + 0.01);
+                weightGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                weightOsc.connect(weightGain);
+                weightGain.connect(masterGain);
+                weightOsc.start(now + 0.01);
+                weightOsc.stop(now + 0.2);
+            }
+
+
+            playDefensePostShot(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Initial boom
+                const boomOsc = this.audioContext.createOscillator();
+                boomOsc.type = 'triangle';
+                boomOsc.frequency.setValueAtTime(120, now);
+                boomOsc.frequency.exponentialRampToValueAtTime(80, now + 0.1);
+                
+                const boomGain = this.audioContext.createGain();
+                boomGain.gain.setValueAtTime(0.8, now);
+                boomGain.gain.exponentialRampToValueAtTime(0.3, now + 0.1);
+                
+                boomOsc.connect(boomGain);
+                boomGain.connect(masterGain);
+                boomOsc.start(now);
+                boomOsc.stop(now + 0.1);
+
+                // Authoritative crack
+                const crackOsc = this.audioContext.createOscillator();
+                crackOsc.type = 'square';
+                crackOsc.frequency.setValueAtTime(2000, now + 0.01);
+                crackOsc.frequency.exponentialRampToValueAtTime(600, now + 0.15);
+                
+                const crackGain = this.audioContext.createGain();
+                crackGain.gain.setValueAtTime(0.6, now + 0.01);
+                crackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                crackOsc.connect(crackGain);
+                crackGain.connect(masterGain);
+                crackOsc.start(now + 0.01);
+                crackOsc.stop(now + 0.15);
+
+                // Power tail
+                const tailOsc = this.audioContext.createOscillator();
+                tailOsc.type = 'sine';
+                tailOsc.frequency.setValueAtTime(200, now + 0.1);
+                tailOsc.frequency.exponentialRampToValueAtTime(80, now + 0.4);
+                
+                const tailGain = this.audioContext.createGain();
+                tailGain.gain.setValueAtTime(0.3, now + 0.1);
+                tailGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                
+                tailOsc.connect(tailGain);
+                tailGain.connect(masterGain);
+                tailOsc.start(now + 0.1);
+                tailOsc.stop(now + 0.4);
+            }
+
+            playSAMLaunch(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Sharp snap
+                const snapOsc = this.audioContext.createOscillator();
+                snapOsc.type = 'square';
+                snapOsc.frequency.value = 1800;
+                
+                const snapGain = this.audioContext.createGain();
+                snapGain.gain.setValueAtTime(0.8, now);
+                snapGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                
+                snapOsc.connect(snapGain);
+                snapGain.connect(masterGain);
+                snapOsc.start(now);
+                snapOsc.stop(now + 0.05);
+
+                // Upward blip (certainty signal)
+                const blipOsc = this.audioContext.createOscillator();
+                blipOsc.type = 'triangle';
+                blipOsc.frequency.setValueAtTime(800, now + 0.03);
+                blipOsc.frequency.exponentialRampToValueAtTime(2400, now + 0.15);
+                
+                const blipGain = this.audioContext.createGain();
+                blipGain.gain.setValueAtTime(0.6, now + 0.03);
+                blipGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                blipOsc.connect(blipGain);
+                blipGain.connect(masterGain);
+                blipOsc.start(now + 0.03);
+                blipOsc.stop(now + 0.15);
+
+                // Thrust trail
+                const thrustNoise = this.createNoiseBuffer(0.25);
+                const thrustSource = this.audioContext.createBufferSource();
+                thrustSource.buffer = thrustNoise;
+                
+                const thrustGain = this.audioContext.createGain();
+                thrustGain.gain.setValueAtTime(0.3, now + 0.05);
+                thrustGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                
+                const thrustFilter = this.audioContext.createBiquadFilter();
+                thrustFilter.type = 'highpass';
+                thrustFilter.frequency.value = 2000;
+                
+                thrustSource.connect(thrustFilter);
+                thrustFilter.connect(thrustGain);
+                thrustGain.connect(masterGain);
+                thrustSource.start(now + 0.05);
+                thrustSource.stop(now + 0.3);
+            }
+
+            playOrbitalCannonFire(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Charge-up phase
+                const chargeOsc = this.audioContext.createOscillator();
+                chargeOsc.type = 'sine';
+                chargeOsc.frequency.setValueAtTime(400, now);
+                chargeOsc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+                
+                const chargeGain = this.audioContext.createGain();
+                chargeGain.gain.setValueAtTime(0, now);
+                chargeGain.gain.linearRampToValueAtTime(0.5, now + 0.1);
+                
+                chargeOsc.connect(chargeGain);
+                chargeGain.connect(masterGain);
+                chargeOsc.start(now);
+                chargeOsc.stop(now + 0.1);
+
+                // Laser discharge
+                const laserOsc = this.audioContext.createOscillator();
+                laserOsc.type = 'sawtooth';
+                laserOsc.frequency.setValueAtTime(1200, now + 0.1);
+                laserOsc.frequency.exponentialRampToValueAtTime(800, now + 0.25);
+                
+                const laserGain = this.audioContext.createGain();
+                laserGain.gain.setValueAtTime(0.7, now + 0.1);
+                laserGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                const laserFilter = this.audioContext.createBiquadFilter();
+                laserFilter.type = 'bandpass';
+                laserFilter.frequency.value = 1000;
+                laserFilter.Q.value = 6;
+                
+                laserOsc.connect(laserFilter);
+                laserFilter.connect(laserGain);
+                laserGain.connect(masterGain);
+                laserOsc.start(now + 0.1);
+                laserOsc.stop(now + 0.25);
+
+                // Space resonance tail
+                const tailOsc = this.audioContext.createOscillator();
+                tailOsc.type = 'sine';
+                tailOsc.frequency.setValueAtTime(300, now + 0.2);
+                tailOsc.frequency.exponentialRampToValueAtTime(150, now + 0.35);
+                
+                const tailGain = this.audioContext.createGain();
+                tailGain.gain.setValueAtTime(0.3, now + 0.2);
+                tailGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                
+                tailOsc.connect(tailGain);
+                tailGain.connect(masterGain);
+                tailOsc.start(now + 0.2);
+                tailOsc.stop(now + 0.35);
+            }
+
+            playLandAttackHit(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Crisp ping (attack confirm)
+                const pingOsc = this.audioContext.createOscillator();
+                pingOsc.type = 'triangle';
+                pingOsc.frequency.setValueAtTime(2000, now);
+                pingOsc.frequency.exponentialRampToValueAtTime(1200, now + 0.08);
+                
+                const pingGain = this.audioContext.createGain();
+                pingGain.gain.setValueAtTime(0.7, now);
+                pingGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                
+                pingOsc.connect(pingGain);
+                pingGain.connect(masterGain);
+                pingOsc.start(now);
+                pingOsc.stop(now + 0.08);
+
+                // Body layer
+                const bodyOsc = this.audioContext.createOscillator();
+                bodyOsc.type = 'square';
+                bodyOsc.frequency.setValueAtTime(600, now + 0.02);
+                bodyOsc.frequency.exponentialRampToValueAtTime(300, now + 0.18);
+                
+                const bodyGain = this.audioContext.createGain();
+                bodyGain.gain.setValueAtTime(0.4, now + 0.02);
+                bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                
+                bodyOsc.connect(bodyGain);
+                bodyGain.connect(masterGain);
+                bodyOsc.start(now + 0.02);
+                bodyOsc.stop(now + 0.18);
+
+                // Add ±3% humanization jitter
+                const jitter = 1 + (Math.random() - 0.5) * 0.06;
+                pingOsc.frequency.value *= jitter;
+                bodyOsc.frequency.value *= jitter;
+            }
+
+            playUnitDestruction(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume * 0.6; // Softer for negative reinforcement
+                masterGain.connect(this.audioContext.destination);
+
+                const destructionOsc = this.audioContext.createOscillator();
+                destructionOsc.type = 'sine';
+                destructionOsc.frequency.setValueAtTime(400, now);
+                destructionOsc.frequency.exponentialRampToValueAtTime(150, now + 0.15);
+                
+                const destructionGain = this.audioContext.createGain();
+                destructionGain.gain.setValueAtTime(0.5, now);
+                destructionGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const filter = this.audioContext.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 800;
+                
+                destructionOsc.connect(filter);
+                filter.connect(destructionGain);
+                destructionGain.connect(masterGain);
+                destructionOsc.start(now);
+                destructionOsc.stop(now + 0.15);
+            }
+
+            playUIConfirm(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                const confirmOsc = this.audioContext.createOscillator();
+                confirmOsc.type = 'square';
+                confirmOsc.frequency.setValueAtTime(1600, now);
+                confirmOsc.frequency.exponentialRampToValueAtTime(2400, now + 0.05);
+                confirmOsc.frequency.setValueAtTime(2400, now + 0.05);
+                confirmOsc.frequency.exponentialRampToValueAtTime(1600, now + 0.1);
+                
+                const confirmGain = this.audioContext.createGain();
+                confirmGain.gain.setValueAtTime(0.6, now);
+                confirmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                confirmOsc.connect(confirmGain);
+                confirmGain.connect(masterGain);
+                confirmOsc.start(now);
+                confirmOsc.stop(now + 0.1);
+            }
+
+            playTerritoryCapture(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const masterGain = this.audioContext.createGain();
+                masterGain.gain.value = volume;
+                masterGain.connect(this.audioContext.destination);
+
+                // Success chord (triad)
+                const chord1 = this.audioContext.createOscillator();
+                chord1.type = 'triangle';
+                chord1.frequency.value = 523; // C5
+                
+                const chord2 = this.audioContext.createOscillator();
+                chord2.type = 'triangle';
+                chord2.frequency.value = 659; // E5
+                
+                const chord3 = this.audioContext.createOscillator();
+                chord3.type = 'triangle';
+                chord3.frequency.value = 784; // G5
+                
+                const chordGain = this.audioContext.createGain();
+                chordGain.gain.setValueAtTime(0.4, now);
+                chordGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                chord1.connect(chordGain);
+                chord2.connect(chordGain);
+                chord3.connect(chordGain);
+                chordGain.connect(masterGain);
+                
+                chord1.start(now);
+                chord2.start(now);
+                chord3.start(now);
+                chord1.stop(now + 0.25);
+                chord2.stop(now + 0.25);
+                chord3.stop(now + 0.25);
+
+                // Shimmer overlay
+                const shimmerOsc = this.audioContext.createOscillator();
+                shimmerOsc.type = 'sine';
+                shimmerOsc.frequency.setValueAtTime(1500, now + 0.05);
+                shimmerOsc.frequency.exponentialRampToValueAtTime(3000, now + 0.15);
+                shimmerOsc.frequency.exponentialRampToValueAtTime(1500, now + 0.3);
+                
+                const shimmerGain = this.audioContext.createGain();
+                shimmerGain.gain.setValueAtTime(0.3, now + 0.05);
+                shimmerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                
+                shimmerOsc.connect(shimmerGain);
+                shimmerGain.connect(masterGain);
+                shimmerOsc.start(now + 0.05);
+                shimmerOsc.stop(now + 0.3);
+            }
+
+        // PHASE 2: Building Noises & Major Achievements
+
+        playPortComplete(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Completion chord (F major triad)
+            const chord1 = this.audioContext.createOscillator();
+            chord1.type = 'triangle';
+            chord1.frequency.value = 349; // F4
+            
+            const chord2 = this.audioContext.createOscillator();
+            chord2.type = 'triangle';
+            chord2.frequency.value = 440; // A4
+            
+            const chord3 = this.audioContext.createOscillator();
+            chord3.type = 'triangle';
+            chord3.frequency.value = 523; // C5
+            
+            const chordGain = this.audioContext.createGain();
+            chordGain.gain.setValueAtTime(0.5, now);
+            chordGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            chord1.connect(chordGain);
+            chord2.connect(chordGain);
+            chord3.connect(chordGain);
+            chordGain.connect(masterGain);
+            
+            chord1.start(now);
+            chord2.start(now);
+            chord3.start(now);
+            chord1.stop(now + 0.6);
+            chord2.stop(now + 0.6);
+            chord3.stop(now + 0.6);
+
+            // Industrial hum layer
+            const humOsc = this.audioContext.createOscillator();
+            humOsc.type = 'sine';
+            humOsc.frequency.setValueAtTime(120, now + 0.2);
+            humOsc.frequency.setValueAtTime(120, now + 0.8);
+            
+            const humGain = this.audioContext.createGain();
+            humGain.gain.setValueAtTime(0, now + 0.2);
+            humGain.gain.linearRampToValueAtTime(0.3, now + 0.4);
+            humGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            humOsc.connect(humGain);
+            humGain.connect(masterGain);
+            humOsc.start(now + 0.2);
+            humOsc.stop(now + 1.0);
+
+            // Trade route activation sparkle
+            const sparkleOsc = this.audioContext.createOscillator();
+            sparkleOsc.type = 'sine';
+            sparkleOsc.frequency.setValueAtTime(1200, now + 0.4);
+            sparkleOsc.frequency.exponentialRampToValueAtTime(2400, now + 0.7);
+            sparkleOsc.frequency.exponentialRampToValueAtTime(1800, now + 1.0);
+            
+            const sparkleGain = this.audioContext.createGain();
+            sparkleGain.gain.setValueAtTime(0.25, now + 0.4);
+            sparkleGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            sparkleOsc.connect(sparkleGain);
+            sparkleGain.connect(masterGain);
+            sparkleOsc.start(now + 0.4);
+            sparkleOsc.stop(now + 1.0);
+        }
+
+        playCityComplete(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Celebratory chord (C major 7th)
+            const chord1 = this.audioContext.createOscillator();
+            chord1.type = 'triangle';
+            chord1.frequency.value = 523; // C5
+            
+            const chord2 = this.audioContext.createOscillator();
+            chord2.type = 'triangle';
+            chord2.frequency.value = 659; // E5
+            
+            const chord3 = this.audioContext.createOscillator();
+            chord3.type = 'triangle';
+            chord3.frequency.value = 784; // G5
+            
+            const chord4 = this.audioContext.createOscillator();
+            chord4.type = 'triangle';
+            chord4.frequency.value = 987; // B5
+            
+            const chordGain = this.audioContext.createGain();
+            chordGain.gain.setValueAtTime(0.4, now);
+            chordGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            chord1.connect(chordGain);
+            chord2.connect(chordGain);
+            chord3.connect(chordGain);
+            chord4.connect(chordGain);
+            chordGain.connect(masterGain);
+            
+            chord1.start(now);
+            chord2.start(now);
+            chord3.start(now);
+            chord4.start(now);
+            chord1.stop(now + 0.8);
+            chord2.stop(now + 0.8);
+            chord3.stop(now + 0.8);
+            chord4.stop(now + 0.8);
+
+            // Population growth ascending notes
+            const growthFreqs = [440, 554, 659, 784, 880];
+            growthFreqs.forEach((freq, i) => {
+                const growthOsc = this.audioContext.createOscillator();
+                growthOsc.type = 'sine';
+                growthOsc.frequency.value = freq;
+                
+                const growthGain = this.audioContext.createGain();
+                growthGain.gain.setValueAtTime(0.2, now + 0.3 + (i * 0.1));
+                growthGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5 + (i * 0.1));
+                
+                growthOsc.connect(growthGain);
+                growthGain.connect(masterGain);
+                growthOsc.start(now + 0.3 + (i * 0.1));
+                growthOsc.stop(now + 0.5 + (i * 0.1));
+            });
+
+            // Prosperity shimmer
+            const shimmerOsc = this.audioContext.createOscillator();
+            shimmerOsc.type = 'sine';
+            shimmerOsc.frequency.setValueAtTime(1500, now + 0.6);
+            shimmerOsc.frequency.exponentialRampToValueAtTime(3000, now + 0.9);
+            shimmerOsc.frequency.exponentialRampToValueAtTime(2000, now + 1.1);
+            
+            const shimmerGain = this.audioContext.createGain();
+            shimmerGain.gain.setValueAtTime(0.2, now + 0.6);
+            shimmerGain.gain.exponentialRampToValueAtTime(0.001, now + 1.1);
+            
+            shimmerOsc.connect(shimmerGain);
+            shimmerGain.connect(masterGain);
+            shimmerOsc.start(now + 0.6);
+            shimmerOsc.stop(now + 1.1);
+        }
+
+        playDefensePostComplete(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Authoritative chord (D minor - strong, defensive)
+            const chord1 = this.audioContext.createOscillator();
+            chord1.type = 'triangle';
+            chord1.frequency.value = 294; // D4
+            
+            const chord2 = this.audioContext.createOscillator();
+            chord2.type = 'triangle';
+            chord2.frequency.value = 349; // F4
+            
+            const chord3 = this.audioContext.createOscillator();
+            chord3.type = 'triangle';
+            chord3.frequency.value = 440; // A4
+            
+            const chordGain = this.audioContext.createGain();
+            chordGain.gain.setValueAtTime(0.6, now);
+            chordGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            chord1.connect(chordGain);
+            chord2.connect(chordGain);
+            chord3.connect(chordGain);
+            chordGain.connect(masterGain);
+            
+            chord1.start(now);
+            chord2.start(now);
+            chord3.start(now);
+            chord1.stop(now + 1.0);
+            chord2.stop(now + 1.0);
+            chord3.stop(now + 1.0);
+
+            // Fortification rumble
+            const rumbleOsc = this.audioContext.createOscillator();
+            rumbleOsc.type = 'sine';
+            rumbleOsc.frequency.setValueAtTime(60, now + 0.2);
+            rumbleOsc.frequency.setValueAtTime(80, now + 0.6);
+            rumbleOsc.frequency.exponentialRampToValueAtTime(50, now + 1.2);
+            
+            const rumbleGain = this.audioContext.createGain();
+            rumbleGain.gain.setValueAtTime(0.4, now + 0.2);
+            rumbleGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            
+            rumbleOsc.connect(rumbleGain);
+            rumbleGain.connect(masterGain);
+            rumbleOsc.start(now + 0.2);
+            rumbleOsc.stop(now + 1.2);
+
+            // Defensive presence (power up sound)
+            const powerOsc = this.audioContext.createOscillator();
+            powerOsc.type = 'square';
+            powerOsc.frequency.setValueAtTime(200, now + 0.4);
+            powerOsc.frequency.exponentialRampToValueAtTime(400, now + 0.8);
+            powerOsc.frequency.exponentialRampToValueAtTime(300, now + 1.2);
+            
+            const powerGain = this.audioContext.createGain();
+            powerGain.gain.setValueAtTime(0.3, now + 0.4);
+            powerGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            
+            const powerFilter = this.audioContext.createBiquadFilter();
+            powerFilter.type = 'lowpass';
+            powerFilter.frequency.value = 800;
+            
+            powerOsc.connect(powerFilter);
+            powerFilter.connect(powerGain);
+            powerGain.connect(masterGain);
+            powerOsc.start(now + 0.4);
+            powerOsc.stop(now + 1.2);
+        }
+
+        playMissileSiloComplete(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Ominous completion chord (A minor)
+            const chord1 = this.audioContext.createOscillator();
+            chord1.type = 'triangle';
+            chord1.frequency.value = 220; // A3
+            
+            const chord2 = this.audioContext.createOscillator();
+            chord2.type = 'triangle';
+            chord2.frequency.value = 261; // C4
+            
+            const chord3 = this.audioContext.createOscillator();
+            chord3.type = 'triangle';
+            chord3.frequency.value = 330; // E4
+            
+            const chordGain = this.audioContext.createGain();
+            chordGain.gain.setValueAtTime(0.5, now);
+            chordGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            chord1.connect(chordGain);
+            chord2.connect(chordGain);
+            chord3.connect(chordGain);
+            chordGain.connect(masterGain);
+            
+            chord1.start(now);
+            chord2.start(now);
+            chord3.start(now);
+            chord1.stop(now + 0.8);
+            chord2.stop(now + 0.8);
+            chord3.stop(now + 0.8);
+
+            // Underground systems activation
+            const systemsOsc = this.audioContext.createOscillator();
+            systemsOsc.type = 'sine';
+            systemsOsc.frequency.setValueAtTime(80, now + 0.3);
+            systemsOsc.frequency.linearRampToValueAtTime(120, now + 0.7);
+            systemsOsc.frequency.exponentialRampToValueAtTime(60, now + 1.0);
+            
+            const systemsGain = this.audioContext.createGain();
+            systemsGain.gain.setValueAtTime(0.4, now + 0.3);
+            systemsGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            systemsOsc.connect(systemsGain);
+            systemsGain.connect(masterGain);
+            systemsOsc.start(now + 0.3);
+            systemsOsc.stop(now + 1.0);
+
+            // Power activation sequence
+            const powerFreqs = [150, 200, 250, 300];
+            powerFreqs.forEach((freq, i) => {
+                const powerOsc = this.audioContext.createOscillator();
+                powerOsc.type = 'square';
+                powerOsc.frequency.value = freq;
+                
+                const powerGain = this.audioContext.createGain();
+                powerGain.gain.setValueAtTime(0.15, now + 0.5 + (i * 0.08));
+                powerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65 + (i * 0.08));
+                
+                const powerFilter = this.audioContext.createBiquadFilter();
+                powerFilter.type = 'lowpass';
+                powerFilter.frequency.value = 600;
+                
+                powerOsc.connect(powerFilter);
+                powerFilter.connect(powerGain);
+                powerGain.connect(masterGain);
+                powerOsc.start(now + 0.5 + (i * 0.08));
+                powerOsc.stop(now + 0.65 + (i * 0.08));
+            });
+        }
+
+        playGold125k(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Achievement chime (bright and rewarding)
+            const chimeFreqs = [880, 1108, 1319]; // A5-C#6-E6 (A major triad)
+            chimeFreqs.forEach((freq, i) => {
+                const chimeOsc = this.audioContext.createOscillator();
+                chimeOsc.type = 'triangle';
+                chimeOsc.frequency.value = freq;
+                
+                const chimeGain = this.audioContext.createGain();
+                chimeGain.gain.setValueAtTime(0.4, now + (i * 0.1));
+                chimeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5 + (i * 0.1));
+                
+                chimeOsc.connect(chimeGain);
+                chimeGain.connect(masterGain);
+                chimeOsc.start(now + (i * 0.1));
+                chimeOsc.stop(now + 0.5 + (i * 0.1));
+            });
+
+            // Prosperity bell resonance
+            const bellOsc = this.audioContext.createOscillator();
+            bellOsc.type = 'sine';
+            bellOsc.frequency.setValueAtTime(440, now + 0.2);
+            bellOsc.frequency.exponentialRampToValueAtTime(415, now + 0.8);
+            
+            const bellGain = this.audioContext.createGain();
+            bellGain.gain.setValueAtTime(0.3, now + 0.2);
+            bellGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            bellOsc.connect(bellGain);
+            bellGain.connect(masterGain);
+            bellOsc.start(now + 0.2);
+            bellOsc.stop(now + 0.8);
+
+            // Economic growth sparkle
+            const sparkleOsc = this.audioContext.createOscillator();
+            sparkleOsc.type = 'sine';
+            sparkleOsc.frequency.setValueAtTime(1760, now + 0.4);
+            sparkleOsc.frequency.exponentialRampToValueAtTime(2637, now + 0.6);
+            sparkleOsc.frequency.exponentialRampToValueAtTime(2093, now + 0.8);
+            
+            const sparkleGain = this.audioContext.createGain();
+            sparkleGain.gain.setValueAtTime(0.2, now + 0.4);
+            sparkleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            sparkleOsc.connect(sparkleGain);
+            sparkleGain.connect(masterGain);
+            sparkleOsc.start(now + 0.4);
+            sparkleOsc.stop(now + 0.8);
+        }
+
+        playGold750k(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Power chord (E5 power chord - triumphant)
+            const power1 = this.audioContext.createOscillator();
+            power1.type = 'triangle';
+            power1.frequency.value = 659; // E5
+            
+            const power2 = this.audioContext.createOscillator();
+            power2.type = 'triangle';
+            power2.frequency.value = 987; // B5
+            
+            const power3 = this.audioContext.createOscillator();
+            power3.type = 'triangle';
+            power3.frequency.value = 1319; // E6
+            
+            const powerGain = this.audioContext.createGain();
+            powerGain.gain.setValueAtTime(0.5, now);
+            powerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            power1.connect(powerGain);
+            power2.connect(powerGain);
+            power3.connect(powerGain);
+            powerGain.connect(masterGain);
+            
+            power1.start(now);
+            power2.start(now);
+            power3.start(now);
+            power1.stop(now + 0.8);
+            power2.stop(now + 0.8);
+            power3.stop(now + 0.8);
+
+            // Nuclear capability (ominous undertone)
+            const nuclearOsc = this.audioContext.createOscillator();
+            nuclearOsc.type = 'sine';
+            nuclearOsc.frequency.setValueAtTime(55, now + 0.3);
+            nuclearOsc.frequency.setValueAtTime(73, now + 0.6);
+            nuclearOsc.frequency.exponentialRampToValueAtTime(49, now + 1.0);
+            
+            const nuclearGain = this.audioContext.createGain();
+            nuclearGain.gain.setValueAtTime(0.3, now + 0.3);
+            nuclearGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            nuclearOsc.connect(nuclearGain);
+            nuclearGain.connect(masterGain);
+            nuclearOsc.start(now + 0.3);
+            nuclearOsc.stop(now + 1.0);
+
+            // Strategic advantage cascade
+            const cascadeFreqs = [440, 554, 659, 831, 1047];
+            cascadeFreqs.forEach((freq, i) => {
+                const cascadeOsc = this.audioContext.createOscillator();
+                cascadeOsc.type = 'sine';
+                cascadeOsc.frequency.value = freq;
+                
+                const cascadeGain = this.audioContext.createGain();
+                cascadeGain.gain.setValueAtTime(0.2, now + 0.5 + (i * 0.08));
+                cascadeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7 + (i * 0.08));
+                
+                cascadeOsc.connect(cascadeGain);
+                cascadeGain.connect(masterGain);
+                cascadeOsc.start(now + 0.5 + (i * 0.08));
+                cascadeOsc.stop(now + 0.7 + (i * 0.08));
+            });
+        }
+
+        playGold1M(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Victory fanfare (C major - triumphant)
+            const fanfareChord1 = this.audioContext.createOscillator();
+            fanfareChord1.type = 'triangle';
+            fanfareChord1.frequency.value = 523; // C5
+            
+            const fanfareChord2 = this.audioContext.createOscillator();
+            fanfareChord2.type = 'triangle';
+            fanfareChord2.frequency.value = 659; // E5
+            
+            const fanfareChord3 = this.audioContext.createOscillator();
+            fanfareChord3.type = 'triangle';
+            fanfareChord3.frequency.value = 784; // G5
+            
+            const fanfareChord4 = this.audioContext.createOscillator();
+            fanfareChord4.type = 'triangle';
+            fanfareChord4.frequency.value = 1047; // C6
+            
+            const fanfareGain = this.audioContext.createGain();
+            fanfareGain.gain.setValueAtTime(0.6, now);
+            fanfareGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            fanfareChord1.connect(fanfareGain);
+            fanfareChord2.connect(fanfareGain);
+            fanfareChord3.connect(fanfareGain);
+            fanfareChord4.connect(fanfareGain);
+            fanfareGain.connect(masterGain);
+            
+            fanfareChord1.start(now);
+            fanfareChord2.start(now);
+            fanfareChord3.start(now);
+            fanfareChord4.start(now);
+            fanfareChord1.stop(now + 1.0);
+            fanfareChord2.stop(now + 1.0);
+            fanfareChord3.stop(now + 1.0);
+            fanfareChord4.stop(now + 1.0);
+
+            // Military supremacy (ascending power sequence)
+            const supremacyFreqs = [110, 147, 196, 262, 330, 440];
+            supremacyFreqs.forEach((freq, i) => {
+                const supremacyOsc = this.audioContext.createOscillator();
+                supremacyOsc.type = 'square';
+                supremacyOsc.frequency.value = freq;
+                
+                const supremacyGain = this.audioContext.createGain();
+                supremacyGain.gain.setValueAtTime(0.2, now + 0.4 + (i * 0.08));
+                supremacyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6 + (i * 0.08));
+                
+                const supremacyFilter = this.audioContext.createBiquadFilter();
+                supremacyFilter.type = 'lowpass';
+                supremacyFilter.frequency.value = 1000;
+                
+                supremacyOsc.connect(supremacyFilter);
+                supremacyFilter.connect(supremacyGain);
+                supremacyGain.connect(masterGain);
+                supremacyOsc.start(now + 0.4 + (i * 0.08));
+                supremacyOsc.stop(now + 0.6 + (i * 0.08));
+            });
+
+            // Economic dominance sparkles
+            const dominanceOsc = this.audioContext.createOscillator();
+            dominanceOsc.type = 'sine';
+            dominanceOsc.frequency.setValueAtTime(2093, now + 0.8);
+            dominanceOsc.frequency.exponentialRampToValueAtTime(4186, now + 1.0);
+            dominanceOsc.frequency.exponentialRampToValueAtTime(3136, now + 1.2);
+            
+            const dominanceGain = this.audioContext.createGain();
+            dominanceGain.gain.setValueAtTime(0.3, now + 0.8);
+            dominanceGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            
+            dominanceOsc.connect(dominanceGain);
+            dominanceGain.connect(masterGain);
+            dominanceOsc.start(now + 0.8);
+            dominanceOsc.stop(now + 1.2);
+        }
+
+        playPlayerConquest(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Victory fanfare (G major - glorious)
+            const victoryChord1 = this.audioContext.createOscillator();
+            victoryChord1.type = 'triangle';
+            victoryChord1.frequency.value = 392; // G4
+            
+            const victoryChord2 = this.audioContext.createOscillator();
+            victoryChord2.type = 'triangle';
+            victoryChord2.frequency.value = 494; // B4
+            
+            const victoryChord3 = this.audioContext.createOscillator();
+            victoryChord3.type = 'triangle';
+            victoryChord3.frequency.value = 587; // D5
+            
+            const victoryChord4 = this.audioContext.createOscillator();
+            victoryChord4.type = 'triangle';
+            victoryChord4.frequency.value = 784; // G5
+            
+            const victoryGain = this.audioContext.createGain();
+            victoryGain.gain.setValueAtTime(0.7, now);
+            victoryGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            
+            victoryChord1.connect(victoryGain);
+            victoryChord2.connect(victoryGain);
+            victoryChord3.connect(victoryGain);
+            victoryChord4.connect(victoryGain);
+            victoryGain.connect(masterGain);
+            
+            victoryChord1.start(now);
+            victoryChord2.start(now);
+            victoryChord3.start(now);
+            victoryChord4.start(now);
+            victoryChord1.stop(now + 1.2);
+            victoryChord2.stop(now + 1.2);
+            victoryChord3.stop(now + 1.2);
+            victoryChord4.stop(now + 1.2);
+
+            // Conquest drums (rhythmic power)
+            for (let i = 0; i < 6; i++) {
+                const drumOsc = this.audioContext.createOscillator();
+                drumOsc.type = 'triangle';
+                drumOsc.frequency.setValueAtTime(80, now + (i * 0.15));
+                drumOsc.frequency.exponentialRampToValueAtTime(40, now + 0.08 + (i * 0.15));
+                
+                const drumGain = this.audioContext.createGain();
+                drumGain.gain.setValueAtTime(0.5, now + (i * 0.15));
+                drumGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12 + (i * 0.15));
+                
+                drumOsc.connect(drumGain);
+                drumGain.connect(masterGain);
+                drumOsc.start(now + (i * 0.15));
+                drumOsc.stop(now + 0.12 + (i * 0.15));
+            }
+
+            // Domination cascade (ascending triumph)
+            const dominationFreqs = [196, 247, 294, 370, 440, 554, 659, 831, 1047];
+            dominationFreqs.forEach((freq, i) => {
+                const dominationOsc = this.audioContext.createOscillator();
+                dominationOsc.type = 'sine';
+                dominationOsc.frequency.value = freq;
+                
+                const dominationGain = this.audioContext.createGain();
+                dominationGain.gain.setValueAtTime(0.25, now + 0.6 + (i * 0.06));
+                dominationGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8 + (i * 0.06));
+                
+                dominationOsc.connect(dominationGain);
+                dominationGain.connect(masterGain);
+                dominationOsc.start(now + 0.6 + (i * 0.06));
+                dominationOsc.stop(now + 0.8 + (i * 0.06));
+            });
+
+            // Triumph finale sparkles
+            const finaleOsc = this.audioContext.createOscillator();
+            finaleOsc.type = 'sine';
+            finaleOsc.frequency.setValueAtTime(2637, now + 1.1);
+            finaleOsc.frequency.exponentialRampToValueAtTime(5274, now + 1.3);
+            finaleOsc.frequency.exponentialRampToValueAtTime(3951, now + 1.5);
+            
+            const finaleGain = this.audioContext.createGain();
+            finaleGain.gain.setValueAtTime(0.4, now + 1.1);
+            finaleGain.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+            
+            finaleOsc.connect(finaleGain);
+            finaleGain.connect(masterGain);
+            finaleOsc.start(now + 1.1);
+            finaleOsc.stop(now + 1.5);
+        }
+
+        // PHASE 3: Impact Noises (0.3-0.8s)
+
+        playNukeDetonation(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Initial flash (massive burst)
+            const flashOsc = this.audioContext.createOscillator();
+            flashOsc.type = 'square';
+            flashOsc.frequency.setValueAtTime(4000, now);
+            flashOsc.frequency.exponentialRampToValueAtTime(200, now + 0.05);
+            
+            const flashGain = this.audioContext.createGain();
+            flashGain.gain.setValueAtTime(0.9, now);
+            flashGain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            
+            flashOsc.connect(flashGain);
+            flashGain.connect(masterGain);
+            flashOsc.start(now);
+            flashOsc.stop(now + 0.05);
+
+            // Cascade explosion layers
+            const cascadeFreqs = [60, 80, 120, 180, 250, 350];
+            cascadeFreqs.forEach((freq, i) => {
+                const cascadeOsc = this.audioContext.createOscillator();
+                cascadeOsc.type = 'sine';
+                cascadeOsc.frequency.setValueAtTime(freq, now + 0.1 + (i * 0.05));
+                cascadeOsc.frequency.exponentialRampToValueAtTime(freq * 0.3, now + 0.4 + (i * 0.05));
+                
+                const cascadeGain = this.audioContext.createGain();
+                cascadeGain.gain.setValueAtTime(0.6, now + 0.1 + (i * 0.05));
+                cascadeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6 + (i * 0.05));
+                
+                cascadeOsc.connect(cascadeGain);
+                cascadeGain.connect(masterGain);
+                cascadeOsc.start(now + 0.1 + (i * 0.05));
+                cascadeOsc.stop(now + 0.6 + (i * 0.05));
+            });
+
+            // Devastation rumble (long tail)
+            const rumbleOsc = this.audioContext.createOscillator();
+            rumbleOsc.type = 'sine';
+            rumbleOsc.frequency.setValueAtTime(40, now + 0.3);
+            rumbleOsc.frequency.setValueAtTime(30, now + 0.6);
+            rumbleOsc.frequency.exponentialRampToValueAtTime(20, now + 0.8);
+            
+            const rumbleGain = this.audioContext.createGain();
+            rumbleGain.gain.setValueAtTime(0.5, now + 0.3);
+            rumbleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            rumbleOsc.connect(rumbleGain);
+            rumbleGain.connect(masterGain);
+            rumbleOsc.start(now + 0.3);
+            rumbleOsc.stop(now + 0.8);
+        }
+
+        playHydrogenBombImpact(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Apocalyptic flash - much more intense than atom bomb
+            const megaFlashOsc = this.audioContext.createOscillator();
+            megaFlashOsc.type = 'square';
+            megaFlashOsc.frequency.setValueAtTime(8000, now);
+            megaFlashOsc.frequency.exponentialRampToValueAtTime(100, now + 0.12);
+            
+            const megaFlashGain = this.audioContext.createGain();
+            megaFlashGain.gain.setValueAtTime(1.0, now);
+            megaFlashGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+            
+            megaFlashOsc.connect(megaFlashGain);
+            megaFlashGain.connect(masterGain);
+            megaFlashOsc.start(now);
+            megaFlashOsc.stop(now + 0.12);
+
+            // Secondary flash harmonics for overwhelming intensity
+            [1.5, 2.0, 3.0].forEach((harmonic, i) => {
+                const harmOsc = this.audioContext.createOscillator();
+                harmOsc.type = 'square';
+                harmOsc.frequency.setValueAtTime(4000 * harmonic, now + 0.02 + (i * 0.01));
+                harmOsc.frequency.exponentialRampToValueAtTime(150 * harmonic, now + 0.08 + (i * 0.01));
+                
+                const harmGain = this.audioContext.createGain();
+                harmGain.gain.setValueAtTime(0.4 - (i * 0.1), now + 0.02 + (i * 0.01));
+                harmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08 + (i * 0.01));
+                
+                harmOsc.connect(harmGain);
+                harmGain.connect(masterGain);
+                harmOsc.start(now + 0.02 + (i * 0.01));
+                harmOsc.stop(now + 0.08 + (i * 0.01));
+            });
+
+            // Multi-stage devastation cascade - much longer and deeper
+            const devastationFreqs = [25, 40, 60, 85, 120, 170, 240, 340, 480, 680];
+            devastationFreqs.forEach((freq, i) => {
+                const devOsc = this.audioContext.createOscillator();
+                devOsc.type = 'sine';
+                devOsc.frequency.setValueAtTime(freq, now + 0.15 + (i * 0.06));
+                devOsc.frequency.exponentialRampToValueAtTime(freq * 0.15, now + 0.8 + (i * 0.06));
+                
+                const devGain = this.audioContext.createGain();
+                devGain.gain.setValueAtTime(0.8 - (i * 0.02), now + 0.15 + (i * 0.06));
+                devGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2 + (i * 0.06));
+                
+                devOsc.connect(devGain);
+                devGain.connect(masterGain);
+                devOsc.start(now + 0.15 + (i * 0.06));
+                devOsc.stop(now + 1.2 + (i * 0.06));
+            });
+
+            // Cataclysmic sub-bass layer
+            const subBassOsc = this.audioContext.createOscillator();
+            subBassOsc.type = 'sine';
+            subBassOsc.frequency.setValueAtTime(18, now + 0.3);
+            subBassOsc.frequency.exponentialRampToValueAtTime(12, now + 1.5);
+            
+            const subBassGain = this.audioContext.createGain();
+            subBassGain.gain.setValueAtTime(0.9, now + 0.3);
+            subBassGain.gain.exponentialRampToValueAtTime(0.001, now + 1.5);
+            
+            subBassOsc.connect(subBassGain);
+            subBassGain.connect(masterGain);
+            subBassOsc.start(now + 0.3);
+            subBassOsc.stop(now + 1.5);
+
+            // World-ending aftermath tremors
+            [28, 22, 16].forEach((freq, i) => {
+                const tremOsc = this.audioContext.createOscillator();
+                tremOsc.type = 'sine';
+                tremOsc.frequency.setValueAtTime(freq, now + 0.8 + (i * 0.15));
+                tremOsc.frequency.exponentialRampToValueAtTime(freq * 0.7, now + 1.8 + (i * 0.15));
+                
+                const tremGain = this.audioContext.createGain();
+                tremGain.gain.setValueAtTime(0.7 - (i * 0.1), now + 0.8 + (i * 0.15));
+                tremGain.gain.exponentialRampToValueAtTime(0.001, now + 1.8 + (i * 0.15));
+                
+                tremOsc.connect(tremGain);
+                tremGain.connect(masterGain);
+                tremOsc.start(now + 0.8 + (i * 0.15));
+                tremOsc.stop(now + 1.8 + (i * 0.15));
+            });
+        }
+
+        playSAMIntercept(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Successful intercept explosion
+            const interceptOsc = this.audioContext.createOscillator();
+            interceptOsc.type = 'square';
+            interceptOsc.frequency.setValueAtTime(2200, now);
+            interceptOsc.frequency.exponentialRampToValueAtTime(800, now + 0.12);
+            
+            const interceptGain = this.audioContext.createGain();
+            interceptGain.gain.setValueAtTime(0.7, now);
+            interceptGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+            
+            interceptOsc.connect(interceptGain);
+            interceptGain.connect(masterGain);
+            interceptOsc.start(now);
+            interceptOsc.stop(now + 0.12);
+
+            // Debris cascade
+            const debrisFreqs = [1600, 1200, 900, 650];
+            debrisFreqs.forEach((freq, i) => {
+                const debrisOsc = this.audioContext.createOscillator();
+                debrisOsc.type = 'triangle';
+                debrisOsc.frequency.value = freq;
+                
+                const debrisGain = this.audioContext.createGain();
+                debrisGain.gain.setValueAtTime(0.3, now + 0.08 + (i * 0.05));
+                debrisGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2 + (i * 0.05));
+                
+                debrisOsc.connect(debrisGain);
+                debrisGain.connect(masterGain);
+                debrisOsc.start(now + 0.08 + (i * 0.05));
+                debrisOsc.stop(now + 0.2 + (i * 0.05));
+            });
+
+            // Victory confirmation tone
+            const victoryOsc = this.audioContext.createOscillator();
+            victoryOsc.type = 'triangle';
+            victoryOsc.frequency.setValueAtTime(880, now + 0.25);
+            victoryOsc.frequency.exponentialRampToValueAtTime(1760, now + 0.35);
+            
+            const victoryGain = this.audioContext.createGain();
+            victoryGain.gain.setValueAtTime(0.4, now + 0.25);
+            victoryGain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+            
+            victoryOsc.connect(victoryGain);
+            victoryGain.connect(masterGain);
+            victoryOsc.start(now + 0.25);
+            victoryOsc.stop(now + 0.45);
+        }
+
+        playBuildingDestruction(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Instant destruction crack
+            const crackOsc = this.audioContext.createOscillator();
+            crackOsc.type = 'square';
+            crackOsc.frequency.setValueAtTime(1200, now);
+            crackOsc.frequency.exponentialRampToValueAtTime(300, now + 0.08);
+            
+            const crackGain = this.audioContext.createGain();
+            crackGain.gain.setValueAtTime(0.8, now);
+            crackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            
+            crackOsc.connect(crackGain);
+            crackGain.connect(masterGain);
+            crackOsc.start(now);
+            crackOsc.stop(now + 0.08);
+
+            // Rapid collapse rumble
+            const rumbleOsc = this.audioContext.createOscillator();
+            rumbleOsc.type = 'triangle';
+            rumbleOsc.frequency.setValueAtTime(200, now + 0.02);
+            rumbleOsc.frequency.exponentialRampToValueAtTime(80, now + 0.15);
+            
+            const rumbleGain = this.audioContext.createGain();
+            rumbleGain.gain.setValueAtTime(0.7, now + 0.02);
+            rumbleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+            
+            rumbleOsc.connect(rumbleGain);
+            rumbleGain.connect(masterGain);
+            rumbleOsc.start(now + 0.02);
+            rumbleOsc.stop(now + 0.15);
+
+            // Final crash
+            const crashOsc = this.audioContext.createOscillator();
+            crashOsc.type = 'sine';
+            crashOsc.frequency.setValueAtTime(150, now + 0.12);
+            crashOsc.frequency.exponentialRampToValueAtTime(50, now + 0.25);
+            
+            const crashGain = this.audioContext.createGain();
+            crashGain.gain.setValueAtTime(0.6, now + 0.12);
+            crashGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            
+            crashOsc.connect(crashGain);
+            crashGain.connect(masterGain);
+            crashOsc.start(now + 0.12);
+            crashOsc.stop(now + 0.25);
+        }
+
+        playUnitElimination(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Heavy unit destruction blast
+            const blastOsc = this.audioContext.createOscillator();
+            blastOsc.type = 'square';
+            blastOsc.frequency.setValueAtTime(1200, now);
+            blastOsc.frequency.exponentialRampToValueAtTime(300, now + 0.12);
+            
+            const blastGain = this.audioContext.createGain();
+            blastGain.gain.setValueAtTime(0.7, now);
+            blastGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+            
+            blastOsc.connect(blastGain);
+            blastGain.connect(masterGain);
+            blastOsc.start(now);
+            blastOsc.stop(now + 0.12);
+
+            // Metal wreckage sounds
+            const wreckageFreqs = [900, 650, 450];
+            wreckageFreqs.forEach((freq, i) => {
+                const wreckOsc = this.audioContext.createOscillator();
+                wreckOsc.type = 'triangle';
+                wreckOsc.frequency.value = freq;
+                
+                const wreckGain = this.audioContext.createGain();
+                wreckGain.gain.setValueAtTime(0.4, now + 0.08 + (i * 0.06));
+                wreckGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2 + (i * 0.06));
+                
+                wreckOsc.connect(wreckGain);
+                wreckGain.connect(masterGain);
+                wreckOsc.start(now + 0.08 + (i * 0.06));
+                wreckOsc.stop(now + 0.2 + (i * 0.06));
+            });
+
+            // Final settling
+            const settleOsc = this.audioContext.createOscillator();
+            settleOsc.type = 'sine';
+            settleOsc.frequency.setValueAtTime(200, now + 0.3);
+            settleOsc.frequency.exponentialRampToValueAtTime(100, now + 0.5);
+            
+            const settleGain = this.audioContext.createGain();
+            settleGain.gain.setValueAtTime(0.3, now + 0.3);
+            settleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+            
+            settleOsc.connect(settleGain);
+            settleGain.connect(masterGain);
+            settleOsc.start(now + 0.3);
+            settleOsc.stop(now + 0.5);
+        }
+
+        playArmorBreak(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Sharp crack of armor breaking
+            const crackOsc = this.audioContext.createOscillator();
+            crackOsc.type = 'square';
+            crackOsc.frequency.setValueAtTime(2800, now);
+            crackOsc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
+            
+            const crackGain = this.audioContext.createGain();
+            crackGain.gain.setValueAtTime(0.8, now);
+            crackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+            
+            crackOsc.connect(crackGain);
+            crackGain.connect(masterGain);
+            crackOsc.start(now);
+            crackOsc.stop(now + 0.08);
+
+            // Armor shattering cascade
+            const shatterFreqs = [1800, 1400, 1000, 700];
+            shatterFreqs.forEach((freq, i) => {
+                const shatterOsc = this.audioContext.createOscillator();
+                shatterOsc.type = 'triangle';
+                shatterOsc.frequency.value = freq;
+                
+                const shatterGain = this.audioContext.createGain();
+                shatterGain.gain.setValueAtTime(0.5, now + 0.05 + (i * 0.04));
+                shatterGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15 + (i * 0.04));
+                
+                shatterOsc.connect(shatterGain);
+                shatterGain.connect(masterGain);
+                shatterOsc.start(now + 0.05 + (i * 0.04));
+                shatterOsc.stop(now + 0.15 + (i * 0.04));
+            });
+
+            // Vulnerability exposed (ominous undertone)
+            const vulnOsc = this.audioContext.createOscillator();
+            vulnOsc.type = 'sine';
+            vulnOsc.frequency.setValueAtTime(150, now + 0.25);
+            vulnOsc.frequency.exponentialRampToValueAtTime(80, now + 0.4);
+            
+            const vulnGain = this.audioContext.createGain();
+            vulnGain.gain.setValueAtTime(0.3, now + 0.25);
+            vulnGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+            
+            vulnOsc.connect(vulnGain);
+            vulnGain.connect(masterGain);
+            vulnOsc.start(now + 0.25);
+            vulnOsc.stop(now + 0.4);
+        }
+
+        playFalloutCreation(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Radioactive hiss layer
+            const noiseBuffer = this.createNoiseBuffer(0.7);
+            const noiseSource = this.audioContext.createBufferSource();
+            noiseSource.buffer = noiseBuffer;
+            
+            const noiseGain = this.audioContext.createGain();
+            noiseGain.gain.setValueAtTime(0.0, now);
+            noiseGain.gain.linearRampToValueAtTime(0.4, now + 0.1);
+            noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+            
+            const noiseFilter = this.audioContext.createBiquadFilter();
+            noiseFilter.type = 'highpass';
+            noiseFilter.frequency.value = 800;
+            
+            noiseSource.connect(noiseFilter);
+            noiseFilter.connect(noiseGain);
+            noiseGain.connect(masterGain);
+            noiseSource.start(now);
+            noiseSource.stop(now + 0.7);
+
+            // Contamination spread (eerie tones)
+            const contamFreqs = [110, 147, 220, 330];
+            contamFreqs.forEach((freq, i) => {
+                const contamOsc = this.audioContext.createOscillator();
+                contamOsc.type = 'sine';
+                contamOsc.frequency.setValueAtTime(freq, now + 0.15 + (i * 0.1));
+                contamOsc.frequency.exponentialRampToValueAtTime(freq * 0.8, now + 0.4 + (i * 0.1));
+                
+                const contamGain = this.audioContext.createGain();
+                contamGain.gain.setValueAtTime(0.2, now + 0.15 + (i * 0.1));
+                contamGain.gain.exponentialRampToValueAtTime(0.001, now + 0.5 + (i * 0.1));
+                
+                contamOsc.connect(contamGain);
+                contamGain.connect(masterGain);
+                contamOsc.start(now + 0.15 + (i * 0.1));
+                contamOsc.stop(now + 0.5 + (i * 0.1));
+            });
+
+            // Permanent damage undertone
+            const damageOsc = this.audioContext.createOscillator();
+            damageOsc.type = 'sine';
+            damageOsc.frequency.setValueAtTime(55, now + 0.3);
+            damageOsc.frequency.setValueAtTime(45, now + 0.6);
+            
+            const damageGain = this.audioContext.createGain();
+            damageGain.gain.setValueAtTime(0.3, now + 0.3);
+            damageGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+            
+            damageOsc.connect(damageGain);
+            damageGain.connect(masterGain);
+            damageOsc.start(now + 0.3);
+            damageOsc.stop(now + 0.7);
+        }
+
+        playShockwaveImpact(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Shockwave pulse
+            const pulseOsc = this.audioContext.createOscillator();
+            pulseOsc.type = 'sine';
+            pulseOsc.frequency.setValueAtTime(80, now);
+            pulseOsc.frequency.exponentialRampToValueAtTime(40, now + 0.2);
+            pulseOsc.frequency.setValueAtTime(60, now + 0.3);
+            pulseOsc.frequency.exponentialRampToValueAtTime(30, now + 0.6);
+            
+            const pulseGain = this.audioContext.createGain();
+            pulseGain.gain.setValueAtTime(0.8, now);
+            pulseGain.gain.exponentialRampToValueAtTime(0.3, now + 0.2);
+            pulseGain.gain.setValueAtTime(0.5, now + 0.3);
+            pulseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            pulseOsc.connect(pulseGain);
+            pulseGain.connect(masterGain);
+            pulseOsc.start(now);
+            pulseOsc.stop(now + 0.6);
+
+            // Area effect ripples
+            const rippleFreqs = [200, 150, 100];
+            rippleFreqs.forEach((freq, i) => {
+                const rippleOsc = this.audioContext.createOscillator();
+                rippleOsc.type = 'triangle';
+                rippleOsc.frequency.setValueAtTime(freq, now + 0.1 + (i * 0.08));
+                rippleOsc.frequency.exponentialRampToValueAtTime(freq * 0.5, now + 0.3 + (i * 0.08));
+                
+                const rippleGain = this.audioContext.createGain();
+                rippleGain.gain.setValueAtTime(0.4, now + 0.1 + (i * 0.08));
+                rippleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4 + (i * 0.08));
+                
+                rippleOsc.connect(rippleGain);
+                rippleGain.connect(masterGain);
+                rippleOsc.start(now + 0.1 + (i * 0.08));
+                rippleOsc.stop(now + 0.4 + (i * 0.08));
+            });
+        }
+
+        // NEW: Viper elimination sounds (3 variants)
+        playViperElimination1(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Sharp metallic crack
+            const crackOsc = this.audioContext.createOscillator();
+            crackOsc.type = 'square';
+            crackOsc.frequency.setValueAtTime(2800, now);
+            crackOsc.frequency.exponentialRampToValueAtTime(1800, now + 0.08);
+            const crackGain = this.audioContext.createGain();
+            crackGain.gain.setValueAtTime(0.4, now);
+            crackGain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+            
+            // Body: Hull breach hiss
+            const hissSource = this.audioContext.createBufferSource();
+            hissSource.buffer = this.createNoiseBuffer(0.25);
+            const hissFilter = this.audioContext.createBiquadFilter();
+            hissFilter.type = 'highpass';
+            hissFilter.frequency.setValueAtTime(1200, now + 0.05);
+            hissFilter.frequency.exponentialRampToValueAtTime(800, now + 0.25);
+            const hissGain = this.audioContext.createGain();
+            hissGain.gain.setValueAtTime(0.3, now + 0.05);
+            hissGain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            
+            // Weight: Water splash
+            const splashOsc = this.audioContext.createOscillator();
+            splashOsc.type = 'sine';
+            splashOsc.frequency.setValueAtTime(180, now + 0.1);
+            splashOsc.frequency.exponentialRampToValueAtTime(90, now + 0.4);
+            const splashGain = this.audioContext.createGain();
+            splashGain.gain.setValueAtTime(0.35, now + 0.1);
+            splashGain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+            
+            crackOsc.connect(crackGain);
+            crackGain.connect(masterGain);
+            hissSource.connect(hissFilter);
+            hissFilter.connect(hissGain);
+            hissGain.connect(masterGain);
+            splashOsc.connect(splashGain);
+            splashGain.connect(masterGain);
+            
+            crackOsc.start(now);
+            crackOsc.stop(now + 0.08);
+            hissSource.start(now + 0.05);
+            hissSource.stop(now + 0.25);
+            splashOsc.start(now + 0.1);
+            splashOsc.stop(now + 0.4);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            crackOsc.frequency.value *= jitter;
+        }
+
+        playViperElimination2(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Electrical cascade failure
+            const electricOsc = this.audioContext.createOscillator();
+            electricOsc.type = 'sawtooth';
+            electricOsc.frequency.setValueAtTime(1600, now);
+            electricOsc.frequency.exponentialRampToValueAtTime(400, now + 0.12);
+            const electricGain = this.audioContext.createGain();
+            electricGain.gain.setValueAtTime(0.35, now);
+            electricGain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+            
+            // Body: System shutdown whine
+            const whineOsc = this.audioContext.createOscillator();
+            whineOsc.type = 'sine';
+            whineOsc.frequency.setValueAtTime(800, now + 0.05);
+            whineOsc.frequency.exponentialRampToValueAtTime(200, now + 0.25);
+            const whineGain = this.audioContext.createGain();
+            whineGain.gain.setValueAtTime(0.3, now + 0.05);
+            whineGain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            
+            // Weight: Bubbling sink
+            const bubbleOsc = this.audioContext.createOscillator();
+            bubbleOsc.type = 'triangle';
+            bubbleOsc.frequency.setValueAtTime(120, now + 0.15);
+            bubbleOsc.frequency.exponentialRampToValueAtTime(60, now + 0.35);
+            const bubbleGain = this.audioContext.createGain();
+            bubbleGain.gain.setValueAtTime(0.25, now + 0.15);
+            bubbleGain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+            
+            electricOsc.connect(electricGain);
+            electricGain.connect(masterGain);
+            whineOsc.connect(whineGain);
+            whineGain.connect(masterGain);
+            bubbleOsc.connect(bubbleGain);
+            bubbleGain.connect(masterGain);
+            
+            electricOsc.start(now);
+            electricOsc.stop(now + 0.12);
+            whineOsc.start(now + 0.05);
+            whineOsc.stop(now + 0.25);
+            bubbleOsc.start(now + 0.15);
+            bubbleOsc.stop(now + 0.35);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            electricOsc.frequency.value *= jitter;
+        }
+
+        playViperElimination3(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Explosive pop
+            const popOsc = this.audioContext.createOscillator();
+            popOsc.type = 'square';
+            popOsc.frequency.setValueAtTime(3200, now);
+            popOsc.frequency.exponentialRampToValueAtTime(1200, now + 0.06);
+            const popGain = this.audioContext.createGain();
+            popGain.gain.setValueAtTime(0.45, now);
+            popGain.gain.exponentialRampToValueAtTime(0.01, now + 0.06);
+            
+            // Body: Rapid decompression
+            const decompSource = this.audioContext.createBufferSource();
+            decompSource.buffer = this.createNoiseBuffer(0.15);
+            const decompFilter = this.audioContext.createBiquadFilter();
+            decompFilter.type = 'bandpass';
+            decompFilter.frequency.setValueAtTime(1000, now + 0.03);
+            decompFilter.frequency.exponentialRampToValueAtTime(300, now + 0.15);
+            const decompGain = this.audioContext.createGain();
+            decompGain.gain.setValueAtTime(0.35, now + 0.03);
+            decompGain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            
+            // Weight: Fast sinking gurgle
+            const gurgleOsc = this.audioContext.createOscillator();
+            gurgleOsc.type = 'sine';
+            gurgleOsc.frequency.setValueAtTime(200, now + 0.08);
+            gurgleOsc.frequency.exponentialRampToValueAtTime(80, now + 0.42);
+            const gurgleGain = this.audioContext.createGain();
+            gurgleGain.gain.setValueAtTime(0.3, now + 0.08);
+            gurgleGain.gain.exponentialRampToValueAtTime(0.01, now + 0.42);
+            
+            popOsc.connect(popGain);
+            popGain.connect(masterGain);
+            decompSource.connect(decompFilter);
+            decompFilter.connect(decompGain);
+            decompGain.connect(masterGain);
+            gurgleOsc.connect(gurgleGain);
+            gurgleGain.connect(masterGain);
+            
+            popOsc.start(now);
+            popOsc.stop(now + 0.06);
+            decompSource.start(now + 0.03);
+            decompSource.stop(now + 0.15);
+            gurgleOsc.start(now + 0.08);
+            gurgleOsc.stop(now + 0.42);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            popOsc.frequency.value *= jitter;
+        }
+
+        // NEW: Condor elimination sounds (3 variants)
+        playCondorElimination1(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Massive structural failure
+            const structureOsc = this.audioContext.createOscillator();
+            structureOsc.type = 'square';
+            structureOsc.frequency.setValueAtTime(1200, now);
+            structureOsc.frequency.exponentialRampToValueAtTime(300, now + 0.2);
+            const structureGain = this.audioContext.createGain();
+            structureGain.gain.setValueAtTime(0.5, now);
+            structureGain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+            
+            // Body: Heavy armor buckling
+            const bucklingSource = this.audioContext.createBufferSource();
+            bucklingSource.buffer = this.createNoiseBuffer(0.35);
+            const bucklingFilter = this.audioContext.createBiquadFilter();
+            bucklingFilter.type = 'lowpass';
+            bucklingFilter.frequency.setValueAtTime(800, now + 0.1);
+            bucklingFilter.frequency.exponentialRampToValueAtTime(200, now + 0.35);
+            const bucklingGain = this.audioContext.createGain();
+            bucklingGain.gain.setValueAtTime(0.4, now + 0.1);
+            bucklingGain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+            
+            // Weight: Water displacement
+            const displacementOsc = this.audioContext.createOscillator();
+            displacementOsc.type = 'triangle';
+            displacementOsc.frequency.setValueAtTime(100, now + 0.25);
+            displacementOsc.frequency.exponentialRampToValueAtTime(40, now + 0.65);
+            const displacementGain = this.audioContext.createGain();
+            displacementGain.gain.setValueAtTime(0.45, now + 0.25);
+            displacementGain.gain.exponentialRampToValueAtTime(0.01, now + 0.65);
+            
+            structureOsc.connect(structureGain);
+            structureGain.connect(masterGain);
+            bucklingSource.connect(bucklingFilter);
+            bucklingFilter.connect(bucklingGain);
+            bucklingGain.connect(masterGain);
+            displacementOsc.connect(displacementGain);
+            displacementGain.connect(masterGain);
+            
+            structureOsc.start(now);
+            structureOsc.stop(now + 0.2);
+            bucklingSource.start(now + 0.1);
+            bucklingSource.stop(now + 0.35);
+            displacementOsc.start(now + 0.25);
+            displacementOsc.stop(now + 0.65);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            structureOsc.frequency.value *= jitter;
+        }
+
+        playCondorElimination2(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Magazine detonation
+            const detonationOsc = this.audioContext.createOscillator();
+            detonationOsc.type = 'sawtooth';
+            detonationOsc.frequency.setValueAtTime(2400, now);
+            detonationOsc.frequency.exponentialRampToValueAtTime(800, now + 0.15);
+            const detonationGain = this.audioContext.createGain();
+            detonationGain.gain.setValueAtTime(0.6, now);
+            detonationGain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+            
+            // Body: Chain reaction explosions
+            const chainFreqs = [1600, 1200, 900, 600];
+            chainFreqs.forEach((freq, i) => {
+                const chainOsc = this.audioContext.createOscillator();
+                chainOsc.type = 'square';
+                chainOsc.frequency.setValueAtTime(freq, now + 0.08 + (i * 0.05));
+                chainOsc.frequency.exponentialRampToValueAtTime(freq * 0.3, now + 0.15 + (i * 0.05));
+                const chainGain = this.audioContext.createGain();
+                chainGain.gain.setValueAtTime(0.4, now + 0.08 + (i * 0.05));
+                chainGain.gain.exponentialRampToValueAtTime(0.01, now + 0.15 + (i * 0.05));
+                
+                chainOsc.connect(chainGain);
+                chainGain.connect(masterGain);
+                chainOsc.start(now + 0.08 + (i * 0.05));
+                chainOsc.stop(now + 0.15 + (i * 0.05));
+            });
+            
+            // Weight: Final collapse
+            const collapseOsc = this.audioContext.createOscillator();
+            collapseOsc.type = 'sine';
+            collapseOsc.frequency.setValueAtTime(80, now + 0.3);
+            collapseOsc.frequency.exponentialRampToValueAtTime(30, now + 0.58);
+            const collapseGain = this.audioContext.createGain();
+            collapseGain.gain.setValueAtTime(0.5, now + 0.3);
+            collapseGain.gain.exponentialRampToValueAtTime(0.01, now + 0.58);
+            
+            detonationOsc.connect(detonationGain);
+            detonationGain.connect(masterGain);
+            collapseOsc.connect(collapseGain);
+            collapseGain.connect(masterGain);
+            
+            detonationOsc.start(now);
+            detonationOsc.stop(now + 0.15);
+            collapseOsc.start(now + 0.3);
+            collapseOsc.stop(now + 0.58);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            detonationOsc.frequency.value *= jitter;
+        }
+
+        playCondorElimination3(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Clarity: Reactor overload buildup
+            const buildupOsc = this.audioContext.createOscillator();
+            buildupOsc.type = 'triangle';
+            buildupOsc.frequency.setValueAtTime(400, now);
+            buildupOsc.frequency.exponentialRampToValueAtTime(1200, now + 0.2);
+            const buildupGain = this.audioContext.createGain();
+            buildupGain.gain.setValueAtTime(0.2, now);
+            buildupGain.gain.exponentialRampToValueAtTime(0.6, now + 0.2);
+            
+            // Body: Massive detonation
+            const massiveOsc = this.audioContext.createOscillator();
+            massiveOsc.type = 'sawtooth';
+            massiveOsc.frequency.setValueAtTime(1800, now + 0.2);
+            massiveOsc.frequency.exponentialRampToValueAtTime(400, now + 0.4);
+            const massiveGain = this.audioContext.createGain();
+            massiveGain.gain.setValueAtTime(0.7, now + 0.2);
+            massiveGain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+            
+            // Weight: Meltdown cascade
+            const meltdownOsc = this.audioContext.createOscillator();
+            meltdownOsc.type = 'sine';
+            meltdownOsc.frequency.setValueAtTime(150, now + 0.35);
+            meltdownOsc.frequency.exponentialRampToValueAtTime(25, now + 0.7);
+            const meltdownGain = this.audioContext.createGain();
+            meltdownGain.gain.setValueAtTime(0.5, now + 0.35);
+            meltdownGain.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+            
+            buildupOsc.connect(buildupGain);
+            buildupGain.connect(masterGain);
+            massiveOsc.connect(massiveGain);
+            massiveGain.connect(masterGain);
+            meltdownOsc.connect(meltdownGain);
+            meltdownGain.connect(masterGain);
+            
+            buildupOsc.start(now);
+            buildupOsc.stop(now + 0.2);
+            massiveOsc.start(now + 0.2);
+            massiveOsc.stop(now + 0.4);
+            meltdownOsc.start(now + 0.35);
+            meltdownOsc.stop(now + 0.7);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            buildupOsc.frequency.value *= jitter;
+        }
+
+        // NEW: Game state jingles
+        playGameStart(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Bright opening bell (reverse of defeat's closing bell)
+            const bellOsc = this.audioContext.createOscillator();
+            bellOsc.type = 'sine';
+            bellOsc.frequency.setValueAtTime(494, now); // B4→C5 (reverse of defeat's C5→B4)
+            bellOsc.frequency.exponentialRampToValueAtTime(523, now + 0.2);
+            
+            const bellGain = this.audioContext.createGain();
+            bellGain.gain.setValueAtTime(0.3, now);
+            bellGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+            
+            bellOsc.connect(bellGain);
+            bellGain.connect(masterGain);
+            bellOsc.start(now);
+            bellOsc.stop(now + 0.2);
+
+            // Ascending motif (reverse of defeat's descending A4→G4→E4→D4)
+            const ascentFreqs = [294, 330, 392, 440]; // D4→E4→G4→A4 (upward progression)
+            ascentFreqs.forEach((freq, i) => {
+                const ascentOsc = this.audioContext.createOscillator();
+                ascentOsc.type = 'triangle'; // Warmer than defeat's sine, more upbeat
+                ascentOsc.frequency.value = freq;
+                
+                const ascentGain = this.audioContext.createGain();
+                ascentGain.gain.setValueAtTime(0.5, now + 0.2 + (i * 0.15)); // Brighter than defeat's 0.4
+                ascentGain.gain.exponentialRampToValueAtTime(0.001, now + 0.45 + (i * 0.15));
+                
+                const ascentFilter = this.audioContext.createBiquadFilter();
+                ascentFilter.type = 'highpass'; // Reverse of defeat's lowpass - more brightness
+                ascentFilter.frequency.value = 200;
+                
+                ascentOsc.connect(ascentFilter);
+                ascentFilter.connect(ascentGain);
+                ascentGain.connect(masterGain);
+                ascentOsc.start(now + 0.2 + (i * 0.15));
+                ascentOsc.stop(now + 0.45 + (i * 0.15));
+            });
+
+            // Welcoming major chord (reverse of defeat's F major - use C major instead)
+            const welcomeChord1 = this.audioContext.createOscillator();
+            welcomeChord1.type = 'triangle'; // Brighter than defeat's sine
+            welcomeChord1.frequency.value = 262; // C4
+            
+            const welcomeChord2 = this.audioContext.createOscillator();
+            welcomeChord2.type = 'triangle';
+            welcomeChord2.frequency.value = 330; // E4
+            
+            const welcomeChord3 = this.audioContext.createOscillator();
+            welcomeChord3.type = 'triangle';
+            welcomeChord3.frequency.value = 392; // G4
+            
+            const welcomeGain = this.audioContext.createGain();
+            welcomeGain.gain.setValueAtTime(0.4, now + 0.8);
+            welcomeGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            
+            welcomeChord1.connect(welcomeGain);
+            welcomeChord2.connect(welcomeGain);
+            welcomeChord3.connect(welcomeGain);
+            welcomeGain.connect(masterGain);
+            
+            welcomeChord1.start(now + 0.8);
+            welcomeChord2.start(now + 0.8);
+            welcomeChord3.start(now + 0.8);
+            welcomeChord1.stop(now + 1.2);
+            welcomeChord2.stop(now + 1.2);
+            welcomeChord3.stop(now + 1.2);
+
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            // Apply slight frequency variation to the bell
+            bellOsc.frequency.value *= jitter;
+        }
+
+        playDefeatJingle(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume * 0.8; // Softer for respectful tone
+            masterGain.connect(this.audioContext.destination);
+            
+            // Gentle descending motif (graceful acknowledgment)
+            const descentFreqs = [523, 466, 415, 370, 330]; // C-Bb-Ab-F#-E
+            descentFreqs.forEach((freq, i) => {
+                const descentOsc = this.audioContext.createOscillator();
+                descentOsc.type = 'triangle';
+                descentOsc.frequency.setValueAtTime(freq, now + (i * 0.15));
+                const descentGain = this.audioContext.createGain();
+                descentGain.gain.setValueAtTime(0.4, now + (i * 0.15));
+                descentGain.gain.exponentialRampToValueAtTime(0.01, now + 0.2 + (i * 0.15));
+                
+                descentOsc.connect(descentGain);
+                descentGain.connect(masterGain);
+                descentOsc.start(now + (i * 0.15));
+                descentOsc.stop(now + 0.2 + (i * 0.15));
+            });
+            
+            // Respectful farewell (warm harmony)
+            const farewellOsc = this.audioContext.createOscillator();
+            farewellOsc.type = 'sine';
+            farewellOsc.frequency.setValueAtTime(330, now + 0.6); // E major chord root
+            const farewellGain = this.audioContext.createGain();
+            farewellGain.gain.setValueAtTime(0.35, now + 0.6);
+            farewellGain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
+            
+            // Gentle closure (soft resolution)
+            const closureOsc = this.audioContext.createOscillator();
+            closureOsc.type = 'triangle';
+            closureOsc.frequency.setValueAtTime(262, now + 0.9); // C resolution
+            const closureGain = this.audioContext.createGain();
+            closureGain.gain.setValueAtTime(0.3, now + 0.9);
+            closureGain.gain.exponentialRampToValueAtTime(0.01, now + 1.2);
+            
+            farewellOsc.connect(farewellGain);
+            farewellGain.connect(masterGain);
+            closureOsc.connect(closureGain);
+            closureGain.connect(masterGain);
+            
+            farewellOsc.start(now + 0.6);
+            farewellOsc.stop(now + 1.0);
+            closureOsc.start(now + 0.9);
+            closureOsc.stop(now + 1.2);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            farewellOsc.frequency.value *= jitter;
+        }
+
+        playVictory1stPlace(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+            
+            // Grand fanfare (triumphant opening)
+            const grandFreqs = [262, 330, 392, 523, 659, 784, 1047]; // C major scale to high C
+            grandFreqs.forEach((freq, i) => {
+                const grandOsc = this.audioContext.createOscillator();
+                grandOsc.type = 'square';
+                grandOsc.frequency.setValueAtTime(freq, now + (i * 0.1));
+                const grandGain = this.audioContext.createGain();
+                grandGain.gain.setValueAtTime(0.5, now + (i * 0.1));
+                grandGain.gain.exponentialRampToValueAtTime(0.01, now + 0.3 + (i * 0.1));
+                
+                grandOsc.connect(grandGain);
+                grandGain.connect(masterGain);
+                grandOsc.start(now + (i * 0.1));
+                grandOsc.stop(now + 0.3 + (i * 0.1));
+            });
+            
+            // Victory drums (rhythmic power)
+            const drumFreqs = [100, 120, 140, 160];
+            for (let i = 0; i < 8; i++) {
+                const drumOsc = this.audioContext.createOscillator();
+                drumOsc.type = 'triangle';
+                drumOsc.frequency.setValueAtTime(drumFreqs[i % 4], now + 0.8 + (i * 0.1));
+                const drumGain = this.audioContext.createGain();
+                drumGain.gain.setValueAtTime(0.6, now + 0.8 + (i * 0.1));
+                drumGain.gain.exponentialRampToValueAtTime(0.01, now + 0.95 + (i * 0.1));
+                
+                drumOsc.connect(drumGain);
+                drumGain.connect(masterGain);
+                drumOsc.start(now + 0.8 + (i * 0.1));
+                drumOsc.stop(now + 0.95 + (i * 0.1));
+            }
+            
+            // Triumph cascade (ascending celebration)
+            const cascadeFreqs = [523, 659, 784, 1047, 1319, 1568];
+            cascadeFreqs.forEach((freq, i) => {
+                const cascadeOsc = this.audioContext.createOscillator();
+                cascadeOsc.type = 'sine';
+                cascadeOsc.frequency.setValueAtTime(freq, now + 1.6 + (i * 0.08));
+                const cascadeGain = this.audioContext.createGain();
+                cascadeGain.gain.setValueAtTime(0.4, now + 1.6 + (i * 0.08));
+                cascadeGain.gain.exponentialRampToValueAtTime(0.01, now + 1.8 + (i * 0.08));
+                
+                cascadeOsc.connect(cascadeGain);
+                cascadeGain.connect(masterGain);
+                cascadeOsc.start(now + 1.6 + (i * 0.08));
+                cascadeOsc.stop(now + 1.8 + (i * 0.08));
+            });
+            
+            // Domination finale (ultimate victory chord)
+            const finaleOsc = this.audioContext.createOscillator();
+            finaleOsc.type = 'sawtooth';
+            finaleOsc.frequency.setValueAtTime(1047, now + 2.1); // High C
+            finaleOsc.frequency.exponentialRampToValueAtTime(2093, now + 2.5); // Ultra-high C
+            const finaleGain = this.audioContext.createGain();
+            finaleGain.gain.setValueAtTime(0.7, now + 2.1);
+            finaleGain.gain.exponentialRampToValueAtTime(0.01, now + 2.5);
+            
+            finaleOsc.connect(finaleGain);
+            finaleGain.connect(masterGain);
+            finaleOsc.start(now + 2.1);
+            finaleOsc.stop(now + 2.5);
+            
+            // Add ±3% humanization jitter
+            const jitter = 1 + (Math.random() - 0.5) * 0.06;
+            finaleOsc.frequency.value *= jitter;
+        }
+
+        // PHASE 2 ADDITIONS: Troop warning sounds
+        playTroopsWarning50(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Warning beep sequence
+            const beepFreqs = [800, 800, 1000]; // Two quick beeps then higher warning
+            beepFreqs.forEach((freq, i) => {
+                const beepOsc = this.audioContext.createOscillator();
+                beepOsc.type = 'square';
+                beepOsc.frequency.value = freq;
+                
+                const beepGain = this.audioContext.createGain();
+                beepGain.gain.setValueAtTime(0.6, now + (i * 0.12));
+                beepGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08 + (i * 0.12));
+                
+                beepOsc.connect(beepGain);
+                beepGain.connect(masterGain);
+                beepOsc.start(now + (i * 0.12));
+                beepOsc.stop(now + 0.08 + (i * 0.12));
+            });
+
+            // Cautionary sustain tone
+            const sustainOsc = this.audioContext.createOscillator();
+            sustainOsc.type = 'triangle';
+            sustainOsc.frequency.value = 600;
+            
+            const sustainGain = this.audioContext.createGain();
+            sustainGain.gain.setValueAtTime(0.3, now + 0.4);
+            sustainGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            sustainOsc.connect(sustainGain);
+            sustainGain.connect(masterGain);
+            sustainOsc.start(now + 0.4);
+            sustainOsc.stop(now + 0.6);
+        }
+
+        playTroopsDanger20(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Urgent alarm sequence (faster and higher pitched)
+            for (let i = 0; i < 5; i++) {
+                const alarmOsc = this.audioContext.createOscillator();
+                alarmOsc.type = 'sawtooth';
+                alarmOsc.frequency.value = 1200 + (i * 100); // Rising urgency
+                
+                const alarmGain = this.audioContext.createGain();
+                alarmGain.gain.setValueAtTime(0.7, now + (i * 0.08));
+                alarmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.06 + (i * 0.08));
+                
+                alarmOsc.connect(alarmGain);
+                alarmGain.connect(masterGain);
+                alarmOsc.start(now + (i * 0.08));
+                alarmOsc.stop(now + 0.06 + (i * 0.08));
+            }
+
+            // Danger sustain with tremolo
+            const dangerOsc = this.audioContext.createOscillator();
+            dangerOsc.type = 'square';
+            dangerOsc.frequency.value = 400;
+            
+            const tremolo = this.audioContext.createOscillator();
+            tremolo.type = 'sine';
+            tremolo.frequency.value = 8; // 8Hz tremolo for urgency
+            const tremoloGain = this.audioContext.createGain();
+            tremoloGain.gain.value = 0.3;
+            
+            tremolo.connect(tremoloGain);
+            tremoloGain.connect(dangerOsc.frequency);
+            
+            const dangerGain = this.audioContext.createGain();
+            dangerGain.gain.setValueAtTime(0.5, now + 0.4);
+            dangerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            dangerOsc.connect(dangerGain);
+            dangerGain.connect(masterGain);
+            
+            dangerOsc.start(now + 0.4);
+            dangerOsc.stop(now + 0.8);
+            tremolo.start(now + 0.4);
+            tremolo.stop(now + 0.8);
+        }
+
+        // PHASE 4: Ship Noises
+        playTradeShipArrival(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Engine approach (distant to close)
+            const engineOsc = this.audioContext.createOscillator();
+            engineOsc.type = 'triangle';
+            engineOsc.frequency.setValueAtTime(80, now);
+            engineOsc.frequency.exponentialRampToValueAtTime(120, now + 0.4);
+            engineOsc.frequency.exponentialRampToValueAtTime(100, now + 0.6);
+            
+            const engineGain = this.audioContext.createGain();
+            engineGain.gain.setValueAtTime(0.2, now);
+            engineGain.gain.linearRampToValueAtTime(0.5, now + 0.4);
+            engineGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            engineOsc.connect(engineGain);
+            engineGain.connect(masterGain);
+            engineOsc.start(now);
+            engineOsc.stop(now + 0.6);
+
+            // Docking clank
+            const clankOsc = this.audioContext.createOscillator();
+            clankOsc.type = 'square';
+            clankOsc.frequency.value = 300;
+            
+            const clankGain = this.audioContext.createGain();
+            clankGain.gain.setValueAtTime(0.4, now + 0.5);
+            clankGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+            
+            clankOsc.connect(clankGain);
+            clankGain.connect(masterGain);
+            clankOsc.start(now + 0.5);
+            clankOsc.stop(now + 0.65);
+
+            // Cargo settle
+            const settleOsc = this.audioContext.createOscillator();
+            settleOsc.type = 'sine';
+            settleOsc.frequency.setValueAtTime(150, now + 0.6);
+            settleOsc.frequency.exponentialRampToValueAtTime(80, now + 0.8);
+            
+            const settleGain = this.audioContext.createGain();
+            settleGain.gain.setValueAtTime(0.3, now + 0.6);
+            settleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+            
+            settleOsc.connect(settleGain);
+            settleGain.connect(masterGain);
+            settleOsc.start(now + 0.6);
+            settleOsc.stop(now + 0.8);
+        }
+
+        playTransportShipLoading(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Hydraulic loading systems
+            const hydraulicOsc = this.audioContext.createOscillator();
+            hydraulicOsc.type = 'sawtooth';
+            hydraulicOsc.frequency.setValueAtTime(60, now);
+            hydraulicOsc.frequency.linearRampToValueAtTime(90, now + 0.3);
+            hydraulicOsc.frequency.linearRampToValueAtTime(70, now + 0.6);
+            
+            const hydraulicGain = this.audioContext.createGain();
+            hydraulicGain.gain.setValueAtTime(0.4, now);
+            hydraulicGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            hydraulicOsc.connect(hydraulicGain);
+            hydraulicGain.connect(masterGain);
+            hydraulicOsc.start(now);
+            hydraulicOsc.stop(now + 0.6);
+
+            // Boarding activity (mechanical sounds)
+            for (let i = 0; i < 4; i++) {
+                const boardingOsc = this.audioContext.createOscillator();
+                boardingOsc.type = 'square';
+                boardingOsc.frequency.value = 200 + (i * 50);
+                
+                const boardingGain = this.audioContext.createGain();
+                boardingGain.gain.setValueAtTime(0.3, now + 0.2 + (i * 0.1));
+                boardingGain.gain.exponentialRampToValueAtTime(0.001, now + 0.28 + (i * 0.1));
+                
+                boardingOsc.connect(boardingGain);
+                boardingGain.connect(masterGain);
+                boardingOsc.start(now + 0.2 + (i * 0.1));
+                boardingOsc.stop(now + 0.28 + (i * 0.1));
+            }
+
+            // Departure preparation (engine warmup)
+            const prepOsc = this.audioContext.createOscillator();
+            prepOsc.type = 'triangle';
+            prepOsc.frequency.setValueAtTime(90, now + 0.6);
+            prepOsc.frequency.exponentialRampToValueAtTime(130, now + 0.9);
+            
+            const prepGain = this.audioContext.createGain();
+            prepGain.gain.setValueAtTime(0.3, now + 0.6);
+            prepGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+            
+            prepOsc.connect(prepGain);
+            prepGain.connect(masterGain);
+            prepOsc.start(now + 0.6);
+            prepOsc.stop(now + 0.9);
+        }
+
+        playWarshipPatrol(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Steady patrol engine
+            const engineOsc = this.audioContext.createOscillator();
+            engineOsc.type = 'triangle';
+            engineOsc.frequency.value = 110;
+            
+            const engineGain = this.audioContext.createGain();
+            engineGain.gain.setValueAtTime(0.4, now);
+            engineGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+            
+            engineOsc.connect(engineGain);
+            engineGain.connect(masterGain);
+            engineOsc.start(now);
+            engineOsc.stop(now + 0.7);
+
+            // Sonar ping sequence (naval awareness)
+            const sonarPings = [0.2, 0.45];
+            sonarPings.forEach(time => {
+                const pingOsc = this.audioContext.createOscillator();
+                pingOsc.type = 'sine';
+                pingOsc.frequency.setValueAtTime(1200, now + time);
+                pingOsc.frequency.exponentialRampToValueAtTime(800, now + time + 0.1);
+                
+                const pingGain = this.audioContext.createGain();
+                pingGain.gain.setValueAtTime(0.5, now + time);
+                pingGain.gain.exponentialRampToValueAtTime(0.001, now + time + 0.1);
+                
+                pingOsc.connect(pingGain);
+                pingGain.connect(masterGain);
+                pingOsc.start(now + time);
+                pingOsc.stop(now + time + 0.1);
+            });
+
+            // Wake wash (water displacement)
+            const wakeNoise = this.createNoiseBuffer(0.4);
+            const wakeSource = this.audioContext.createBufferSource();
+            wakeSource.buffer = wakeNoise;
+            
+            const wakeGain = this.audioContext.createGain();
+            wakeGain.gain.setValueAtTime(0.2, now + 0.3);
+            wakeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+            
+            const wakeFilter = this.audioContext.createBiquadFilter();
+            wakeFilter.type = 'lowpass';
+            wakeFilter.frequency.value = 400;
+            
+            wakeSource.connect(wakeFilter);
+            wakeFilter.connect(wakeGain);
+            wakeGain.connect(masterGain);
+            wakeSource.start(now + 0.3);
+            wakeSource.stop(now + 0.7);
+        }
+
+        playFleetFormation(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Coordinated engine sounds (3 ships in formation)
+            const engineFreqs = [95, 110, 125];
+            engineFreqs.forEach((freq, i) => {
+                const engineOsc = this.audioContext.createOscillator();
+                engineOsc.type = 'triangle';
+                engineOsc.frequency.value = freq;
+                
+                const engineGain = this.audioContext.createGain();
+                engineGain.gain.setValueAtTime(0.25, now + (i * 0.1));
+                engineGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+                
+                engineOsc.connect(engineGain);
+                engineGain.connect(masterGain);
+                engineOsc.start(now + (i * 0.1));
+                engineOsc.stop(now + 1.0);
+            });
+
+            // Formation coordination signals
+            const signalFreqs = [1600, 1400, 1200];
+            signalFreqs.forEach((freq, i) => {
+                const signalOsc = this.audioContext.createOscillator();
+                signalOsc.type = 'square';
+                signalOsc.frequency.value = freq;
+                
+                const signalGain = this.audioContext.createGain();
+                signalGain.gain.setValueAtTime(0.3, now + 0.3 + (i * 0.15));
+                signalGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35 + (i * 0.15));
+                
+                signalOsc.connect(signalGain);
+                signalGain.connect(masterGain);
+                signalOsc.start(now + 0.3 + (i * 0.15));
+                signalOsc.stop(now + 0.35 + (i * 0.15));
+            });
+
+            // Synchronized wake (coordinated water displacement)
+            const syncWakeOsc = this.audioContext.createOscillator();
+            syncWakeOsc.type = 'sine';
+            syncWakeOsc.frequency.setValueAtTime(200, now + 0.6);
+            syncWakeOsc.frequency.exponentialRampToValueAtTime(120, now + 1.0);
+            
+            const syncWakeGain = this.audioContext.createGain();
+            syncWakeGain.gain.setValueAtTime(0.4, now + 0.6);
+            syncWakeGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+            
+            syncWakeOsc.connect(syncWakeGain);
+            syncWakeGain.connect(masterGain);
+            syncWakeOsc.start(now + 0.6);
+            syncWakeOsc.stop(now + 1.0);
+        }
+
+        playPortActivity(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Harbor ambience (mechanical activity)
+            const ambientNoise = this.createNoiseBuffer(0.6);
+            const ambientSource = this.audioContext.createBufferSource();
+            ambientSource.buffer = ambientNoise;
+            
+            const ambientGain = this.audioContext.createGain();
+            ambientGain.gain.setValueAtTime(0.2, now);
+            ambientGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            const ambientFilter = this.audioContext.createBiquadFilter();
+            ambientFilter.type = 'lowpass';
+            ambientFilter.frequency.value = 300;
+            
+            ambientSource.connect(ambientFilter);
+            ambientFilter.connect(ambientGain);
+            ambientGain.connect(masterGain);
+            ambientSource.start(now);
+            ambientSource.stop(now + 0.6);
+
+            // Crane operations (mechanical loading/unloading)
+            for (let i = 0; i < 3; i++) {
+                const craneOsc = this.audioContext.createOscillator();
+                craneOsc.type = 'sawtooth';
+                craneOsc.frequency.value = 70 + (i * 15);
+                
+                const craneGain = this.audioContext.createGain();
+                craneGain.gain.setValueAtTime(0.3, now + (i * 0.15));
+                craneGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1 + (i * 0.15));
+                
+                craneOsc.connect(craneGain);
+                craneGain.connect(masterGain);
+                craneOsc.start(now + (i * 0.15));
+                craneOsc.stop(now + 0.1 + (i * 0.15));
+            }
+
+            // Ship horns (communication)
+            const hornOsc = this.audioContext.createOscillator();
+            hornOsc.type = 'triangle';
+            hornOsc.frequency.setValueAtTime(150, now + 0.4);
+            hornOsc.frequency.setValueAtTime(200, now + 0.45);
+            hornOsc.frequency.setValueAtTime(150, now + 0.5);
+            
+            const hornGain = this.audioContext.createGain();
+            hornGain.gain.setValueAtTime(0.4, now + 0.4);
+            hornGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            hornOsc.connect(hornGain);
+            hornGain.connect(masterGain);
+            hornOsc.start(now + 0.4);
+            hornOsc.stop(now + 0.6);
+        }
+
+        playNavalConstruction(volume = 0.7) {
+            const now = this.audioContext.currentTime;
+            const masterGain = this.audioContext.createGain();
+            masterGain.gain.value = volume;
+            masterGain.connect(this.audioContext.destination);
+
+            // Heavy construction (metal work)
+            const constructionOsc = this.audioContext.createOscillator();
+            constructionOsc.type = 'square';
+            constructionOsc.frequency.setValueAtTime(80, now);
+            constructionOsc.frequency.linearRampToValueAtTime(120, now + 0.4);
+            constructionOsc.frequency.linearRampToValueAtTime(90, now + 0.6);
+            
+            const constructionGain = this.audioContext.createGain();
+            constructionGain.gain.setValueAtTime(0.5, now);
+            constructionGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+            
+            constructionOsc.connect(constructionGain);
+            constructionGain.connect(masterGain);
+            constructionOsc.start(now);
+            constructionOsc.stop(now + 0.6);
+
+            // Welding operations (high frequency sparks)
+            for (let i = 0; i < 5; i++) {
+                const weldOsc = this.audioContext.createOscillator();
+                weldOsc.type = 'sawtooth';
+                weldOsc.frequency.value = 1800 + (i * 200);
+                
+                const weldGain = this.audioContext.createGain();
+                weldGain.gain.setValueAtTime(0.3, now + 0.1 + (i * 0.08));
+                weldGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15 + (i * 0.08));
+                
+                weldOsc.connect(weldGain);
+                weldGain.connect(masterGain);
+                weldOsc.start(now + 0.1 + (i * 0.08));
+                weldOsc.stop(now + 0.15 + (i * 0.08));
+            }
+
+            // Systems activation (naval systems coming online)
+            const systemsOsc = this.audioContext.createOscillator();
+            systemsOsc.type = 'sine';
+            systemsOsc.frequency.setValueAtTime(400, now + 0.6);
+            systemsOsc.frequency.exponentialRampToValueAtTime(800, now + 0.75);
+            systemsOsc.frequency.exponentialRampToValueAtTime(600, now + 0.9);
+            
+            const systemsGain = this.audioContext.createGain();
+            systemsGain.gain.setValueAtTime(0.4, now + 0.6);
+            systemsGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+            
+            systemsOsc.connect(systemsGain);
+            systemsGain.connect(masterGain);
+            systemsOsc.start(now + 0.6);
+            systemsOsc.stop(now + 0.9);
+        }
+
+        }
+
+        // Global variables
+        let audioEngine = null;
+        let masterVolume = 0.5;
+
+        // Initialize audio
+        async function initAudio() {
+            audioEngine = new WebAudioSoundsV2();
+            await audioEngine.init();
+            
+            document.getElementById('initButton').style.display = 'none';
+            document.getElementById('soundControls').classList.remove('hidden');
+            document.getElementById('status').textContent = '✅ Phase 1 Ready - Click any button to play';
+        }
+
+        // Play sound function
+        function playSound(type) {
+            if (!audioEngine) {
+                document.getElementById('status').textContent = '⚠️ Please initialize audio first';
+                return;
+            }
+
+            const buttons = document.querySelectorAll('.sound-button');
+            buttons.forEach(btn => btn.classList.remove('playing'));
+
+            let button;
+            let statusMessage;
+            
+            switch(type) {
+                case 'viperShellHit':
+                    audioEngine.playViperShellHit(masterVolume);
+                    statusMessage = '🚢💥 Playing: Viper Hit (0.2s)';
+                    break;
+                case 'defensePostShot':
+                    audioEngine.playDefensePostShot(masterVolume);
+                    statusMessage = '🏰 Playing: Defense Post Shot (0.4s)';
+                    break;
+                case 'samLaunch':
+                    audioEngine.playSAMLaunch(masterVolume);
+                    statusMessage = '🚀 Playing: SAM Launch (0.3s)';
+                    break;
+                case 'orbitalCannonFire':
+                    audioEngine.playOrbitalCannonFire(masterVolume);
+                    statusMessage = '🛰️ Playing: Orbital Cannon (0.35s)';
+                    break;
+                case 'landAttackHit':
+                    audioEngine.playLandAttackHit(masterVolume);
+                    statusMessage = '⚔️ Playing: Land Attack Hit (0.18s)';
+                    break;
+                case 'unitDestruction':
+                    audioEngine.playUnitDestruction(masterVolume);
+                    statusMessage = '💀 Playing: Unit Destruction (0.15s)';
+                    break;
+                case 'uiConfirm':
+                    audioEngine.playUIConfirm(masterVolume);
+                    statusMessage = '✅ Playing: UI Confirm (0.1s)';
+                    break;
+                case 'territoryCapture':
+                    audioEngine.playTerritoryCapture(masterVolume);
+                    statusMessage = '🏆 Playing: Territory Capture (0.3s)';
+                    break;
+                case 'portComplete':
+                    audioEngine.playPortComplete(masterVolume);
+                    statusMessage = '🚢 Playing: Port Complete (1.0s)';
+                    break;
+                case 'cityComplete':
+                    audioEngine.playCityComplete(masterVolume);
+                    statusMessage = '🏙️ Playing: City Complete (1.1s)';
+                    break;
+                case 'defensePostComplete':
+                    audioEngine.playDefensePostComplete(masterVolume);
+                    statusMessage = '🏰 Playing: Defense Post Complete (1.2s)';
+                    break;
+                case 'missileSiloComplete':
+                    audioEngine.playMissileSiloComplete(masterVolume);
+                    statusMessage = '🚀 Playing: Missile Silo Complete (1.0s)';
+                    break;
+                case 'gold125k':
+                    audioEngine.playGold125k(masterVolume);
+                    statusMessage = '💰 Playing: Gold 125K Milestone (0.8s)';
+                    break;
+                case 'gold750k':
+                    audioEngine.playGold750k(masterVolume);
+                    statusMessage = '⚛️ Playing: Gold 750K Milestone (1.0s)';
+                    break;
+                case 'gold1M':
+                    audioEngine.playGold1M(masterVolume);
+                    statusMessage = '👑 Playing: Gold 1M Milestone (1.2s)';
+                    break;
+                case 'playerConquest':
+                    audioEngine.playPlayerConquest(masterVolume);
+                    statusMessage = '🏆 Playing: Player Conquest (1.5s)';
+                    break;
+                case 'nukeDetonation':
+                    audioEngine.playNukeDetonation(masterVolume);
+                    statusMessage = '☢️ Playing: Nuke Detonation (0.8s)';
+                    break;
+                case 'hydrogenBombImpact':
+                    audioEngine.playHydrogenBombImpact(masterVolume);
+                    statusMessage = '💣 Playing: H-Bomb Impact (1.8s)';
+                    break;
+                case 'samIntercept':
+                    audioEngine.playSAMIntercept(masterVolume);
+                    statusMessage = '🚀 Playing: SAM Intercept (0.45s)';
+                    break;
+                case 'buildingDestruction':
+                    audioEngine.playBuildingDestruction(masterVolume);
+                    statusMessage = '🏗️ Playing: Building Destruction (0.25s)';
+                    break;
+                case 'unitElimination':
+                    audioEngine.playUnitElimination(masterVolume);
+                    statusMessage = '🛡️ Playing: Unit Elimination (0.5s)';
+                    break;
+                case 'armorBreak':
+                    audioEngine.playArmorBreak(masterVolume);
+                    statusMessage = '⚔️ Playing: Armor Break (0.4s)';
+                    break;
+                case 'falloutCreation':
+                    audioEngine.playFalloutCreation(masterVolume);
+                    statusMessage = '☢️ Playing: Fallout Creation (0.7s)';
+                    break;
+                case 'shockwaveImpact':
+                    audioEngine.playShockwaveImpact(masterVolume);
+                    statusMessage = '💨 Playing: Shockwave Impact (0.6s)';
+                    break;
+                // NEW: Game state jingles
+                case 'gameStart':
+                    audioEngine.playGameStart(masterVolume);
+                    statusMessage = '🎵 Playing: Game Start Jingle (1.2s)';
+                    break;
+                case 'defeatJingle':
+                    audioEngine.playDefeatJingle(masterVolume);
+                    statusMessage = '😔 Playing: Defeat Jingle (1.2s)';
+                    break;
+                case 'victory1stPlace':
+                    audioEngine.playVictory1stPlace(masterVolume);
+                    statusMessage = '🏆 Playing: Victory 1st Place (2.5s)';
+                    break;
+                // NEW: Phase 2 troop warnings
+                case 'troopsWarning50':
+                    audioEngine.playTroopsWarning50(masterVolume);
+                    statusMessage = '⚠️ Playing: Troops Warning 50% (0.6s)';
+                    break;
+                case 'troopsDanger20':
+                    audioEngine.playTroopsDanger20(masterVolume);
+                    statusMessage = '🚨 Playing: Troops DANGER 20% (0.8s)';
+                    break;
+                // NEW: Phase 4 ship noises
+                case 'tradeShipArrival':
+                    audioEngine.playTradeShipArrival(masterVolume);
+                    statusMessage = '🚢💰 Playing: Trade Ship Arrival (0.8s)';
+                    break;
+                case 'transportShipLoading':
+                    audioEngine.playTransportShipLoading(masterVolume);
+                    statusMessage = '🚢👥 Playing: Transport Ship Loading (0.9s)';
+                    break;
+                case 'warshipPatrol':
+                    audioEngine.playWarshipPatrol(masterVolume);
+                    statusMessage = '🚢⚓ Playing: Warship Patrol (0.7s)';
+                    break;
+                case 'fleetFormation':
+                    audioEngine.playFleetFormation(masterVolume);
+                    statusMessage = '🚢🚢🚢 Playing: Fleet Formation (1.0s)';
+                    break;
+                case 'portActivity':
+                    audioEngine.playPortActivity(masterVolume);
+                    statusMessage = '🏭 Playing: Port Activity (0.6s)';
+                    break;
+                case 'navalConstruction':
+                    audioEngine.playNavalConstruction(masterVolume);
+                    statusMessage = '🔧 Playing: Naval Construction (0.9s)';
+                    break;
+            }
+
+            // Find and animate the button
+            event.target.classList.add('playing');
+            setTimeout(() => event.target.classList.remove('playing'), 1000);
+            
+            document.getElementById('status').textContent = statusMessage;
+        }
+
+        // Volume control
+        document.getElementById('volume').addEventListener('input', function(e) {
+            masterVolume = e.target.value / 100;
+            document.getElementById('volumeValue').textContent = e.target.value + '%';
+        });
+    </script>
+</body>
+</html>

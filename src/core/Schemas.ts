@@ -1,0 +1,601 @@
+import { z } from "zod";
+import quickChatData from "../../resources/QuickChat.json" with { type: "json" };
+import {
+  AllPlayers,
+  Difficulty,
+  Duos,
+  GameMapType,
+  GameMode,
+  GameType,
+  PlayerType,
+  UnitType,
+} from "./game/Game";
+import { flattenedEmojiTable } from "./Util";
+
+export type GameID = string;
+export type ClientID = string;
+
+export type Intent =
+  | SpawnIntent
+  | AttackIntent
+  | CancelAttackIntent
+  | BoatAttackIntent
+  | AllianceRequestIntent
+  | AllianceRequestReplyIntent
+  | BreakAllianceIntent
+  | TargetPlayerIntent
+  | EmojiIntent
+  | DonateGoldIntent
+  | DonateTroopsIntent
+  | TargetTroopRatioIntent
+  | BuildUnitIntent
+  | EmbargoIntent
+  | QuickChatIntent
+  | DirectChatIntent
+  | AllChatIntent
+  | MoveWarshipIntent
+  | BatchMoveWarshipsIntent
+  | WhisperIntent
+  | AutoPlayToggleIntent
+  | AutoPlayAttackRatioUpdateIntent;
+
+export type AttackIntent = z.infer<typeof AttackIntentSchema>;
+export type CancelAttackIntent = z.infer<typeof CancelAttackIntentSchema>;
+export type SpawnIntent = z.infer<typeof SpawnIntentSchema>;
+export type BoatAttackIntent = z.infer<typeof BoatAttackIntentSchema>;
+export type AllianceRequestIntent = z.infer<typeof AllianceRequestIntentSchema>;
+export type AllianceRequestReplyIntent = z.infer<
+  typeof AllianceRequestReplyIntentSchema
+>;
+export type BreakAllianceIntent = z.infer<typeof BreakAllianceIntentSchema>;
+export type TargetPlayerIntent = z.infer<typeof TargetPlayerIntentSchema>;
+export type EmojiIntent = z.infer<typeof EmojiIntentSchema>;
+export type DonateGoldIntent = z.infer<typeof DonateGoldIntentSchema>;
+export type DonateTroopsIntent = z.infer<typeof DonateTroopIntentSchema>;
+export type EmbargoIntent = z.infer<typeof EmbargoIntentSchema>;
+export type TargetTroopRatioIntent = z.infer<
+  typeof TargetTroopRatioIntentSchema
+>;
+export type BuildUnitIntent = z.infer<typeof BuildUnitIntentSchema>;
+export type MoveWarshipIntent = z.infer<typeof MoveWarshipIntentSchema>;
+export type BatchMoveWarshipsIntent = z.infer<typeof BatchMoveWarshipsIntentSchema>;
+export type QuickChatIntent = z.infer<typeof QuickChatIntentSchema>;
+export type DirectChatIntent = z.infer<typeof DirectChatIntentSchema>;
+export type AllChatIntent = z.infer<typeof AllChatIntentSchema>;
+export type WhisperIntent = z.infer<typeof WhisperIntentSchema>;
+export type AutoPlayToggleIntent = z.infer<typeof AutoPlayToggleIntentSchema>;
+export type AutoPlayAttackRatioUpdateIntent = z.infer<typeof AutoPlayAttackRatioUpdateIntentSchema>;
+
+export type Turn = z.infer<typeof TurnSchema>;
+export type GameConfig = z.infer<typeof GameConfigSchema>;
+
+export type ClientMessage =
+  | ClientSendWinnerMessage
+  | ClientPingMessage
+  | ClientIntentMessage
+  | ClientPlayerDataMessage
+  | ClientJoinMessage
+  | ClientLogMessage
+  | ClientHashMessage;
+export type ServerMessage =
+  | ServerSyncMessage
+  | ServerStartGameMessage
+  | ServerEndGameMessage
+  | ServerPingMessage
+  | ServerDesyncMessage
+  | ServerPrestartMessage;
+
+export type ServerSyncMessage = z.infer<typeof ServerTurnMessageSchema>;
+export type ServerStartGameMessage = z.infer<
+  typeof ServerStartGameMessageSchema
+>;
+export type ServerEndGameMessage = z.infer<typeof ServerEndGameMessageSchema>;
+
+export type ServerPingMessage = z.infer<typeof ServerPingMessageSchema>;
+export type ServerDesyncMessage = z.infer<typeof ServerDesyncSchema>;
+export type ServerPrestartMessage = z.infer<typeof ServerPrestartMessageSchema>;
+export type ClientSendWinnerMessage = z.infer<typeof ClientSendWinnerSchema>;
+export type ClientPingMessage = z.infer<typeof ClientPingMessageSchema>;
+export type ClientIntentMessage = z.infer<typeof ClientIntentMessageSchema>;
+export type ClientPlayerDataMessage = z.infer<
+  typeof ClientPlayerDataMessageSchema
+>;
+export type ClientJoinMessage = z.infer<typeof ClientJoinMessageSchema>;
+export type ClientLogMessage = z.infer<typeof ClientLogMessageSchema>;
+export type ClientHashMessage = z.infer<typeof ClientHashSchema>;
+
+export type PlayerRecord = z.infer<typeof PlayerRecordSchema>;
+export type GameRecord = z.infer<typeof GameRecordSchema>;
+
+export type AllPlayersStats = z.infer<typeof AllPlayersStatsSchema>;
+export type PlayerStats = z.infer<typeof PlayerStatsSchema>;
+export type Player = z.infer<typeof PlayerSchema>;
+export type ServerPlayerData = z.infer<typeof ServerPlayerDataSchema>;
+
+export type GameStartInfo = z.infer<typeof GameStartInfoSchema>;
+const PlayerTypeSchema = z.nativeEnum(PlayerType);
+
+export interface GameInfo {
+  gameID: GameID;
+  clients?: ClientInfo[];
+  numClients?: number;
+  msUntilStart?: number;
+  gameConfig?: GameConfig;
+}
+export interface ClientInfo {
+  clientID: ClientID;
+  username: string;
+}
+export enum LogSeverity {
+  Debug = "DEBUG",
+  Info = "INFO",
+  Warn = "WARN",
+  Error = "ERROR",
+  Fatal = "FATAL",
+}
+
+const GameConfigSchema = z.object({
+  gameMap: z.nativeEnum(GameMapType),
+  difficulty: z.nativeEnum(Difficulty),
+  gameType: z.nativeEnum(GameType),
+  gameMode: z.nativeEnum(GameMode),
+  disableNPCs: z.boolean(),
+  bots: z.number().int().min(0).max(400),
+  infiniteGold: z.boolean(),
+  infiniteTroops: z.boolean(),
+  instantBuild: z.boolean(),
+  maxPlayers: z.number().optional(),
+  disabledUnits: z.array(z.nativeEnum(UnitType)).optional(),
+  playerTeams: z.union([z.number().optional(), z.literal(Duos)]),
+  spawnPhaseTurns: z.number().optional(),
+  // Blockchain game flag
+  isBlockchainGame: z.boolean().optional(),
+});
+
+export const TeamSchema = z.string();
+
+const SafeString = z
+  .string()
+  .regex(
+    /^([a-zA-Z0-9\s.,!?@#$%&*()-_+=\[\]{}|;:"'\/\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff]|üÜ])*$/,
+  )
+  .max(1000);
+
+const jwtRegex = /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]*$/;
+// Copied from zod, modified to remove their erroneous `typ` header requirement
+function isValidJWT(jwt: string, alg?: string): boolean {
+  if (!jwtRegex.test(jwt)) return false;
+  try {
+    const [header] = jwt.split(".");
+    // Convert base64url to base64
+    const base64 = header
+      .replace(/-/g, "+")
+      .replace(/_/g, "/")
+      .padEnd(header.length + ((4 - (header.length % 4)) % 4), "=");
+    const decoded = JSON.parse(atob(base64));
+    if (typeof decoded !== "object" || decoded === null) return false;
+    if (!decoded.alg) return false;
+    if (alg && decoded.alg !== alg) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const PersistentIdSchema = z.string().uuid();
+const TokenSchema = z.string().refine(
+  (v) => {
+    // Accept valid UUIDs
+    if (PersistentIdSchema.safeParse(v).success) return true;
+    // Accept valid JWTs
+    if (isValidJWT(v)) return true;
+    // Accept sandbox tokens (sandboxP1_XXXXXXXX or sandboxP2_XXXXXXXX)
+    if (/^sandbox(P1|P2)_[a-zA-Z0-9]{8}$/.test(v)) return true;
+    return false;
+  },
+  {
+    message: "Token must be a valid UUID, JWT, or sandbox token",
+  },
+);
+
+const EmojiSchema = z
+  .number()
+  .nonnegative()
+  .max(flattenedEmojiTable.length - 1);
+const ID = z
+  .string()
+  .regex(/^[a-zA-Z0-9]+$/)
+  .length(8);
+
+const NukesEnum = z.enum([
+  "Atom Bomb",
+  "Hydrogen Bomb",
+  "MIRV",
+  "MIRV Warhead",
+]);
+
+const NukeStatsSchema = z.record(NukesEnum, z.number());
+
+export const PlayerStatsSchema = z.object({
+  sentNukes: z.record(ID, NukeStatsSchema),
+});
+
+export const AllPlayersStatsSchema = z.record(ID, PlayerStatsSchema);
+
+// Zod schemas
+const BaseIntentSchema = z.object({
+  type: z.enum([
+    "attack",
+    "cancel_attack",
+    "spawn",
+    "boat",
+    "name",
+    "targetPlayer",
+    "emoji",
+    "troop_ratio",
+    "build_unit",
+    "embargo",
+    "move_warship",
+    "quick_chat",
+    "direct_chat",
+    "all_chat",
+    "whisper",
+    "auto_play_toggle",
+  ]),
+  clientID: ID,
+});
+
+export const AttackIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("attack"),
+  targetID: ID.nullable(),
+  troops: z.number().nullable(),
+});
+
+export const SpawnIntentSchema = BaseIntentSchema.extend({
+  flag: z.string().nullable(),
+  type: z.literal("spawn"),
+  name: SafeString,
+  playerType: PlayerTypeSchema,
+  x: z.number(),
+  y: z.number(),
+});
+
+export const BoatAttackIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("boat"),
+  targetID: ID.nullable(),
+  troops: z.number(),
+  dstX: z.number(),
+  dstY: z.number(),
+  srcX: z.number().nullable(),
+  srcY: z.number().nullable(),
+});
+
+export const AllianceRequestIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("allianceRequest"),
+  recipient: ID,
+});
+
+export const AllianceRequestReplyIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("allianceRequestReply"),
+  requestor: ID, // The one who made the original alliance request
+  accept: z.boolean(),
+});
+
+export const BreakAllianceIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("breakAlliance"),
+  recipient: ID,
+});
+
+export const TargetPlayerIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("targetPlayer"),
+  target: ID,
+});
+
+export const EmojiIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("emoji"),
+  recipient: z.union([ID, z.literal(AllPlayers)]),
+  emoji: EmojiSchema,
+});
+
+export const EmbargoIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("embargo"),
+  targetID: ID,
+  action: z.union([z.literal("start"), z.literal("stop")]),
+});
+
+export const DonateGoldIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("donate_gold"),
+  recipient: ID,
+  gold: z.number().nullable(),
+});
+
+export const DonateTroopIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("donate_troops"),
+  recipient: ID,
+  troops: z.number().nullable(),
+});
+
+export const TargetTroopRatioIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("troop_ratio"),
+  ratio: z.number().min(0).max(1),
+});
+
+export const BuildUnitIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("build_unit"),
+  unit: z.nativeEnum(UnitType),
+  x: z.number(),
+  y: z.number(),
+});
+
+export const CancelAttackIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("cancel_attack"),
+  attackID: z.string(),
+});
+
+export const MoveWarshipIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("move_warship"),
+  unitId: z.number(),
+  tile: z.number(),
+});
+
+export const BatchMoveWarshipsIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("batch_move_warships"),
+  movements: z.array(z.object({
+    unitId: z.number(),
+    targetTile: z.number(),
+  })),
+});
+
+export const QuickChatKeySchema = z.enum(
+  Object.entries(quickChatData).flatMap(([category, entries]) =>
+    entries.map((entry) => `${category}.${entry.key}`),
+  ) as [string, ...string[]],
+);
+
+export const QuickChatIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("quick_chat"),
+  recipient: ID,
+  quickChatKey: QuickChatKeySchema,
+  variables: z.record(SafeString).optional(),
+});
+
+export const DirectChatIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("direct_chat"),
+  recipient: ID,
+  message: SafeString,
+});
+
+export const AllChatIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("all_chat"),
+  message: SafeString,
+});
+
+export const WhisperIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("whisper"),
+  sender: ID,
+  recipient: ID,
+  message: SafeString,
+});
+
+export const AutoPlayToggleIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("auto_play_toggle"),
+  enabled: z.boolean(),
+  autoBuild: z.boolean(),
+  autoShip: z.boolean(),
+  autoAttack: z.boolean(),
+  attackRatio: z.number().optional(), // Current UI attack ratio
+});
+
+export const AutoPlayAttackRatioUpdateIntentSchema = BaseIntentSchema.extend({
+  type: z.literal("auto_play_attack_ratio_update"),
+  attackRatio: z.number(), // New attack ratio from UI
+});
+
+const IntentSchema = z.union([
+  AttackIntentSchema,
+  CancelAttackIntentSchema,
+  SpawnIntentSchema,
+  BoatAttackIntentSchema,
+  AllianceRequestIntentSchema,
+  AllianceRequestReplyIntentSchema,
+  BreakAllianceIntentSchema,
+  TargetPlayerIntentSchema,
+  EmojiIntentSchema,
+  DonateGoldIntentSchema,
+  DonateTroopIntentSchema,
+  TargetTroopRatioIntentSchema,
+  BuildUnitIntentSchema,
+  EmbargoIntentSchema,
+  MoveWarshipIntentSchema,
+  BatchMoveWarshipsIntentSchema,
+  QuickChatIntentSchema,
+  DirectChatIntentSchema,
+  AllChatIntentSchema,
+  WhisperIntentSchema,
+  AutoPlayToggleIntentSchema,
+  AutoPlayAttackRatioUpdateIntentSchema,
+]);
+
+export const TurnSchema = z.object({
+  turnNumber: z.number(),
+  intents: z.array(IntentSchema),
+  // The hash of the game state at the end of the turn.
+  hash: z.number().nullable().optional(),
+});
+
+// Server
+
+const ServerBaseMessageSchema = z.object({
+  type: z.enum(["turn", "ping", "prestart", "start", "desync", "end"]),
+});
+
+export const ServerTurnMessageSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("turn"),
+  turn: TurnSchema,
+});
+
+export const ServerPingMessageSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("ping"),
+});
+
+export const ServerPrestartMessageSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("prestart"),
+  gameMap: z.nativeEnum(GameMapType),
+});
+
+export const PlayerSchema = z.object({
+  playerID: ID,
+  clientID: ID,
+  username: SafeString,
+  flag: SafeString.optional(),
+});
+
+export const GameStartInfoSchema = z.object({
+  gameID: ID,
+  config: GameConfigSchema,
+  players: z.array(PlayerSchema),
+});
+
+export const ServerStartGameMessageSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("start"),
+  // Turns the client missed if they are late to the game.
+  turns: z.array(TurnSchema),
+  gameStartInfo: GameStartInfoSchema,
+});
+
+export const ServerPlayerDataSchema = z.object({
+  clientID: ID,
+  username: SafeString,
+  tilesOwned: z.number(),
+  tilesWithFallout: z.number(),
+  numLandTiles: z.number(),
+  gold: z.number(),
+  isAlive: z.boolean(),
+  hasSpawned: z.boolean(),
+  troops: z.number(),
+  workers: z.number(),
+  population: z.number(),
+  survivalTime: z.number(),
+  serverSurvivalTime: z.number().optional(),
+  clientSurvivalTime: z.number().optional(),
+  serverReceivedAt: z.number().optional(),
+  isDisconnected: z.boolean().optional(),
+});
+
+export const ServerEndGameMessageSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("end"),
+  gameID: ID,
+  winners: z.array(ServerPlayerDataSchema),
+});
+
+export const ServerDesyncSchema = ServerBaseMessageSchema.extend({
+  type: z.literal("desync"),
+  turn: z.number(),
+  correctHash: z.number().nullable(),
+  clientsWithCorrectHash: z.number(),
+  totalActiveClients: z.number(),
+  yourHash: z.number().optional(),
+});
+
+export const ServerMessageSchema = z.union([
+  ServerTurnMessageSchema,
+  ServerPrestartMessageSchema,
+  ServerStartGameMessageSchema,
+  ServerEndGameMessageSchema,
+  ServerPingMessageSchema,
+  ServerDesyncSchema,
+]);
+
+// Client
+
+export const ClientSendWinnerSchema = z.object({
+  type: z.literal("winner"),
+  winner: z.union([ID, TeamSchema]).nullable(),
+  allPlayersStats: AllPlayersStatsSchema,
+  winnerType: z.enum(["player", "team"]),
+});
+
+export const ClientHashSchema = z.object({
+  type: z.literal("hash"),
+  hash: z.number(),
+  turnNumber: z.number(),
+});
+
+export const ClientLogMessageSchema = z.object({
+  type: z.literal("log"),
+  severity: z.nativeEnum(LogSeverity),
+  log: ID,
+});
+
+export const ClientPingMessageSchema = z.object({
+  type: z.literal("ping"),
+});
+
+export const ClientIntentMessageSchema = z.object({
+  type: z.literal("intent"),
+  intent: IntentSchema,
+});
+
+// New message for blockchain games
+export const ClientPlayerDataMessageSchema = z.object({
+  type: z.literal("playerdata"),
+  clientID: ID,
+  username: SafeString,
+  tilesOwned: z.number(),
+  tilesWithFallout: z.number(),
+  numLandTiles: z.number(),
+  gold: z.number(),
+  isAlive: z.boolean(),
+  hasSpawned: z.boolean(),
+  troops: z.number(),
+  workers: z.number(),
+  population: z.number(),
+  survivalTime: z.number(), // Number of ticks the player survived
+});
+
+// WARNING: never send this message to clients.
+export const ClientJoinMessageSchema = z.object({
+  type: z.literal("join"),
+  clientID: ID,
+  token: TokenSchema, // WARNING: PII
+  gameID: ID,
+  lastTurn: z.number(), // The last turn the client saw.
+  username: SafeString,
+  flag: SafeString.nullable(),
+  // Optional wallet address for blockchain games
+  walletAddress: z.string().nullable().optional(),
+});
+
+export const ClientMessageSchema = z.union([
+  ClientSendWinnerSchema,
+  ClientPingMessageSchema,
+  ClientIntentMessageSchema,
+  ClientPlayerDataMessageSchema,
+  ClientJoinMessageSchema,
+  ClientLogMessageSchema,
+  ClientHashSchema,
+]);
+
+export const PlayerRecordSchema = z.object({
+  clientID: ID,
+  username: SafeString,
+  ip: SafeString.nullable(), // WARNING: PII
+  persistentID: PersistentIdSchema, // WARNING: PII
+});
+
+export const GameRecordSchema = z.object({
+  id: ID,
+  gameStartInfo: GameStartInfoSchema,
+  players: z.array(PlayerRecordSchema),
+  startTimestampMS: z.number(),
+  endTimestampMS: z.number(),
+  durationSeconds: z.number(),
+  date: SafeString,
+  num_turns: z.number(),
+  turns: z.array(TurnSchema),
+  winner: z.union([ID, SafeString]).nullable().optional(),
+  winnerType: z.enum(["player", "team"]).nullable().optional(),
+  allPlayersStats: z.record(ID, PlayerStatsSchema),
+  version: z.enum(["v0.0.1"]),
+  gitCommit: z.string().nullable().optional(),
+});

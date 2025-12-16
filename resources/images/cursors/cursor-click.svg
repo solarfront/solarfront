@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3F4F6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D1D5DB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#9CA3AF;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="energySurge" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#60A5FA;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0.4" />
+    </radialGradient>
+    <radialGradient id="powerPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0.3" />
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Palm base - clenched fist -->
+  <path d="M 8 20 Q 8 16 12 16 L 20 16 Q 24 16 24 20 L 24 26 Q 24 28 22 28 L 10 28 Q 8 28 8 26 Z" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1" filter="url(#glow)"/>
+  
+  <!-- Thumb - wrapped over fingers -->
+  <path d="M 6 22 Q 4 20 4 18 Q 4 16 6 16 Q 8 16 8 18 L 8 22 Q 8 24 6 24 Z" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Index finger - fully clenched -->
+  <path d="M 12 16 Q 10 14 10 12 Q 10 10 12 10 Q 14 10 14 12 L 14 16" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Middle finger - fully clenched -->
+  <path d="M 16 16 Q 14 14 14 11 Q 14 9 16 9 Q 18 9 18 11 L 18 16" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Ring finger - fully clenched -->
+  <path d="M 20 16 Q 18 14 18 12 Q 18 10 20 10 Q 22 10 22 12 L 22 16" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Pinky - fully clenched -->
+  <path d="M 24 16 Q 22 14 22 13 Q 22 11 24 11 Q 26 11 26 13 L 26 16" 
+        fill="url(#metalGrad)" stroke="#374151" stroke-width="1"/>
+  
+  <!-- Energy surge circuits -->
+  <path d="M 10 22 L 14 22 M 14 24 L 18 24 M 18 26 L 22 26" 
+        stroke="url(#energySurge)" stroke-width="3" fill="none" opacity="1" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="0.3s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Power discharge from knuckles -->
+  <circle cx="12" cy="14" r="2" fill="url(#powerPulse)" opacity="0.9" filter="url(#glow)">
+    <animate attributeName="r" values="1;3;1" dur="0.4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="16" cy="13" r="2" fill="url(#powerPulse)" opacity="0.9" filter="url(#glow)">
+    <animate attributeName="r" values="1;3;1" dur="0.4s" begin="0.1s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="20" cy="14" r="2" fill="url(#powerPulse)" opacity="0.9" filter="url(#glow)">
+    <animate attributeName="r" values="1;3;1" dur="0.4s" begin="0.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Energy discharge lines -->
+  <path d="M 16 22 L 16 18 M 14 20 L 18 20 M 12 21 L 20 21" 
+        stroke="#FFFFFF" stroke-width="1" opacity="0.8" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="0.2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Main power core on palm -->
+  <circle cx="16" cy="22" r="3" fill="url(#energySurge)" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="0.25s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Lightning effects -->
+  <path d="M 16 19 L 15 17 L 17 15 L 16 13" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9" filter="url(#glow)">
+    <animate attributeName="opacity" values="0;1;0" dur="0.15s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 18 20 L 19 18 L 17 16 L 18 14" stroke="#FFFFFF" stroke-width="1.5" opacity="0.9" filter="url(#glow)">
+    <animate attributeName="opacity" values="0;1;0" dur="0.15s" begin="0.075s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Power overload indicators -->
+  <rect x="15" y="26" width="2" height="2" fill="url(#energySurge)" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="0.2s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Energy wave emanation -->
+  <circle cx="16" cy="16" r="6" fill="none" stroke="#60A5FA" stroke-width="1" opacity="0.6">
+    <animate attributeName="r" values="4;12;4" dur="0.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;0.2;0.8" dur="0.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="16" cy="16" r="8" fill="none" stroke="#3B82F6" stroke-width="0.5" opacity="0.4">
+    <animate attributeName="r" values="6;16;6" dur="0.8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.1;0.6" dur="0.8s" repeatCount="indefinite"/>
+  </circle>
+</svg>

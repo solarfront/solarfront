@@ -1,0 +1,59 @@
+/* SolarFront Simple Cursor System */
+
+/* Base cursor - default hover pointer */
+body {
+  cursor: url('/resources/images/cursors/cursor-hover.png') 0 0, auto;
+}
+
+/* Apply hover cursor to all elements by default */
+*, *::before, *::after {
+  cursor: inherit;
+}
+
+/* Force interactive elements to use custom hover cursor */
+button,
+a,
+[role="button"],
+.hotkey-button,
+input[type="button"],
+input[type="submit"],
+select,
+.clickable,
+.radial-menu-item {
+  cursor: url('/resources/images/cursors/cursor-hover.png') 0 0, pointer !important;
+}
+
+/* Click states - active/pressed cursor (highest specificity) */
+body.cursor-click,
+body.cursor-click *,
+body.cursor-click *::before,
+body.cursor-click *::after {
+  cursor: url('/resources/images/cursors/cursor-click.png') 0 0, pointer !important;
+}
+
+/* Disabled states */
+button:disabled,
+[aria-disabled="true"],
+.disabled {
+  cursor: not-allowed !important;
+}
+
+/* Special cursors for text areas and inputs */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea,
+.text-input {
+  cursor: text !important;
+}
+
+/* Game canvas - inherit from body */
+canvas {
+  cursor: inherit;
+}
+
+/* Ensure html also uses hover cursor */
+html {
+  cursor: url('/resources/images/cursors/cursor-hover.png') 0 0, auto;
+}

@@ -1,0 +1,205 @@
+{
+  "name": "TestMap",
+  "width": 2048,
+  "height": 1818,
+  "nations": [
+    {
+      "coordinates": [
+        420,
+        420
+      ],
+      "name": "Shattered Ember Dominion",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1580,
+        1380
+      ],
+      "name": "Frostbreak Empire",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        350,
+        1550
+      ],
+      "name": "Verdant Reach",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1700,
+        200
+      ],
+      "name": "Emerald Skies Coalition",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        600,
+        200
+      ],
+      "name": "Craterwatch Enclave",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        850,
+        300
+      ],
+      "name": "Ironmoon Guild",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1250,
+        220
+      ],
+      "name": "High Orbit Union",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1470,
+        350
+      ],
+      "name": "Greyrock Outpost",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        600,
+        900
+      ],
+      "name": "Lunarch Pact",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        850,
+        1100
+      ],
+      "name": "Stoneveil Tribes",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1200,
+        950
+      ],
+      "name": "Astral Forge",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1380,
+        1100
+      ],
+      "name": "Meteorfall League",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        400,
+        700
+      ],
+      "name": "Twilight Rim",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1700,
+        700
+      ],
+      "name": "Celestial Accord",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1450,
+        800
+      ],
+      "name": "Orrin Duskborn",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        500,
+        1250
+      ],
+      "name": "Marrowstone Clan",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        780,
+        1450
+      ],
+      "name": "Frozen Shard Syndicate",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1150,
+        1500
+      ],
+      "name": "Silverhowl Outriders",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        900,
+        1600
+      ],
+      "name": "Deepcrater Band",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1300,
+        500
+      ],
+      "name": "Skyforge Kin",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        820,
+        500
+      ],
+      "name": "Echo Rift Cartel",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [
+        1000,
+        700
+      ],
+      "name": "Oblivion Striders",
+      "strength": 2,
+      "flag": ""
+    }
+  ]
+}

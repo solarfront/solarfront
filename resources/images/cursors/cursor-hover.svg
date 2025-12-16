@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <!-- Enhanced glow effect -->
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer targeting ring with glow -->
+  <circle cx="12" cy="12" r="10" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" filter="url(#glow)"/>
+  <circle cx="12" cy="12" r="8" fill="none" stroke="rgba(59,130,246,0.6)" stroke-width="1"/>
+  
+  <!-- Enhanced crosshair lines -->
+  <line x1="12" y1="2" x2="12" y2="6" stroke="rgba(255,255,255,1)" stroke-width="2" filter="url(#glow)"/>
+  <line x1="12" y1="18" x2="12" y2="22" stroke="rgba(255,255,255,1)" stroke-width="2" filter="url(#glow)"/>
+  <line x1="2" y1="12" x2="6" y2="12" stroke="rgba(255,255,255,1)" stroke-width="2" filter="url(#glow)"/>
+  <line x1="18" y1="12" x2="22" y2="12" stroke="rgba(255,255,255,1)" stroke-width="2" filter="url(#glow)"/>
+  
+  <!-- Enhanced center dot -->
+  <circle cx="12" cy="12" r="2" fill="rgba(59,130,246,1)" filter="url(#glow)"/>
+</svg>

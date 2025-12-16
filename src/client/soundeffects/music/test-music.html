@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Engine Test - SolarFront Musical Compositions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            font-size: 1.1em;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .control-group h3 {
+            margin: 0 0 15px 0;
+            color: #87CEEB;
+            font-size: 1.1em;
+        }
+        
+        button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            background: linear-gradient(45deg, #45a049, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .music-button {
+            background: linear-gradient(45deg, #9C27B0, #8E24AA);
+        }
+        
+        .music-button:hover {
+            background: linear-gradient(45deg, #8E24AA, #9C27B0);
+        }
+        
+        .note-button {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+            min-width: 80px;
+            padding: 8px 12px;
+            margin: 2px;
+        }
+        
+        .note-button:hover {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+        }
+        
+        .chord-button {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            min-width: 120px;
+        }
+        
+        .chord-button:hover {
+            background: linear-gradient(45deg, #F57C00, #FF9800);
+        }
+        
+        label {
+            display: inline-block;
+            width: 100px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        input[type="range"] {
+            width: 150px;
+            margin-left: 10px;
+        }
+        
+        .volume-display {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: #87CEEB;
+        }
+        
+        #status {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            min-height: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .piano-roll {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2px;
+            margin: 15px 0;
+        }
+        
+        .about {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #9C27B0;
+        }
+        
+        .about h3 {
+            color: #87CEEB;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 SolarFront Music Engine</h1>
+        <p class="subtitle">Musical Composition System using Web Audio API</p>
+        
+        <div class="controls">
+            <!-- Volume Control -->
+            <div class="control-group">
+                <h3>🔊 Volume Control</h3>
+                <label for="volume">Master Volume:</label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+                <span class="volume-display" id="volumeDisplay">50%</span>
+            </div>
+            
+            <!-- Music Compositions -->
+            <div class="control-group">
+                <h3>🎼 Musical Compositions</h3>
+                <button onclick="playComposition('coolMusic')" class="music-button">
+                    🎵 Cool Music (Placeholder)
+                </button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <!-- Individual Notes -->
+            <div class="control-group">
+                <h3>🎹 Individual Notes (Octave 4)</h3>
+                <div class="piano-roll">
+                    <button onclick="playNote('C', 4)" class="note-button">C</button>
+                    <button onclick="playNote('C#', 4)" class="note-button">C#</button>
+                    <button onclick="playNote('D', 4)" class="note-button">D</button>
+                    <button onclick="playNote('D#', 4)" class="note-button">D#</button>
+                    <button onclick="playNote('E', 4)" class="note-button">E</button>
+                    <button onclick="playNote('F', 4)" class="note-button">F</button>
+                    <button onclick="playNote('F#', 4)" class="note-button">F#</button>
+                    <button onclick="playNote('G', 4)" class="note-button">G</button>
+                    <button onclick="playNote('G#', 4)" class="note-button">G#</button>
+                    <button onclick="playNote('A', 4)" class="note-button">A</button>
+                    <button onclick="playNote('A#', 4)" class="note-button">A#</button>
+                    <button onclick="playNote('B', 4)" class="note-button">B</button>
+                </div>
+            </div>
+            
+            <!-- Chords -->
+            <div class="control-group">
+                <h3>🎼 Common Chords</h3>
+                <button onclick="playChord('Cmajor')" class="chord-button">C Major</button>
+                <button onclick="playChord('Dminor')" class="chord-button">D Minor</button>
+                <button onclick="playChord('Gmajor')" class="chord-button">G Major</button>
+                <button onclick="playChord('Aminor')" class="chord-button">A Minor</button>
+                <button onclick="playChord('Fmajor')" class="chord-button">F Major</button>
+            </div>
+        </div>
+        
+        <div id="status">Ready to play music...</div>
+        
+        <div class="about">
+            <h3>About the Music Engine</h3>
+            <p>This music engine uses the Web Audio API to create musical compositions procedurally. 
+            It can recreate songs, play individual notes, chords, and full musical arrangements using 
+            oscillators and precise timing.</p>
+            
+            <p><strong>Features:</strong></p>
+            <ul>
+                <li>Musical note generation with proper frequencies</li>
+                <li>Chord progressions and harmonies</li>
+                <li>ADSR envelopes for realistic note shaping</li>
+                <li>Support for different octaves and wave types</li>
+                <li>Timing system for complex musical arrangements</li>
+            </ul>
+            
+            <p><strong>Next Steps:</strong> The "Cool Music" composition is currently a placeholder. 
+            To implement the full song, we need musical analysis of the original MP3 file.</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Music Engine (JavaScript version)
+        class MusicEngine {
+            constructor() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // Musical note frequencies (A4 = 440Hz standard)
+                this.noteFrequencies = {
+                    'C': [65.41, 130.81, 261.63, 523.25, 1046.50, 2093.00],
+                    'C#': [69.30, 138.59, 277.18, 554.37, 1108.73, 2217.46],
+                    'D': [73.42, 146.83, 293.66, 587.33, 1174.66, 2349.32],
+                    'D#': [77.78, 155.56, 311.13, 622.25, 1244.51, 2489.02],
+                    'E': [82.41, 164.81, 329.63, 659.25, 1318.51, 2637.02],
+                    'F': [87.31, 174.61, 349.23, 698.46, 1396.91, 2793.83],
+                    'F#': [92.50, 185.00, 369.99, 739.99, 1479.98, 2959.96],
+                    'G': [98.00, 196.00, 392.00, 783.99, 1567.98, 3135.96],
+                    'G#': [103.83, 207.65, 415.30, 830.61, 1661.22, 3322.44],
+                    'A': [110.00, 220.00, 440.00, 880.00, 1760.00, 3520.00],
+                    'A#': [116.54, 233.08, 466.16, 932.33, 1864.66, 3729.31],
+                    'B': [123.47, 246.94, 493.88, 987.77, 1975.53, 3951.07]
+                };
+            }
+            
+            getNoteFrequency(note, octave) {
+                const frequencies = this.noteFrequencies[note];
+                if (!frequencies || octave < 1 || octave > 6) {
+                    throw new Error(`Invalid note: ${note}${octave}`);
+                }
+                return frequencies[octave - 1];
+            }
+            
+            playNote(note, octave, duration, volume = 0.5, waveType = 'sine', startTime = null) {
+                const now = startTime || this.audioContext.currentTime;
+                const frequency = this.getNoteFrequency(note, octave);
+                
+                const oscillator = this.audioContext.createOscillator();
+                const gainNode = this.audioContext.createGain();
+                
+                oscillator.type = waveType;
+                oscillator.frequency.setValueAtTime(frequency, now);
+                
+                // ADSR envelope
+                gainNode.gain.setValueAtTime(0, now);
+                gainNode.gain.linearRampToValueAtTime(volume, now + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(volume * 0.8, now + 0.1);
+                gainNode.gain.setValueAtTime(volume * 0.8, now + duration - 0.1);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(this.audioContext.destination);
+                
+                oscillator.start(now);
+                oscillator.stop(now + duration);
+            }
+            
+            playChord(notes, duration, volume = 0.5, waveType = 'sine', startTime = null) {
+                const chordVolume = volume / notes.length;
+                notes.forEach(({note, octave}) => {
+                    this.playNote(note, octave, duration, chordVolume, waveType, startTime);
+                });
+            }
+            
+            playCoolMusic(volume = 0.5) {
+                const now = this.audioContext.currentTime;
+                const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C'];
+                const octave = 4;
+                const noteDuration = 0.5;
+                
+                notes.forEach((note, index) => {
+                    this.playNote(note, octave, noteDuration, volume, 'sine', now + (index * noteDuration));
+                });
+            }
+        }
+        
+        // Initialize music engine
+        const musicEngine = new MusicEngine();
+        
+        // Volume control
+        const volumeSlider = document.getElementById('volume');
+        const volumeDisplay = document.getElementById('volumeDisplay');
+        let masterVolume = 0.5;
+        
+        volumeSlider.addEventListener('input', function() {
+            masterVolume = parseFloat(this.value);
+            volumeDisplay.textContent = Math.round(masterVolume * 100) + '%';
+        });
+        
+        // Status message system
+        function updateStatus(message) {
+            document.getElementById('status').textContent = message;
+            setTimeout(() => {
+                document.getElementById('status').textContent = 'Ready to play music...';
+            }, 3000);
+        }
+        
+        // Play individual note
+        function playNote(note, octave) {
+            try {
+                musicEngine.playNote(note, octave, 1.0, masterVolume, 'sine');
+                updateStatus(`🎵 Playing: ${note}${octave} (1.0s)`);
+            } catch (error) {
+                updateStatus(`❌ Error: ${error.message}`);
+            }
+        }
+        
+        // Play chord
+        function playChord(chordName) {
+            const chords = {
+                'Cmajor': [{note: 'C', octave: 4}, {note: 'E', octave: 4}, {note: 'G', octave: 4}],
+                'Dminor': [{note: 'D', octave: 4}, {note: 'F', octave: 4}, {note: 'A', octave: 4}],
+                'Gmajor': [{note: 'G', octave: 4}, {note: 'B', octave: 4}, {note: 'D', octave: 5}],
+                'Aminor': [{note: 'A', octave: 4}, {note: 'C', octave: 5}, {note: 'E', octave: 5}],
+                'Fmajor': [{note: 'F', octave: 4}, {note: 'A', octave: 4}, {note: 'C', octave: 5}]
+            };
+            
+            const chord = chords[chordName];
+            if (chord) {
+                musicEngine.playChord(chord, 2.0, masterVolume, 'sine');
+                updateStatus(`🎼 Playing: ${chordName} chord (2.0s)`);
+            } else {
+                updateStatus(`❌ Unknown chord: ${chordName}`);
+            }
+        }
+        
+        // Play composition
+        function playComposition(compositionName) {
+            switch (compositionName) {
+                case 'coolMusic':
+                    musicEngine.playCoolMusic(masterVolume);
+                    updateStatus('🎵 Playing: Cool Music (Placeholder - C major scale, 4.0s)');
+                    break;
+                default:
+                    updateStatus(`❌ Unknown composition: ${compositionName}`);
+            }
+        }
+        
+        // Initialize audio context on first user interaction
+        document.addEventListener('click', function() {
+            if (musicEngine.audioContext.state === 'suspended') {
+                musicEngine.audioContext.resume();
+            }
+        }, {once: true});
+    </script>
+</body>
+</html>

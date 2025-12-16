@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5E7EB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9CA3AF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B7280;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="greenGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#15803D;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Palm base - slightly curled for interaction -->
+  <path d="M 8 18 Q 8 14 12 14 L 20 14 Q 24 14 24 18 L 24 25 Q 24 27 22 27 L 10 27 Q 8 27 8 25 Z" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Thumb - positioned for interaction -->
+  <path d="M 6 19 Q 4 17 4 15 Q 4 13 6 13 Q 8 13 8 15 L 8 19 Q 8 21 6 21 Z" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Index finger - slightly curled -->
+  <path d="M 12 14 Q 10 12 10 9 Q 10 7 12 7 Q 14 7 14 9 L 14 14" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Middle finger - slightly curled -->
+  <path d="M 16 14 Q 14 12 14 7 Q 14 5 16 5 Q 18 5 18 7 L 18 14" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Ring finger - curled -->
+  <path d="M 20 14 Q 18 12 18 9 Q 18 7 20 7 Q 22 7 22 9 L 22 14" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Pinky - curled -->
+  <path d="M 24 14 Q 22 12 22 11 Q 22 9 24 9 Q 26 9 26 11 L 26 14" 
+        fill="url(#metalGrad)" stroke="#4B5563" stroke-width="0.8"/>
+  
+  <!-- Enhanced circuit lines with green energy -->
+  <path d="M 10 19 L 14 19 M 14 21 L 18 21 M 18 23 L 22 23" 
+        stroke="url(#greenGlow)" stroke-width="1.5" fill="none" opacity="0.9"/>
+  
+  <!-- Fingertip energy indicators (green) -->
+  <circle cx="12" cy="7" r="1.5" fill="#22C55E" opacity="0.8">
+    <animate attributeName="r" values="1;1.5;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="16" cy="5" r="1.5" fill="#22C55E" opacity="0.8">
+    <animate attributeName="r" values="1;1.5;1" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="20" cy="7" r="1.5" fill="#22C55E" opacity="0.8">
+    <animate attributeName="r" values="1;1.5;1" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Joint indicators (green) -->
+  <circle cx="12" cy="11" r="1" fill="#22C55E" opacity="0.7"/>
+  <circle cx="16" cy="9" r="1" fill="#22C55E" opacity="0.7"/>
+  <circle cx="20" cy="11" r="1" fill="#22C55E" opacity="0.7"/>
+  <circle cx="24" cy="12" r="1" fill="#22C55E" opacity="0.7"/>
+  
+  <!-- Friendly LED indicator on palm (green) -->
+  <circle cx="16" cy="20" r="2" fill="#22C55E" opacity="0.9">
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Interaction readiness indicators -->
+  <rect x="15" y="25" width="2" height="1" fill="#22C55E" opacity="0.8"/>
+  <rect x="11" y="13" width="1" height="2" fill="#16A34A"/>
+  <rect x="19" y="13" width="1" height="2" fill="#16A34A"/>
+  
+  <!-- Territory ownership symbol -->
+  <path d="M 26 2 L 28 2 L 28 4 L 26 4 Z" fill="#22C55E" opacity="0.8"/>
+  <path d="M 25 3 L 29 3" stroke="#22C55E" stroke-width="0.5" opacity="0.6"/>
+  <path d="M 27 1 L 27 5" stroke="#22C55E" stroke-width="0.5" opacity="0.6"/>
+</svg>

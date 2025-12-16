@@ -1,0 +1,4 @@
+dist/
+resources/maps/*.bin
+resources/maps/*.webp
+resources/maps/*.png

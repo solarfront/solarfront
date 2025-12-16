@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5E7EB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9CA3AF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B7280;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:0.7" />
+    </linearGradient>
+    <radialGradient id="redPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FF0000;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#DC2626;stop-opacity:0.3" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Palm base - tense, aggressive posture -->
+  <path d="M 8 20 Q 8 16 12 16 L 20 16 Q 24 16 24 20 L 24 26 Q 24 28 22 28 L 10 28 Q 8 28 8 26 Z" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Thumb - clenched position -->
+  <path d="M 6 22 Q 4 20 4 18 Q 4 16 6 16 Q 8 16 8 18 L 8 22 Q 8 24 6 24 Z" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Index finger - partially clenched, aggressive -->
+  <path d="M 12 16 Q 10 14 10 11 Q 10 9 12 9 Q 14 9 14 11 L 14 16" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Middle finger - clenched -->
+  <path d="M 16 16 Q 14 14 14 10 Q 14 8 16 8 Q 18 8 18 10 L 18 16" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Ring finger - clenched -->
+  <path d="M 20 16 Q 18 14 18 11 Q 18 9 20 9 Q 22 9 22 11 L 22 16" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Pinky - clenched -->
+  <path d="M 24 16 Q 22 14 22 12 Q 22 10 24 10 Q 26 10 26 12 L 26 16" 
+        fill="url(#metalGrad)" stroke="#7F1D1D" stroke-width="1"/>
+  
+  <!-- Aggressive circuit lines with red energy -->
+  <path d="M 10 22 L 14 22 M 14 24 L 18 24 M 18 26 L 22 26" 
+        stroke="url(#redGlow)" stroke-width="2" fill="none" opacity="1"/>
+  
+  <!-- Warning indicators on knuckles -->
+  <rect x="11" y="14" width="2" height="1" fill="#EF4444" opacity="0.9"/>
+  <rect x="15" y="14" width="2" height="1" fill="#EF4444" opacity="0.9"/>
+  <rect x="19" y="14" width="2" height="1" fill="#EF4444" opacity="0.9"/>
+  <rect x="23" y="14" width="2" height="1" fill="#EF4444" opacity="0.9"/>
+  
+  <!-- Targeting reticles around fingertips -->
+  <g opacity="0.8">
+    <!-- Index finger targeting -->
+    <circle cx="12" cy="9" r="3" fill="none" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <path d="M 9 9 L 11 9 M 13 9 L 15 9 M 12 6 L 12 8 M 12 10 L 12 12" 
+          stroke="#EF4444" stroke-width="1"/>
+    
+    <!-- Middle finger targeting -->
+    <circle cx="16" cy="8" r="3" fill="none" stroke="#EF4444" stroke-width="1" opacity="0.6"/>
+    <path d="M 13 8 L 15 8 M 17 8 L 19 8 M 16 5 L 16 7 M 16 9 L 16 11" 
+          stroke="#EF4444" stroke-width="1"/>
+  </g>
+  
+  <!-- Joint indicators (red warning) -->
+  <circle cx="12" cy="13" r="1" fill="#EF4444" opacity="0.8"/>
+  <circle cx="16" cy="12" r="1" fill="#EF4444" opacity="0.8"/>
+  <circle cx="20" cy="13" r="1" fill="#EF4444" opacity="0.8"/>
+  <circle cx="24" cy="14" r="1" fill="#EF4444" opacity="0.8"/>
+  
+  <!-- Hostile LED indicator on palm (red, pulsing) -->
+  <circle cx="16" cy="22" r="2" fill="url(#redPulse)">
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Threat assessment indicators -->
+  <path d="M 26 2 L 28 4 M 28 2 L 26 4" stroke="#EF4444" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="27" cy="3" r="3" fill="none" stroke="#EF4444" stroke-width="0.8" opacity="0.6"/>
+  
+  <!-- Weapon charging effect -->
+  <rect x="15" y="26" width="2" height="1" fill="#EF4444" opacity="1">
+    <animate attributeName="opacity" values="0.5;1;0.5" dur="0.8s" repeatCount="indefinite"/>
+  </rect>
+</svg>

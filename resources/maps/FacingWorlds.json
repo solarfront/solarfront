@@ -1,0 +1,80 @@
+{
+  "name": "FacingWorldsSector",
+  "width": 2048,
+  "height": 1818,
+  "nations": [
+    {
+      "coordinates": [279, 952],
+      "name": "Frosthaven Dominion",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [330, 820],
+      "name": "Cryoshard Outpost",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [525, 262],
+      "name": "Verdantia High Council",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [580, 340],
+      "name": "Mosspeak Rangers",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [649, 1596],
+      "name": "Emerald Tide Pact",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [600, 1470],
+      "name": "Leafshade Enclave",
+      "strength": 1,
+      "flag": ""
+    },
+
+    {
+      "coordinates": [1769, 952],
+      "name": "Glacialis Empire",
+      "strength": 3,
+      "flag": ""
+    },
+    {
+      "coordinates": [1718, 820],
+      "name": "Frostspire Garrison",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1523, 262],
+      "name": "Arboran Zenith",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1468, 340],
+      "name": "Verdure Watch",
+      "strength": 1,
+      "flag": ""
+    },
+    {
+      "coordinates": [1399, 1596],
+      "name": "Jadefall Confederacy",
+      "strength": 2,
+      "flag": ""
+    },
+    {
+      "coordinates": [1448, 1470],
+      "name": "Thornroot Outriders",
+      "strength": 1,
+      "flag": ""
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+import { LitElement, html } from "lit";
+import { customElement, state } from "lit/decorators.js";
+import { translateText } from "../client/Utils";
+import { consolex } from "../core/Consolex";
+import { GameMode } from "../core/game/Game";
+import { GameID, GameInfo } from "../core/Schemas";
+import { generateID } from "../core/Util";
+import { JoinLobbyEvent } from "./Main";
+import { getMapsImage } from "./utilities/Maps";
+
+@customElement("public-lobby")
+export class PublicLobby extends LitElement {
+  @state() private lobbies: GameInfo[] = [];
+  @state() public isLobbyHighlighted: boolean = false;
+  @state() private isButtonDebounced: boolean = false;
+  private lobbiesInterval: number | null = null;
+  private currLobby: GameInfo | null = null;
+  private debounceDelay: number = 750;
+  private lobbyIDToStart = new Map<GameID, number>();
+
+  createRenderRoot() {
+    return this;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.fetchAndUpdateLobbies();
+    this.lobbiesInterval = window.setInterval(
+      () => this.fetchAndUpdateLobbies(),
+      1000,
+    );
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this.lobbiesInterval !== null) {
+      clearInterval(this.lobbiesInterval);
+      this.lobbiesInterval = null;
+    }
+  }
+
+  private async fetchAndUpdateLobbies(): Promise<void> {
+    try {
+      this.lobbies = await this.fetchLobbies();
+      this.lobbies.forEach((l) => {
+        // Store the start time on first fetch because endpoint is cached, causing
+        // the time to appear irregular.
+        if (!this.lobbyIDToStart.has(l.gameID)) {
+          const msUntilStart = l.msUntilStart ?? 0;
+          this.lobbyIDToStart.set(l.gameID, msUntilStart + Date.now());
+        }
+      });
+    } catch (error) {
+      consolex.error("Error fetching lobbies:", error);
+    }
+  }
+
+  async fetchLobbies(): Promise<GameInfo[]> {
+    try {
+      const response = await fetch(`${process.env.API_URL}/api/public_lobbies`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      return data.lobbies;
+    } catch (error) {
+      consolex.error("Error fetching lobbies:", error);
+      throw error;
+    }
+  }
+
+  public stop() {
+    if (this.lobbiesInterval !== null) {
+      this.isLobbyHighlighted = false;
+      clearInterval(this.lobbiesInterval);
+      this.lobbiesInterval = null;
+    }
+  }
+
+  render() {
+    if (this.lobbies.length === 0) return html``;
+
+    const lobby = this.lobbies[0];
+    if (!lobby?.gameConfig) {
+      return;
+    }
+    const start = this.lobbyIDToStart.get(lobby.gameID) ?? 0;
+    const timeRemaining = Math.max(0, Math.floor((start - Date.now()) / 1000));
+
+    // Format time to show minutes and seconds
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
+    const timeDisplay = minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+
+    const teamCount =
+      lobby.gameConfig.gameMode === GameMode.Team
+        ? lobby.gameConfig.playerTeams || 0
+        : null;
+
+    return html`
+      <button
+        @click=${() => this.lobbyClicked(lobby)}
+        ?disabled=${this.isButtonDebounced}
+        class="w-full mx-auto p-4 md:p-6 ${this.isLobbyHighlighted
+          ? "bg-gradient-to-r from-green-600 to-green-500"
+          : "bg-gradient-to-r from-purple-600 to-purple-500"} text-white font-medium rounded-2xl transition-opacity duration-200 hover:opacity-90 ${this
+          .isButtonDebounced
+          ? "opacity-70 cursor-not-allowed"
+          : ""}"
+      >
+        <div class="text-lg md:text-2xl font-semibold mb-2">
+          ${translateText("public_lobby.join")}
+        </div>
+        <div class="flex">
+          <img
+            src="${getMapsImage(lobby.gameConfig.gameMap)}"
+            alt="${lobby.gameConfig.gameMap}"
+            class="w-1/3 md:w-1/5 md:h-[80px]"
+            style="border: 1px solid rgba(255, 255, 255, 0.5)"
+          />
+          <div
+            class="w-full flex flex-col md:flex-row items-center justify-center md:justify-evenly"
+          >
+            <div class="flex flex-col items-center">
+              <div class="text-md font-medium text-purple-100 mb-4">
+                <!-- ${lobby.gameConfig.gameMap} -->
+                ${translateText(
+                  `map.${lobby.gameConfig.gameMap.toLowerCase().replace(/\s+/g, "")}`,
+                )}
+              </div>
+              <div class="text-md font-medium text-blue-100">
+                ${lobby.gameConfig.gameMode === GameMode.Team
+                  ? translateText("public_lobby.teams", { num: teamCount ?? 0 })
+                  : translateText("game_mode.ffa")}
+              </div>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="text-md font-medium text-blue-100 mb-2">
+                ${lobby.numClients} / ${lobby.gameConfig.maxPlayers}
+              </div>
+              <div class="text-md font-medium text-blue-100">
+                ${timeDisplay}
+              </div>
+            </div>
+          </div>
+        </div>
+      </button>
+    `;
+  }
+
+  leaveLobby() {
+    this.isLobbyHighlighted = false;
+    this.currLobby = null;
+  }
+
+  private lobbyClicked(lobby: GameInfo) {
+    if (this.isButtonDebounced) {
+      return;
+    }
+
+    // Set debounce state
+    this.isButtonDebounced = true;
+
+    // Reset debounce after delay
+    setTimeout(() => {
+      this.isButtonDebounced = false;
+    }, this.debounceDelay);
+
+    if (this.currLobby === null) {
+      this.isLobbyHighlighted = true;
+      this.currLobby = lobby;
+      this.dispatchEvent(
+        new CustomEvent("join-lobby", {
+          detail: {
+            gameID: lobby.gameID,
+            clientID: generateID(),
+          } as JoinLobbyEvent,
+          bubbles: true,
+          composed: true,
+        }),
+      );
+    } else {
+      this.dispatchEvent(
+        new CustomEvent("leave-lobby", {
+          detail: { lobby: this.currLobby },
+          bubbles: true,
+          composed: true,
+        }),
+      );
+      this.leaveLobby();
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E5E7EB;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9CA3AF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B7280;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:0.6" />
+    </linearGradient>
+    <radialGradient id="scanPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FCD34D;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0.2" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Palm base - reaching forward gesture -->
+  <path d="M 8 18 Q 8 14 12 14 L 20 14 Q 24 14 24 18 L 24 26 Q 24 28 22 28 L 10 28 Q 8 28 8 26 Z" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Thumb - extended for claiming -->
+  <path d="M 6 19 Q 4 17 4 15 Q 4 13 6 13 Q 8 13 8 15 L 8 19 Q 8 21 6 21 Z" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Index finger - pointing/reaching -->
+  <path d="M 12 14 Q 10 12 10 6 Q 10 4 12 4 Q 14 4 14 6 L 14 14" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Middle finger - extended -->
+  <path d="M 16 14 Q 14 12 14 5 Q 14 3 16 3 Q 18 3 18 5 L 18 14" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Ring finger - extended -->
+  <path d="M 20 14 Q 18 12 18 7 Q 18 5 20 5 Q 22 5 22 7 L 22 14" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Pinky - slightly curled -->
+  <path d="M 24 14 Q 22 12 22 9 Q 22 7 24 7 Q 26 7 26 9 L 26 14" 
+        fill="url(#metalGrad)" stroke="#92400E" stroke-width="0.8"/>
+  
+  <!-- Exploration circuit lines -->
+  <path d="M 10 20 L 14 20 M 14 22 L 18 22 M 18 24 L 22 24" 
+        stroke="url(#amberGlow)" stroke-width="1.2" fill="none" opacity="0.8"/>
+  
+  <!-- Scanning beam from palm -->
+  <path d="M 16 21 Q 16 16 12 12 Q 8 8 4 8" 
+        stroke="url(#amberGlow)" stroke-width="1" fill="none" opacity="0.6">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 16 21 Q 16 16 20 12 Q 24 8 28 8" 
+        stroke="url(#amberGlow)" stroke-width="1" fill="none" opacity="0.6">
+    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Exploration indicators on fingertips -->
+  <circle cx="12" cy="4" r="1.2" fill="#F59E0B" opacity="0.7">
+    <animate attributeName="r" values="0.8;1.5;0.8" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="16" cy="3" r="1.2" fill="#F59E0B" opacity="0.7">
+    <animate attributeName="r" values="0.8;1.5;0.8" dur="3s" begin="0.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="20" cy="5" r="1.2" fill="#F59E0B" opacity="0.7">
+    <animate attributeName="r" values="0.8;1.5;0.8" dur="3s" begin="1.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Joint indicators (amber) -->
+  <circle cx="12" cy="9" r="1" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="16" cy="8" r="1" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="20" cy="10" r="1" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="24" cy="11" r="1" fill="#F59E0B" opacity="0.6"/>
+  
+  <!-- Exploration LED indicator on palm -->
+  <circle cx="16" cy="21" r="1.8" fill="url(#scanPulse)">
+    <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Territory claiming indicators -->
+  <rect x="15" y="26" width="2" height="1" fill="#F59E0B" opacity="0.8"/>
+  <rect x="11" y="13" width="1" height="2" fill="#D97706"/>
+  <rect x="19" y="13" width="1" height="2" fill="#D97706"/>
+  
+  <!-- Expansion/claiming symbol -->
+  <circle cx="27" cy="3" r="2" fill="none" stroke="#F59E0B" stroke-width="1" opacity="0.7"/>
+  <path d="M 25 3 L 29 3 M 27 1 L 27 5" stroke="#F59E0B" stroke-width="1" opacity="0.8"/>
+  <circle cx="27" cy="3" r="4" fill="none" stroke="#F59E0B" stroke-width="0.5" opacity="0.4">
+    <animate attributeName="r" values="2;5;2" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.1;0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>

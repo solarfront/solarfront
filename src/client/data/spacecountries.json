@@ -1,0 +1,2326 @@
+[
+  {
+    "code": "xx",
+    "name": "None"
+  },
+  {
+    "code": "Abbasid Caliphate",
+    "continent": "Asia",
+    "name": "Void Abbasid Command"
+  },
+  {
+    "code": "Achaemenid Empire",
+    "continent": "Asia",
+    "name": "Stellar Achaemenid Cluster"
+  },
+  {
+    "code": "ae",
+    "continent": "Asia",
+    "name": "Forge Arab Assembly"
+  },
+  {
+    "code": "af",
+    "continent": "Asia",
+    "name": "Cosmic Afghanistan Confederacy"
+  },
+  {
+    "code": "african union",
+    "continent": "Africa",
+    "name": "Alpha African Confederacy"
+  },
+  {
+    "code": "ag",
+    "continent": "North America",
+    "name": "Quantum Antigua Legion"
+  },
+  {
+    "code": "ai",
+    "continent": "North America",
+    "name": "Forge Anguilla Frontier"
+  },
+  {
+    "code": "1_Airgialla",
+    "continent": "Europe",
+    "name": "Eclipse Airgialla Sector"
+  },
+  {
+    "code": "al",
+    "continent": "Europe",
+    "name": "Apex Albania Regency"
+  },
+  {
+    "code": "Alabama",
+    "continent": "North America",
+    "name": "Crimson Alabama Sector"
+  },
+  {
+    "code": "ax",
+    "continent": "Europe",
+    "name": "Galactic Aland Expanse"
+  },
+  {
+    "code": "Alaska",
+    "continent": "North America",
+    "name": "Titan Alaska Realm"
+  },
+  {
+    "code": "dz",
+    "continent": "Africa",
+    "name": "Quantum Algeria Quadrant"
+  },
+  {
+    "code": "Amazigh flag",
+    "continent": "Africa",
+    "name": "Shadow Amazigh Outpost"
+  },
+  {
+    "code": "amazonas",
+    "continent": "South America",
+    "name": "Apex Amazonas Expanse"
+  },
+  {
+    "code": "as",
+    "continent": "Oceania",
+    "name": "Nebula American Sector"
+  },
+  {
+    "code": "am",
+    "continent": "Asia",
+    "name": "Nova Armenia Assembly"
+  },
+  {
+    "code": "Anarchist flag",
+    "name": "Hyperion Anarchist Forge"
+  },
+  {
+    "code": "ad",
+    "continent": "Europe",
+    "name": "Void Andorra Assembly"
+  },
+  {
+    "code": "ao",
+    "continent": "Africa",
+    "name": "Solar Angola Quadrant"
+  },
+  {
+    "code": "aq",
+    "name": "Astral Antarctica Assembly"
+  },
+  {
+    "code": "antipope",
+    "continent": "Europe",
+    "name": "Nova Anti-Pope Assembly"
+  },
+  {
+    "code": "aquitaine",
+    "continent": "Europe",
+    "name": "Zenith Aquitaine Sector"
+  },
+  {
+    "code": "ar",
+    "continent": "South America",
+    "name": "Stellar Argentina Citadel"
+  },
+  {
+    "code": "Aram Damascus",
+    "continent": "Asia",
+    "name": "Titan Aram Command"
+  },
+  {
+    "code": "Arabia",
+    "continent": "Asia",
+    "name": "Astral Arabia Enclave"
+  },
+  {
+    "code": "Arizona",
+    "continent": "North America",
+    "name": "Apex Arizona Regency"
+  },
+  {
+    "code": "Arkansas",
+    "continent": "North America",
+    "name": "Nebula Arkansas Dynasty"
+  },
+  {
+    "code": "armagnac",
+    "continent": "Europe",
+    "name": "Vanguard Armagnac Dynasty"
+  },
+  {
+    "code": "aw",
+    "continent": "South America",
+    "name": "Celestial Aruba Citadel"
+  },
+  {
+    "code": "sh-ac",
+    "continent": "Africa",
+    "name": "Vanguard Ascension Holdfast"
+  },
+  {
+    "code": "Assyria",
+    "continent": "Asia",
+    "name": "Iron Assyria Confederacy"
+  },
+  {
+    "code": "asturias",
+    "continent": "Europe",
+    "name": "Iron Asturias Dynasty"
+  },
+  {
+    "code": "Athens",
+    "continent": "Europe",
+    "name": "Quantum Athens Quadrant"
+  },
+  {
+    "code": "at",
+    "continent": "Europe",
+    "name": "Nebula Austria Quadrant"
+  },
+  {
+    "code": "austria-hungary",
+    "continent": "Europe",
+    "name": "Vanguard Austria-Hungary Consortium"
+  },
+  {
+    "code": "au",
+    "continent": "Oceania",
+    "name": "Vanguard Australia Dynasty"
+  },
+  {
+    "code": "az",
+    "continent": "Asia",
+    "name": "Solar Azerbaijan Expanse"
+  },
+  {
+    "code": "Aztec Empire",
+    "continent": "North America",
+    "name": "Nebula Aztec Consortium"
+  },
+  {
+    "code": "bs",
+    "continent": "North America",
+    "name": "Arc Bahamas Consortium"
+  },
+  {
+    "code": "bahia",
+    "continent": "South America",
+    "name": "Alpha Bahia Bastion"
+  },
+  {
+    "code": "bh",
+    "continent": "Asia",
+    "name": "Apex Bahrain Sector"
+  },
+  {
+    "code": "baguette",
+    "name": "Solar Baguette Expanse"
+  },
+  {
+    "code": "bd",
+    "continent": "Asia",
+    "name": "Stellar Bangladesh Dominion"
+  },
+  {
+    "code": "bb",
+    "continent": "North America",
+    "name": "Omega Barbados Citadel"
+  },
+  {
+    "code": "Babylonia",
+    "continent": "Asia",
+    "name": "Cosmic Babylonia Holdfast"
+  },
+  {
+    "code": "es-pv",
+    "continent": "Europe",
+    "name": "Astral Basque Confederacy"
+  },
+  {
+    "code": "by",
+    "continent": "Europe",
+    "name": "Apex Belarus Sector"
+  },
+  {
+    "code": "be",
+    "continent": "Europe",
+    "name": "Hyperion Belgium Colony"
+  },
+  {
+    "code": "bz",
+    "continent": "North America",
+    "name": "Zenith Belize Dynasty"
+  },
+  {
+    "code": "bj",
+    "continent": "Africa",
+    "name": "Titan Benin Realm"
+  },
+  {
+    "code": "bm",
+    "continent": "North America",
+    "name": "Astral Bermuda Collective"
+  },
+  {
+    "code": "bt",
+    "continent": "Asia",
+    "name": "Crimson Bhutan Cohort"
+  },
+  {
+    "code": "bo",
+    "continent": "South America",
+    "name": "Vanguard Bolivia Outpost"
+  },
+  {
+    "code": "bq",
+    "continent": "South America",
+    "name": "Void Bonaire, Dominion"
+  },
+  {
+    "code": "ba",
+    "continent": "Europe",
+    "name": "Quantum Bosnia Dominion"
+  },
+  {
+    "code": "bw",
+    "continent": "Africa",
+    "name": "Forge Botswana Enclave"
+  },
+  {
+    "code": "bv",
+    "name": "Titan Bouvet Cluster"
+  },
+  {
+    "code": "br",
+    "continent": "South America",
+    "name": "Eclipse Brazil Holdfast"
+  },
+  {
+    "code": "io",
+    "continent": "Asia",
+    "name": "Nebula British Outpost"
+  },
+  {
+    "code": "Brittany",
+    "continent": "Europe",
+    "name": "Arc Brittany Legion"
+  },
+  {
+    "code": "bn",
+    "continent": "Asia",
+    "name": "Astral Brunei Cohort"
+  },
+  {
+    "code": "buenos_aires",
+    "continent": "South America",
+    "name": "Celestial Buenos Dominion"
+  },
+  {
+    "code": "bg",
+    "continent": "Europe",
+    "name": "Eclipse Bulgaria Combine"
+  },
+  {
+    "code": "bf",
+    "continent": "Africa",
+    "name": "Stellar Burkina Holdfast"
+  },
+  {
+    "code": "burgundy",
+    "continent": "Europe",
+    "name": "Forge Burgundy Bastion"
+  },
+  {
+    "code": "Burma",
+    "continent": "Asia",
+    "name": "Nova Burma Expanse"
+  },
+  {
+    "code": "bi",
+    "continent": "Africa",
+    "name": "Nova Burundi Consortium"
+  },
+  {
+    "code": "Byzantine Empire",
+    "continent": "Europe",
+    "name": "Astral Byzantine Assembly"
+  },
+  {
+    "code": "cv",
+    "continent": "Africa",
+    "name": "Spectral Cabo Frontier"
+  },
+  {
+    "code": "California",
+    "continent": "North America",
+    "name": "Radiant California Colony"
+  },
+  {
+    "code": "kh",
+    "continent": "Asia",
+    "name": "Alpha Cambodia Legion"
+  },
+  {
+    "code": "cm",
+    "continent": "Africa",
+    "name": "Omega Cameroon Consortium"
+  },
+  {
+    "code": "ca",
+    "continent": "North America",
+    "name": "Stellar Canada Sector"
+  },
+  {
+    "code": "ic",
+    "continent": "Africa",
+    "name": "Hyperion Canary Command"
+  },
+  {
+    "code": "Capybara",
+    "name": "Iron Capybara Cohort"
+  },
+  {
+    "code": "Carthage",
+    "continent": "Africa",
+    "name": "Apex Carthage Bastion"
+  },
+  {
+    "code": "castille",
+    "continent": "Europe",
+    "name": "Forge Castille Realm"
+  },
+  {
+    "code": "catamarca",
+    "continent": "South America",
+    "name": "Alpha Catamarca Command"
+  },
+  {
+    "code": "es-ct",
+    "continent": "Europe",
+    "name": "Iron Catalonia Assembly"
+  },
+  {
+    "code": "ky",
+    "continent": "North America",
+    "name": "Quantum Cayman Prime"
+  },
+  {
+    "code": "Ceará",
+    "continent": "South America",
+    "name": "Astral Ceará Dynasty"
+  },
+  {
+    "code": "cf",
+    "continent": "Africa",
+    "name": "Radiant Central Cluster"
+  },
+  {
+    "code": "td",
+    "continent": "Africa",
+    "name": "Quantum Chad Quadrant"
+  },
+  {
+    "code": "cl",
+    "continent": "South America",
+    "name": "Hyperion Chile Confederacy"
+  },
+  {
+    "code": "cn",
+    "continent": "Asia",
+    "name": "Cosmic China Combine"
+  },
+  {
+    "code": "Chinook",
+    "continent": "North America",
+    "name": "Spectral Chinook Quadrant"
+  },
+  {
+    "code": "cx",
+    "continent": "Asia",
+    "name": "Stellar Christmas Command"
+  },
+  {
+    "code": "Chuvashia",
+    "continent": "Europe",
+    "name": "Spectral Chuvashia Dominion"
+  },
+  {
+    "code": "cp",
+    "name": "Stellar Clipperton Frontier"
+  },
+  {
+    "code": "cc",
+    "continent": "Asia",
+    "name": "Cosmic Cocos Holdfast"
+  },
+  {
+    "code": "Colchis",
+    "continent": "Asia",
+    "name": "Vanguard Colchis Expanse"
+  },
+  {
+    "code": "co",
+    "continent": "South America",
+    "name": "Alpha Colombia Citadel"
+  },
+  {
+    "code": "Colorado",
+    "continent": "North America",
+    "name": "Iron Colorado Dominion"
+  },
+  {
+    "code": "km",
+    "continent": "Africa",
+    "name": "Nebula Comoros Combine"
+  },
+  {
+    "code": "communist flag",
+    "name": "Astral Communist Colony"
+  },
+  {
+    "code": "Confederate States",
+    "continent": "North America",
+    "name": "Nebula Confederate Realm"
+  },
+  {
+    "code": "1_Connacht",
+    "continent": "Europe",
+    "name": "Nebula Connacht Enclave"
+  },
+  {
+    "code": "ck",
+    "continent": "Oceania",
+    "name": "Solar Cook Citadel"
+  },
+  {
+    "code": "cordoba",
+    "continent": "Europe",
+    "name": "Alpha Cordoba Legion"
+  },
+  {
+    "code": "Corsica",
+    "continent": "Europe",
+    "name": "Spectral Corsica Bastion"
+  },
+  {
+    "code": "cr",
+    "continent": "North America",
+    "name": "Radiant Costa Collective"
+  },
+  {
+    "code": "ci",
+    "continent": "Africa",
+    "name": "Stellar Côte Bastion"
+  },
+  {
+    "code": "hr",
+    "continent": "Europe",
+    "name": "Celestial Croatia Dominion"
+  },
+  {
+    "code": "Cthulhu Republic",
+    "name": "Iron Cthulhu Sector"
+  },
+  {
+    "code": "cu",
+    "continent": "North America",
+    "name": "Vanguard Cuba Realm"
+  },
+  {
+    "code": "cw",
+    "continent": "South America",
+    "name": "Vanguard Curaçao Expanse"
+  },
+  {
+    "code": "cy",
+    "continent": "Europe",
+    "name": "Cosmic Cyprus Quadrant"
+  },
+  {
+    "code": "cz",
+    "continent": "Europe",
+    "name": "Alpha Czech Sector"
+  },
+  {
+    "code": "Danzig",
+    "continent": "Europe",
+    "name": "Titan Danzig Frontier"
+  },
+  {
+    "code": "1_Dalriata",
+    "continent": "Europe",
+    "name": "Hyperion Dál Prime"
+  },
+  {
+    "code": "dk",
+    "continent": "Europe",
+    "name": "Celestial Denmark Dominion"
+  },
+  {
+    "code": "cd",
+    "continent": "Africa",
+    "name": "Omega Democratic Citadel"
+  },
+  {
+    "code": "dg",
+    "continent": "Asia",
+    "name": "Galactic Diego Holdfast"
+  },
+  {
+    "code": "Dilmun",
+    "continent": "Asia",
+    "name": "Celestial Dilmun Legion"
+  },
+  {
+    "code": "dj",
+    "continent": "Africa",
+    "name": "Alpha Djibouti Cluster"
+  },
+  {
+    "code": "dm",
+    "continent": "North America",
+    "name": "Radiant Dominica Assembly"
+  },
+  {
+    "code": "do",
+    "continent": "North America",
+    "name": "Stellar Dominican Command"
+  },
+  {
+    "code": "1_Dumnonia",
+    "continent": "Europe",
+    "name": "Shadow Dumnonia Bastion"
+  },
+  {
+    "code": "Dutch East India Company",
+    "name": "Vanguard Dutch Confederacy"
+  },
+  {
+    "code": "1_Dyfed",
+    "continent": "Europe",
+    "name": "Zenith Dyfed Quadrant"
+  },
+  {
+    "code": "1_East Anglia",
+    "continent": "Europe",
+    "name": "Arc East Citadel"
+  },
+  {
+    "code": "east_germany",
+    "continent": "Europe",
+    "name": "Galactic East Frontier"
+  },
+  {
+    "code": "ec",
+    "continent": "South America",
+    "name": "Omega Ecuador Dominion"
+  },
+  {
+    "code": "eg",
+    "continent": "Africa",
+    "name": "Quantum Egypt Cluster"
+  },
+  {
+    "code": "Elam",
+    "continent": "Asia",
+    "name": "Arc Elam Consortium"
+  },
+  {
+    "code": "sv",
+    "continent": "North America",
+    "name": "Astral El Realm"
+  },
+  {
+    "code": "granada",
+    "continent": "Europe",
+    "name": "Alpha Emirate Citadel"
+  },
+  {
+    "code": "Empire of Japan",
+    "continent": "Asia",
+    "name": "Arc Japan Command"
+  },
+  {
+    "code": "Empire of Japan1",
+    "continent": "Asia",
+    "name": "Arc Japan Command"
+  },
+  {
+    "code": "gb-eng",
+    "continent": "Europe",
+    "name": "Quantum England Combine"
+  },
+  {
+    "code": "gq",
+    "continent": "Africa",
+    "name": "Crimson Equatorial Holdfast"
+  },
+  {
+    "code": "er",
+    "continent": "Africa",
+    "name": "Zenith Eritrea Assembly"
+  },
+  {
+    "code": "1_Essex",
+    "continent": "Europe",
+    "name": "Spectral Essex Forge"
+  },
+  {
+    "code": "ee",
+    "continent": "Europe",
+    "name": "Forge Estonia Enclave"
+  },
+  {
+    "code": "sz",
+    "continent": "Africa",
+    "name": "Spectral Eswatini Cluster"
+  },
+  {
+    "code": "et",
+    "continent": "Africa",
+    "name": "Crimson Ethiopia Cohort"
+  },
+  {
+    "code": "eu",
+    "continent": "Europe",
+    "name": "Arc Europe Cohort"
+  },
+  {
+    "code": "fk",
+    "continent": "South America",
+    "name": "Zenith Falkland Realm"
+  },
+  {
+    "code": "fo",
+    "continent": "Europe",
+    "name": "Celestial Faroe Sector"
+  },
+  {
+    "code": "Fascist Spain",
+    "continent": "Europe",
+    "name": "Shadow Fascist Bastion"
+  },
+  {
+    "code": "fm",
+    "continent": "Oceania",
+    "name": "Vanguard Micronesia Cluster"
+  },
+  {
+    "code": "fj",
+    "continent": "Oceania",
+    "name": "Shadow Fiji Realm"
+  },
+  {
+    "code": "fi",
+    "continent": "Europe",
+    "name": "Galactic Finland Command"
+  },
+  {
+    "code": "Flanders",
+    "continent": "Europe",
+    "name": "Nebula Flanders Cluster"
+  },
+  {
+    "code": "Florida",
+    "continent": "North America",
+    "name": "Nova Florida Frontier"
+  },
+  {
+    "code": "1_Fortriu",
+    "continent": "Europe",
+    "name": "Shadow Fortriu Collective"
+  },
+  {
+    "code": "fr",
+    "continent": "Europe",
+    "name": "Forge France Expanse"
+  },
+  {
+    "code": "1_Franks",
+    "continent": "Europe",
+    "name": "Alpha Franks Regency"
+  },
+  {
+    "code": "french foreign legion",
+    "name": "Hyperion Foreign Citadel"
+  },
+  {
+    "code": "gf",
+    "continent": "South America",
+    "name": "Quantum Guiana Assembly"
+  },
+  {
+    "code": "pf",
+    "continent": "Oceania",
+    "name": "Forge Polynesia Assembly"
+  },
+  {
+    "code": "frost_giant",
+    "name": "Alpha Frost Command"
+  },
+  {
+    "code": "tf",
+    "continent": "Africa",
+    "name": "Stellar Southern Command"
+  },
+  {
+    "code": "ga",
+    "continent": "Africa",
+    "name": "Alpha Gabon Bastion"
+  },
+  {
+    "code": "galapagos",
+    "continent": "South America",
+    "name": "Void Galápagos Dominion"
+  },
+  {
+    "code": "es-ga",
+    "continent": "Europe",
+    "name": "Iron Galicia Cohort"
+  },
+  {
+    "code": "gm",
+    "continent": "Africa",
+    "name": "Omega Gambia Prime"
+  },
+  {
+    "code": "Garamant",
+    "continent": "Africa",
+    "name": "Vanguard Garamantes Forge"
+  },
+  {
+    "code": "ge",
+    "continent": "Asia",
+    "name": "Vanguard Georgia Outpost"
+  },
+  {
+    "code": "Georgia_US",
+    "continent": "North America",
+    "name": "Crimson Georgia Bastion"
+  },
+  {
+    "code": "German Empire",
+    "continent": "Europe",
+    "name": "Quantum German Prime"
+  },
+  {
+    "code": "de",
+    "continent": "Europe",
+    "name": "Eclipse Germany Holdfast"
+  },
+  {
+    "code": "gh",
+    "continent": "Africa",
+    "name": "Titan Ghana Sector"
+  },
+  {
+    "code": "gi",
+    "continent": "Europe",
+    "name": "Omega Gibraltar Sector"
+  },
+  {
+    "code": "gr",
+    "continent": "Europe",
+    "name": "Titan Greece Prime"
+  },
+  {
+    "code": "gl",
+    "continent": "North America",
+    "name": "Solar Greenland Cluster"
+  },
+  {
+    "code": "gd",
+    "continent": "North America",
+    "name": "Cosmic Grenada Combine"
+  },
+  {
+    "code": "gp",
+    "continent": "North America",
+    "name": "Arc Guadeloupe Regency"
+  },
+  {
+    "code": "gu",
+    "continent": "Oceania",
+    "name": "Vanguard Guam Prime"
+  },
+  {
+    "code": "gt",
+    "continent": "North America",
+    "name": "Radiant Guatemala Sector"
+  },
+  {
+    "code": "gg",
+    "continent": "Europe",
+    "name": "Celestial Guernsey Assembly"
+  },
+  {
+    "code": "gn",
+    "continent": "Africa",
+    "name": "Cosmic Guinea Regency"
+  },
+  {
+    "code": "gw",
+    "continent": "Africa",
+    "name": "Galactic Guinea-Bissau Holdfast"
+  },
+  {
+    "code": "1_Gwent",
+    "continent": "Europe",
+    "name": "Astral Gwent Quadrant"
+  },
+  {
+    "code": "1_Gwynedd",
+    "continent": "Europe",
+    "name": "Solar Gwynedd Dominion"
+  },
+  {
+    "code": "gy",
+    "continent": "South America",
+    "name": "Arc Guyana Colony"
+  },
+  {
+    "code": "Habsburg Austria",
+    "continent": "Europe",
+    "name": "Omega Habsburg Dynasty"
+  },
+  {
+    "code": "ht",
+    "continent": "North America",
+    "name": "Arc Haiti Assembly"
+  },
+  {
+    "code": "Hawaii",
+    "continent": "Oceania",
+    "name": "Vanguard Hawaii Dynasty"
+  },
+  {
+    "code": "hm",
+    "name": "Alpha Heard Holdfast"
+  },
+  {
+    "code": "va",
+    "continent": "Europe",
+    "name": "Spectral Holy Forge"
+  },
+  {
+    "code": "Holy Roman Empire",
+    "continent": "Europe",
+    "name": "Void Holy Consortium"
+  },
+  {
+    "code": "hn",
+    "continent": "North America",
+    "name": "Nebula Honduras Holdfast"
+  },
+  {
+    "code": "hk",
+    "continent": "Asia",
+    "name": "Omega Hong Prime"
+  },
+  {
+    "code": "hu",
+    "continent": "Europe",
+    "name": "Solar Hungary Prime"
+  },
+  {
+    "code": "Hyrcania",
+    "continent": "Asia",
+    "name": "Apex Hyrcania Quadrant"
+  },
+  {
+    "code": "is",
+    "continent": "Europe",
+    "name": "Solar Iceland Colony"
+  },
+  {
+    "code": "Idaho",
+    "continent": "North America",
+    "name": "Iron Idaho Realm"
+  },
+  {
+    "code": "Illinois",
+    "continent": "North America",
+    "name": "Titan Illinois Regency"
+  },
+  {
+    "code": "in",
+    "continent": "Asia",
+    "name": "Crimson India Consortium"
+  },
+  {
+    "code": "Indiana",
+    "continent": "North America",
+    "name": "Vanguard Indiana Regency"
+  },
+  {
+    "code": "id",
+    "continent": "Asia",
+    "name": "Vanguard Indonesia Enclave"
+  },
+  {
+    "code": "Iowa",
+    "continent": "North America",
+    "name": "Celestial Iowa Assembly"
+  },
+  {
+    "code": "iq",
+    "continent": "Asia",
+    "name": "Galactic Iraq Regency"
+  },
+  {
+    "code": "ir",
+    "continent": "Asia",
+    "name": "Zenith Iran Colony"
+  },
+  {
+    "code": "ie",
+    "continent": "Europe",
+    "name": "Stellar Ireland Command"
+  },
+  {
+    "code": "im",
+    "continent": "Europe",
+    "name": "Shadow Isle Consortium"
+  },
+  {
+    "code": "il",
+    "continent": "Asia",
+    "name": "Apex Israel Command"
+  },
+  {
+    "code": "it",
+    "continent": "Europe",
+    "name": "Omega Italy Prime"
+  },
+  {
+    "code": "italy",
+    "continent": "Europe",
+    "name": "Shadow Italy Forge"
+  },
+  {
+    "code": "jm",
+    "continent": "North America",
+    "name": "Shadow Jamaica Forge"
+  },
+  {
+    "code": "jp",
+    "continent": "Asia",
+    "name": "Iron Japan Frontier"
+  },
+  {
+    "code": "je",
+    "continent": "Europe",
+    "name": "Quantum Jersey Command"
+  },
+  {
+    "code": "jo",
+    "continent": "Asia",
+    "name": "Omega Jordan Frontier"
+  },
+  {
+    "code": "Kansas",
+    "continent": "North America",
+    "name": "Shadow Kansas Bastion"
+  },
+  {
+    "code": "kz",
+    "continent": "Asia",
+    "name": "Astral Kazakhstan Forge"
+  },
+  {
+    "code": "Kemet",
+    "continent": "Africa",
+    "name": "Omega Kemet Collective"
+  },
+  {
+    "code": "ke",
+    "continent": "Africa",
+    "name": "Stellar Kenya Assembly"
+  },
+  {
+    "code": "1_Kent",
+    "continent": "Europe",
+    "name": "Titan Kent Legion"
+  },
+  {
+    "code": "Kentucky",
+    "continent": "North America",
+    "name": "Zenith Kentucky Expanse"
+  },
+  {
+    "code": "Khemet",
+    "continent": "Africa",
+    "name": "Forge Khemet Assembly"
+  },
+  {
+    "code": "Kingdom of Egypt",
+    "continent": "Africa",
+    "name": "Arc Egypt Enclave"
+  },
+  {
+    "code": "Kingdom of Iraq",
+    "continent": "Asia",
+    "name": "Apex Iraq Cohort"
+  },
+  {
+    "code": "Kingdom of Jerusalem",
+    "continent": "Asia",
+    "name": "Shadow Jerusalem Assembly"
+  },
+  {
+    "code": "Kingdom of Judah",
+    "continent": "Asia",
+    "name": "Quantum Judah Dynasty"
+  },
+  {
+    "code": "ki",
+    "continent": "Oceania",
+    "name": "Celestial Kiribati Cluster"
+  },
+  {
+    "code": "Kiwi",
+    "name": "Forge Kiwi Frontier"
+  },
+  {
+    "code": "xk",
+    "continent": "Europe",
+    "name": "Radiant Kosovo Holdfast"
+  },
+  {
+    "code": "kurdistan",
+    "continent": "Asia",
+    "name": "Celestial Kurdistan Colony"
+  },
+  {
+    "code": "Kush",
+    "continent": "Africa",
+    "name": "Apex Kush Bastion"
+  },
+  {
+    "code": "kw",
+    "continent": "Asia",
+    "name": "Void Kuwait Prime"
+  },
+  {
+    "code": "kg",
+    "continent": "Asia",
+    "name": "Nebula Kyrgyzstan Combine"
+  },
+  {
+    "code": "1_Laigin",
+    "continent": "Europe",
+    "name": "Solar Laigin Cohort"
+  },
+  {
+    "code": "la",
+    "continent": "Asia",
+    "name": "Nova Laos Command"
+  },
+  {
+    "code": "lv",
+    "continent": "Europe",
+    "name": "Galactic Latvia Combine"
+  },
+  {
+    "code": "League of Nations",
+    "name": "Apex League Bastion"
+  },
+  {
+    "code": "lb",
+    "continent": "Asia",
+    "name": "Vanguard Lebanon Colony"
+  },
+  {
+    "code": "Leinster",
+    "continent": "Europe",
+    "name": "Cosmic Leinster Assembly"
+  },
+  {
+    "code": "leon",
+    "continent": "Europe",
+    "name": "Celestial León Prime"
+  },
+  {
+    "code": "ls",
+    "continent": "Africa",
+    "name": "Hyperion Lesotho Cohort"
+  },
+  {
+    "code": "lr",
+    "continent": "Africa",
+    "name": "Quantum Liberia Realm"
+  },
+  {
+    "code": "Liberalism_flag",
+    "name": "Alpha Liberalism Frontier"
+  },
+  {
+    "code": "Libyan Jamahiriya",
+    "continent": "Africa",
+    "name": "Omega Libyan Holdfast"
+  },
+  {
+    "code": "ly",
+    "continent": "Africa",
+    "name": "Omega Libya Bastion"
+  },
+  {
+    "code": "li",
+    "continent": "Europe",
+    "name": "Crimson Liechtenstein Sector"
+  },
+  {
+    "code": "Listenbourg",
+    "name": "Solar Listenbourg Command"
+  },
+  {
+    "code": "lt",
+    "continent": "Europe",
+    "name": "Eclipse Lithuania Enclave"
+  },
+  {
+    "code": "Louisiana",
+    "continent": "North America",
+    "name": "Quantum Louisiana Outpost"
+  },
+  {
+    "code": "lu",
+    "continent": "Europe",
+    "name": "Arc Luxembourg Frontier"
+  },
+  {
+    "code": "lydia",
+    "continent": "Asia",
+    "name": "Quantum Lydia Cohort"
+  },
+  {
+    "code": "Macedonia",
+    "continent": "Europe",
+    "name": "Void Macedonia Bastion"
+  },
+  {
+    "code": "mo",
+    "continent": "Asia",
+    "name": "Apex Macau Prime"
+  },
+  {
+    "code": "mg",
+    "continent": "Africa",
+    "name": "Galactic Madagascar Forge"
+  },
+  {
+    "code": "Maine",
+    "continent": "North America",
+    "name": "Galactic Maine Frontier"
+  },
+  {
+    "code": "mw",
+    "continent": "Africa",
+    "name": "Astral Malawi Expanse"
+  },
+  {
+    "code": "my",
+    "continent": "Asia",
+    "name": "Shadow Malaysia Collective"
+  },
+  {
+    "code": "mv",
+    "continent": "Asia",
+    "name": "Void Maldives Frontier"
+  },
+  {
+    "code": "ml",
+    "continent": "Africa",
+    "name": "Void Mali Enclave"
+  },
+  {
+    "code": "mt",
+    "continent": "Europe",
+    "name": "Vanguard Malta Colony"
+  },
+  {
+    "code": "Māori Flag",
+    "continent": "Oceania",
+    "name": "Iron Māori Legion"
+  },
+  {
+    "code": "mh",
+    "continent": "Oceania",
+    "name": "Spectral Marshall Citadel"
+  },
+  {
+    "code": "mq",
+    "continent": "North America",
+    "name": "Cosmic Martinique Bastion"
+  },
+  {
+    "code": "Maryland",
+    "continent": "North America",
+    "name": "Arc Maryland Regency"
+  },
+  {
+    "code": "mr",
+    "continent": "Africa",
+    "name": "Cosmic Mauritania Cluster"
+  },
+  {
+    "code": "mu",
+    "continent": "Africa",
+    "name": "Shadow Mauritius Forge"
+  },
+  {
+    "code": "yt",
+    "continent": "Africa",
+    "name": "Quantum Mayotte Cohort"
+  },
+  {
+    "code": "Median Empire",
+    "continent": "Asia",
+    "name": "Omega Median Bastion"
+  },
+  {
+    "code": "1_Mercia",
+    "continent": "Europe",
+    "name": "Forge Mercia Sector"
+  },
+  {
+    "code": "mx",
+    "continent": "North America",
+    "name": "Hyperion Mexico Colony"
+  },
+  {
+    "code": "Michigan",
+    "continent": "North America",
+    "name": "Astral Michigan Quadrant"
+  },
+  {
+    "code": "minas_gerais",
+    "continent": "South America",
+    "name": "Nova Minas Dominion"
+  },
+  {
+    "code": "Minnesota",
+    "continent": "North America",
+    "name": "Titan Minnesota Bastion"
+  },
+  {
+    "code": "Mississippi",
+    "continent": "North America",
+    "name": "Vanguard Mississippi Bastion"
+  },
+  {
+    "code": "Missouri",
+    "continent": "North America",
+    "name": "Zenith Missouri Confederacy"
+  },
+  {
+    "code": "md",
+    "continent": "Europe",
+    "name": "Arc Moldova Dynasty"
+  },
+  {
+    "code": "mc",
+    "continent": "Europe",
+    "name": "Void Monaco Frontier"
+  },
+  {
+    "code": "Mongol Empire",
+    "continent": "Asia",
+    "name": "Nebula Mongol Prime"
+  },
+  {
+    "code": "mn",
+    "continent": "Asia",
+    "name": "Titan Mongolia Expanse"
+  },
+  {
+    "code": "Montana",
+    "continent": "North America",
+    "name": "Shadow Montana Quadrant"
+  },
+  {
+    "code": "me",
+    "continent": "Europe",
+    "name": "Shadow Montenegro Prime"
+  },
+  {
+    "code": "ms",
+    "continent": "North America",
+    "name": "Apex Montserrat Consortium"
+  },
+  {
+    "code": "ma",
+    "continent": "Africa",
+    "name": "Celestial Morocco Dominion"
+  },
+  {
+    "code": "mz",
+    "continent": "Africa",
+    "name": "Crimson Mozambique Prime"
+  },
+  {
+    "code": "1_Munster",
+    "continent": "Europe",
+    "name": "Eclipse Munster Cohort"
+  },
+  {
+    "code": "mm",
+    "continent": "Asia",
+    "name": "Crimson Myanmar Dynasty"
+  },
+  {
+    "code": "na",
+    "continent": "Africa",
+    "name": "Omega Namibia Expanse"
+  },
+  {
+    "code": "NATO",
+    "name": "Void NATO Outpost"
+  },
+  {
+    "code": "nr",
+    "continent": "Oceania",
+    "name": "Quantum Nauru Expanse"
+  },
+  {
+    "code": "Nebraska",
+    "continent": "North America",
+    "name": "Titan Nebraska Sector"
+  },
+  {
+    "code": "np",
+    "continent": "Asia",
+    "name": "Cosmic Nepal Outpost"
+  },
+  {
+    "code": "nl",
+    "continent": "Europe",
+    "name": "Quantum Netherlands Bastion"
+  },
+  {
+    "code": "neuragic_empire",
+    "name": "Vanguard Neuragic Dominion"
+  },
+  {
+    "code": "Nevada",
+    "continent": "North America",
+    "name": "Forge Nevada Forge"
+  },
+  {
+    "code": "nc",
+    "continent": "Oceania",
+    "name": "Apex New Citadel"
+  },
+  {
+    "code": "New_Hampshire",
+    "continent": "North America",
+    "name": "Galactic New Outpost"
+  },
+  {
+    "code": "New_Jersey",
+    "continent": "North America",
+    "name": "Galactic New Cluster"
+  },
+  {
+    "code": "New_Mexico",
+    "continent": "North America",
+    "name": "Alpha New Bastion"
+  },
+  {
+    "code": "New_York",
+    "continent": "North America",
+    "name": "Spectral New Collective"
+  },
+  {
+    "code": "nz",
+    "continent": "Oceania",
+    "name": "Quantum New Prime"
+  },
+  {
+    "code": "ni",
+    "continent": "North America",
+    "name": "Zenith Nicaragua Colony"
+  },
+  {
+    "code": "ne",
+    "continent": "Africa",
+    "name": "Alpha Niger Outpost"
+  },
+  {
+    "code": "ng",
+    "continent": "Africa",
+    "name": "Crimson Nigeria Outpost"
+  },
+  {
+    "code": "nu",
+    "continent": "Oceania",
+    "name": "Arc Niue Assembly"
+  },
+  {
+    "code": "nf",
+    "continent": "Oceania",
+    "name": "Shadow Norfolk Collective"
+  },
+  {
+    "code": "normandy",
+    "continent": "Europe",
+    "name": "Titan Normandy Sector"
+  },
+  {
+    "code": "North Karelia",
+    "continent": "Europe",
+    "name": "Radiant North Bastion"
+  },
+  {
+    "code": "North_Carolina",
+    "continent": "North America",
+    "name": "Eclipse North Dominion"
+  },
+  {
+    "code": "North_Dakota",
+    "continent": "North America",
+    "name": "Stellar North Sector"
+  },
+  {
+    "code": "kp",
+    "continent": "Asia",
+    "name": "Spectral North Regency"
+  },
+  {
+    "code": "mk",
+    "continent": "Europe",
+    "name": "Nova North Cluster"
+  },
+  {
+    "code": "northern_ireland",
+    "continent": "Europe",
+    "name": "Apex Northern Combine"
+  },
+  {
+    "code": "mp",
+    "continent": "Oceania",
+    "name": "Alpha Northern Cluster"
+  },
+  {
+    "code": "1_Northern Uí Néill",
+    "continent": "Europe",
+    "name": "Vanguard Northern Confederacy"
+  },
+  {
+    "code": "1_Northumbria",
+    "continent": "Europe",
+    "name": "Radiant Northumbria Legion"
+  },
+  {
+    "code": "no",
+    "continent": "Europe",
+    "name": "Astral Norway Citadel"
+  },
+  {
+    "code": "Ohio",
+    "continent": "North America",
+    "name": "Vanguard Ohio Command"
+  },
+  {
+    "code": "Oklahoma",
+    "continent": "North America",
+    "name": "Titan Oklahoma Expanse"
+  },
+  {
+    "code": "om",
+    "continent": "Asia",
+    "name": "Nebula Oman Colony"
+  },
+  {
+    "code": "Oregon",
+    "continent": "North America",
+    "name": "Eclipse Oregon Frontier"
+  },
+  {
+    "code": "Ottoman Empire",
+    "continent": "Asia",
+    "name": "Iron Ottoman Sector"
+  },
+  {
+    "code": "pk",
+    "continent": "Asia",
+    "name": "Alpha Pakistan Expanse"
+  },
+  {
+    "code": "pw",
+    "continent": "Oceania",
+    "name": "Forge Palau Collective"
+  },
+  {
+    "code": "Palekh",
+    "continent": "Europe",
+    "name": "Eclipse Palekh Collective"
+  },
+  {
+    "code": "pa",
+    "continent": "North America",
+    "name": "Celestial Panama Collective"
+  },
+  {
+    "code": "pg",
+    "continent": "Oceania",
+    "name": "Cosmic Papua Command"
+  },
+  {
+    "code": "Pará",
+    "continent": "South America",
+    "name": "Nebula Pará Enclave"
+  },
+  {
+    "code": "py",
+    "continent": "South America",
+    "name": "Solar Paraguay Command"
+  },
+  {
+    "code": "paris",
+    "continent": "Europe",
+    "name": "Vanguard Paris Confederacy"
+  },
+  {
+    "code": "Pennsylvania",
+    "continent": "North America",
+    "name": "Nebula Pennsylvania Collective"
+  },
+  {
+    "code": "pe",
+    "continent": "South America",
+    "name": "Forge Peru Colony"
+  },
+  {
+    "code": "Persia",
+    "continent": "Asia",
+    "name": "Nebula Persia Frontier"
+  },
+  {
+    "code": "ph",
+    "continent": "Asia",
+    "name": "Void Philippines Enclave"
+  },
+  {
+    "code": "Phrygia",
+    "continent": "Asia",
+    "name": "Spectral Phrygia Colony"
+  },
+  {
+    "code": "pn",
+    "continent": "Oceania",
+    "name": "Void Pitcairn Dynasty"
+  },
+  {
+    "code": "pl",
+    "continent": "Europe",
+    "name": "Arc Poland Citadel"
+  },
+  {
+    "code": "polar_bears",
+    "name": "Apex Polar Bastion"
+  },
+  {
+    "code": "Polish–Lithuanian Commonwealth",
+    "continent": "Europe",
+    "name": "Galactic Polish–Lithuanian Frontier"
+  },
+  {
+    "code": "pt",
+    "continent": "Europe",
+    "name": "Vanguard Portugal Cohort"
+  },
+  {
+    "code": "1_Powys",
+    "continent": "Europe",
+    "name": "Nebula Powys Expanse"
+  },
+  {
+    "code": "provence",
+    "continent": "Europe",
+    "name": "Stellar Provence Realm"
+  },
+  {
+    "code": "prussia",
+    "continent": "Europe",
+    "name": "Spectral Prussia Command"
+  },
+  {
+    "code": "pr",
+    "continent": "North America",
+    "name": "Solar Puerto Dynasty"
+  },
+  {
+    "code": "qa",
+    "continent": "Asia",
+    "name": "Spectral Qatar Regency"
+  },
+  {
+    "code": "Qing Dynasty",
+    "continent": "Asia",
+    "name": "Astral Qing Confederacy"
+  },
+  {
+    "code": "Quebec",
+    "continent": "North America",
+    "name": "Hyperion Quebec Collective"
+  },
+  {
+    "code": "Republic of China",
+    "continent": "Asia",
+    "name": "Galactic China Quadrant"
+  },
+  {
+    "code": "cg",
+    "continent": "Africa",
+    "name": "Astral Congo Regency"
+  },
+  {
+    "code": "Republic of Egypt",
+    "continent": "Africa",
+    "name": "Zenith Egypt Assembly"
+  },
+  {
+    "code": "Republic of Formosa",
+    "continent": "Asia",
+    "name": "Nova Formosa Cohort"
+  },
+  {
+    "code": "Republic of Korea",
+    "continent": "Asia",
+    "name": "Astral Korea Dominion"
+  },
+  {
+    "code": "Republic of Pirates",
+    "continent": "North America",
+    "name": "Radiant Pirates Legion"
+  },
+  {
+    "code": "re",
+    "continent": "Africa",
+    "name": "Galactic Réunion Prime"
+  },
+  {
+    "code": "Rhode_Island",
+    "continent": "North America",
+    "name": "Iron Rhode Dominion"
+  },
+  {
+    "code": "rio_de_janeiro",
+    "continent": "South America",
+    "name": "Nova Rio Sector"
+  },
+  {
+    "code": "Romanov Russia",
+    "continent": "Europe",
+    "name": "Radiant Romanov Bastion"
+  },
+  {
+    "code": "ro",
+    "continent": "Europe",
+    "name": "Zenith Romania Colony"
+  },
+  {
+    "code": "Ror Empire",
+    "name": "Iron Ror Sector"
+  },
+  {
+    "code": "ru",
+    "continent": "Europe",
+    "name": "Galactic Russia Dynasty"
+  },
+  {
+    "code": "rw",
+    "continent": "Africa",
+    "name": "Solar Rwanda Frontier"
+  },
+  {
+    "code": "Saba kingdom",
+    "continent": "Asia",
+    "name": "Solar Saba Quadrant"
+  },
+  {
+    "code": "bl",
+    "continent": "North America",
+    "name": "Galactic Saint Prime"
+  },
+  {
+    "code": "sh-hl",
+    "continent": "Africa",
+    "name": "Astral Saint Forge"
+  },
+  {
+    "code": "kn",
+    "continent": "North America",
+    "name": "Astral Saint Confederacy"
+  },
+  {
+    "code": "lc",
+    "continent": "North America",
+    "name": "Nova Saint Command"
+  },
+  {
+    "code": "mf",
+    "continent": "North America",
+    "name": "Astral Saint Dominion"
+  },
+  {
+    "code": "pm",
+    "continent": "North America",
+    "name": "Solar Saint Consortium"
+  },
+  {
+    "code": "vc",
+    "continent": "North America",
+    "name": "Crimson Saint Quadrant"
+  },
+  {
+    "code": "Sami flag",
+    "continent": "Europe",
+    "name": "Eclipse Sami Combine"
+  },
+  {
+    "code": "ws",
+    "continent": "Oceania",
+    "name": "Nebula Samoa Prime"
+  },
+  {
+    "code": "sm",
+    "continent": "Europe",
+    "name": "Hyperion San Consortium"
+  },
+  {
+    "code": "Santa Cruz",
+    "continent": "South America",
+    "name": "Stellar Santa Frontier"
+  },
+  {
+    "code": "santa_claus",
+    "name": "Galactic Santa Cohort"
+  },
+  {
+    "code": "st",
+    "continent": "Africa",
+    "name": "Cosmic Sao Regency"
+  },
+  {
+    "code": "São Paulo",
+    "continent": "South America",
+    "name": "Nova São Dynasty"
+  },
+  {
+    "code": "sardines",
+    "name": "Cosmic Sardines Regency"
+  },
+  {
+    "code": "Sassanid Empire",
+    "continent": "Asia",
+    "name": "Arc Sassanid Command"
+  },
+  {
+    "code": "sa",
+    "continent": "Asia",
+    "name": "Omega Saudi Combine"
+  },
+  {
+    "code": "gb-sct",
+    "continent": "Europe",
+    "name": "Quantum Scotland Dynasty"
+  },
+  {
+    "code": "Second Republic of Iraq",
+    "continent": "Asia",
+    "name": "Hyperion Second Collective"
+  },
+  {
+    "code": "Second Spanish Republic",
+    "continent": "Europe",
+    "name": "Spectral Second Expanse"
+  },
+  {
+    "code": "sn",
+    "continent": "Africa",
+    "name": "Spectral Senegal Sector"
+  },
+  {
+    "code": "rs",
+    "continent": "Europe",
+    "name": "Stellar Serbia Assembly"
+  },
+  {
+    "code": "seville",
+    "continent": "Europe",
+    "name": "Omega Seville Consortium"
+  },
+  {
+    "code": "sc",
+    "continent": "Africa",
+    "name": "Forge Seychelles Colony"
+  },
+  {
+    "code": "Siam",
+    "continent": "Asia",
+    "name": "Omega Siam Command"
+  },
+  {
+    "code": "Siberia",
+    "continent": "Asia",
+    "name": "Quantum Siberia Quadrant"
+  },
+  {
+    "code": "Sicily",
+    "continent": "Europe",
+    "name": "Astral Sicily Command"
+  },
+  {
+    "code": "sl",
+    "continent": "Africa",
+    "name": "Nova Sierra Confederacy"
+  },
+  {
+    "code": "sg",
+    "continent": "Asia",
+    "name": "Celestial Singapore Expanse"
+  },
+  {
+    "code": "sx",
+    "continent": "North America",
+    "name": "Eclipse Sint Confederacy"
+  },
+  {
+    "code": "sk",
+    "continent": "Europe",
+    "name": "Solar Slovakia Confederacy"
+  },
+  {
+    "code": "si",
+    "continent": "Europe",
+    "name": "Zenith Slovenia Frontier"
+  },
+  {
+    "code": "Socialist_flag",
+    "name": "Astral Socialist Forge"
+  },
+  {
+    "code": "sb",
+    "continent": "Oceania",
+    "name": "Hyperion Solomon Realm"
+  },
+  {
+    "code": "so",
+    "continent": "Africa",
+    "name": "Arc Somalia Forge"
+  },
+  {
+    "code": "za",
+    "continent": "Africa",
+    "name": "Vanguard South Collective"
+  },
+  {
+    "code": "South_Carolina",
+    "continent": "North America",
+    "name": "Radiant South Regency"
+  },
+  {
+    "code": "South_Dakota",
+    "continent": "North America",
+    "name": "Astral South Dominion"
+  },
+  {
+    "code": "gs",
+    "continent": "Antarctica",
+    "name": "Astral South Holdfast"
+  },
+  {
+    "code": "kr",
+    "continent": "Asia",
+    "name": "Alpha South Combine"
+  },
+  {
+    "code": "ss",
+    "continent": "Africa",
+    "name": "Galactic South Holdfast"
+  },
+  {
+    "code": "1_Southern Uí Néill",
+    "continent": "Europe",
+    "name": "Omega Southern Quadrant"
+  },
+  {
+    "code": "es",
+    "continent": "Europe",
+    "name": "Celestial Spain Collective"
+  },
+  {
+    "code": "spanish_empire",
+    "continent": "Europe",
+    "name": "Solar Spanish Legion"
+  },
+  {
+    "code": "Sparta",
+    "continent": "Europe",
+    "name": "Cosmic Sparta Regency"
+  },
+  {
+    "code": "SPQR",
+    "continent": "Europe",
+    "name": "Nebula SPQR Citadel"
+  },
+  {
+    "code": "lk",
+    "continent": "Asia",
+    "name": "Void Sri Colony"
+  },
+  {
+    "code": "ps",
+    "continent": "Asia",
+    "name": "Vanguard Palestine Holdfast"
+  },
+  {
+    "code": "1_Strathclyde",
+    "continent": "Europe",
+    "name": "Solar Strathclyde Cluster"
+  },
+  {
+    "code": "sd",
+    "continent": "Africa",
+    "name": "Celestial Sudan Command"
+  },
+  {
+    "code": "Sultanate of Nejd",
+    "continent": "Asia",
+    "name": "Stellar Sultanate Sector"
+  },
+  {
+    "code": "sr",
+    "continent": "South America",
+    "name": "Nebula Suriname Confederacy"
+  },
+  {
+    "code": "1_Sussex",
+    "continent": "Europe",
+    "name": "Hyperion Sussex Holdfast"
+  },
+  {
+    "code": "sj",
+    "continent": "Europe",
+    "name": "Hyperion Svalbard Forge"
+  },
+  {
+    "code": "se",
+    "continent": "Europe",
+    "name": "Crimson Sweden Frontier"
+  },
+  {
+    "code": "Sweden Norway Union",
+    "continent": "Europe",
+    "name": "Void Sweden Legion"
+  },
+  {
+    "code": "ch",
+    "continent": "Europe",
+    "name": "Apex Switzerland Sector"
+  },
+  {
+    "code": "sy",
+    "continent": "Asia",
+    "name": "Quantum Syria Cohort"
+  },
+  {
+    "code": "tw",
+    "continent": "Asia",
+    "name": "Omega Taiwan Quadrant"
+  },
+  {
+    "code": "tj",
+    "continent": "Asia",
+    "name": "Forge Tajikistan Regency"
+  },
+  {
+    "code": "tz",
+    "continent": "Africa",
+    "name": "Nebula Tanzania Collective"
+  },
+  {
+    "code": "Tennessee",
+    "continent": "North America",
+    "name": "Nebula Tennessee Bastion"
+  },
+  {
+    "code": "Texas",
+    "continent": "North America",
+    "name": "Void Texas Consortium"
+  },
+  {
+    "code": "th",
+    "continent": "Asia",
+    "name": "Radiant Thailand Frontier"
+  },
+  {
+    "code": "tibet",
+    "continent": "Asia",
+    "name": "Radiant Tibet Bastion"
+  },
+  {
+    "code": "tl",
+    "continent": "Asia",
+    "name": "Omega Timor-Leste Prime"
+  },
+  {
+    "code": "tg",
+    "continent": "Africa",
+    "name": "Eclipse Togo Regency"
+  },
+  {
+    "code": "tk",
+    "continent": "Oceania",
+    "name": "Titan Tokelau Legion"
+  },
+  {
+    "code": "to",
+    "continent": "Oceania",
+    "name": "Celestial Tonga Regency"
+  },
+  {
+    "code": "tt",
+    "continent": "South America",
+    "name": "Spectral Trinidad Cohort"
+  },
+  {
+    "code": "sh-ta",
+    "continent": "Africa",
+    "name": "Hyperion Tristan Expanse"
+  },
+  {
+    "code": "Trucial States",
+    "continent": "Asia",
+    "name": "Crimson Trucial Citadel"
+  },
+  {
+    "code": "tn",
+    "continent": "Africa",
+    "name": "Galactic Tunisia Forge"
+  },
+  {
+    "code": "tr",
+    "continent": "Asia",
+    "name": "Galactic Türkiye Sector"
+  },
+  {
+    "code": "tm",
+    "continent": "Asia",
+    "name": "Hyperion Turkmenistan Realm"
+  },
+  {
+    "code": "tc",
+    "continent": "North America",
+    "name": "Apex Turks Cohort"
+  },
+  {
+    "code": "tv",
+    "continent": "Oceania",
+    "name": "Crimson Tuvalu Command"
+  },
+  {
+    "code": "USA 1776",
+    "continent": "North America",
+    "name": "Vanguard USA Cluster"
+  },
+  {
+    "code": "ussr",
+    "continent": "Europe",
+    "name": "Crimson USSR Cohort"
+  },
+  {
+    "code": "ug",
+    "continent": "Africa",
+    "name": "Hyperion Uganda Expanse"
+  },
+  {
+    "code": "ua",
+    "continent": "Europe",
+    "name": "Radiant Ukraine Outpost"
+  },
+  {
+    "code": "1_Ulaid",
+    "continent": "Europe",
+    "name": "Nova Ulaid Cluster"
+  },
+  {
+    "code": "Umayyad Caliphate",
+    "continent": "Asia",
+    "name": "Hyperion Umayyad Holdfast"
+  },
+  {
+    "code": "United Arab Republic",
+    "continent": "Asia",
+    "name": "Spectral Arab Quadrant"
+  },
+  {
+    "code": "gb",
+    "continent": "Europe",
+    "name": "Vanguard United Cluster"
+  },
+  {
+    "code": "un",
+    "name": "Omega Nations Realm"
+  },
+  {
+    "code": "us",
+    "continent": "North America",
+    "name": "Nova America Citadel"
+  },
+  {
+    "code": "Urartu",
+    "continent": "Asia",
+    "name": "Vanguard Urartu Combine"
+  },
+  {
+    "code": "uy",
+    "continent": "South America",
+    "name": "Crimson Uruguay Frontier"
+  },
+  {
+    "code": "Utah",
+    "continent": "North America",
+    "name": "Spectral Utah Sector"
+  },
+  {
+    "code": "uz",
+    "continent": "Asia",
+    "name": "Hyperion Uzbekistan Bastion"
+  },
+  {
+    "code": "valencia",
+    "continent": "Europe",
+    "name": "Quantum Valencia Combine"
+  },
+  {
+    "code": "vu",
+    "continent": "Oceania",
+    "name": "Galactic Vanuatu Command"
+  },
+  {
+    "code": "ve",
+    "continent": "South America",
+    "name": "Solar Venezuela Enclave"
+  },
+  {
+    "code": "venice",
+    "continent": "Europe",
+    "name": "Eclipse Venice Collective"
+  },
+  {
+    "code": "Vermont",
+    "continent": "North America",
+    "name": "Arc Vermont Dynasty"
+  },
+  {
+    "code": "vn",
+    "continent": "Asia",
+    "name": "Vanguard Vietnam Bastion"
+  },
+  {
+    "code": "vg",
+    "continent": "North America",
+    "name": "Celestial Virgin Enclave"
+  },
+  {
+    "code": "vi",
+    "continent": "North America",
+    "name": "Arc Virgin Cohort"
+  },
+  {
+    "code": "Virginia",
+    "continent": "North America",
+    "name": "Zenith Virginia Colony"
+  },
+  {
+    "code": "gb-wls",
+    "continent": "Europe",
+    "name": "Arc Wales Regency"
+  },
+  {
+    "code": "Wallonia",
+    "continent": "Europe",
+    "name": "Nova Wallonia Consortium"
+  },
+  {
+    "code": "wf",
+    "continent": "Oceania",
+    "name": "Solar Wallis Cohort"
+  },
+  {
+    "code": "Washington",
+    "continent": "North America",
+    "name": "Solar Washington Command"
+  },
+  {
+    "code": "1_Wessex",
+    "continent": "Europe",
+    "name": "Zenith Wessex Sector"
+  },
+  {
+    "code": "west_germany",
+    "continent": "Europe",
+    "name": "Apex West Frontier"
+  },
+  {
+    "code": "West Roman Empire",
+    "continent": "Europe",
+    "name": "Cosmic West Holdfast"
+  },
+  {
+    "code": "West_Virginia",
+    "continent": "North America",
+    "name": "Cosmic West Cluster"
+  },
+  {
+    "code": "eh",
+    "continent": "Africa",
+    "name": "Galactic Western Confederacy"
+  },
+  {
+    "code": "Wisconsin",
+    "continent": "North America",
+    "name": "Shadow Wisconsin Legion"
+  },
+  {
+    "code": "Wyoming",
+    "continent": "North America",
+    "name": "Vanguard Wyoming Collective"
+  },
+  {
+    "code": "Yellow_Flag",
+    "name": "Vanguard Yellow Confederacy"
+  },
+  {
+    "code": "ye",
+    "continent": "Asia",
+    "name": "Omega Yemen Enclave"
+  },
+  {
+    "code": "yugoslavia",
+    "continent": "Europe",
+    "name": "Titan Yugoslavia Combine"
+  },
+  {
+    "code": "Zaire",
+    "continent": "Africa",
+    "name": "Iron Zaire Confederacy"
+  },
+  {
+    "code": "zm",
+    "continent": "Africa",
+    "name": "Zenith Zambia Colony"
+  },
+  {
+    "code": "Zheleznogorsk",
+    "continent": "Asia",
+    "name": "Nebula Zheleznogorsk Command"
+  },
+  {
+    "code": "zw",
+    "continent": "Africa",
+    "name": "Spectral Zimbabwe Quadrant"
+  }
+]

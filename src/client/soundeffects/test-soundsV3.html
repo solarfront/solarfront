@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarFront Sound Effects V3 - Space Combat Audio Suite</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a1f 0%, #1a1a3e 50%, #0f0f23 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+            text-shadow: 0 0 30px rgba(0, 255, 204, 0.5);
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8899ff;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .init-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #initButton {
+            background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+            border: none;
+            color: #0a0a1f;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 255, 204, 0.4);
+        }
+
+        #initButton:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 204, 0.6);
+        }
+
+        #initButton:disabled {
+            background: #444;
+            color: #999;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .category-section {
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            color: #00ffcc;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .category-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+
+        .sound-card {
+            background: linear-gradient(135deg, rgba(74, 85, 104, 0.6) 0%, rgba(45, 55, 72, 0.6) 100%);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sound-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 255, 204, 0.5);
+            box-shadow: 0 6px 25px rgba(0, 255, 204, 0.3);
+        }
+
+        .sound-card.playing {
+            background: linear-gradient(135deg, rgba(0, 255, 204, 0.2) 0%, rgba(0, 153, 255, 0.2) 100%);
+            border-color: #00ffcc;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .sound-name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .sound-description {
+            font-size: 13px;
+            color: #8899ff;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .sound-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, #00ffcc 0%, #0099ff 100%);
+            border: none;
+            color: #0a0a1f;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+        }
+
+        .play-button:active {
+            transform: scale(0.95);
+        }
+
+        .volume-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00ffcc;
+            cursor: pointer;
+        }
+
+        .volume-label {
+            font-size: 12px;
+            color: #8899ff;
+            min-width: 35px;
+            text-align: right;
+        }
+
+        .waveform-visual {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sound-card.playing .waveform-visual {
+            opacity: 0.1;
+        }
+
+        @keyframes waveform {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .playing .waveform-visual::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 204, 0.5), transparent);
+            animation: waveform 1s linear infinite;
+        }
+
+        .master-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(10, 10, 31, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .master-volume {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .master-label {
+            color: #00ffcc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>🚀 SolarFront Sound Effects V3</h1>
+        <div class="subtitle">Space Combat Audio Suite - 30 Optimized Sound Effects</div>
+        
+        <div class="init-container">
+            <button id="initButton">🎵 Initialize Audio System</button>
+        </div>
+        
+        <div id="soundContainer" style="display: none;">
+            <!-- Attack Sounds Section -->
+            <div class="category-section">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-icon">⚡</div>
+                        Attack Sounds
+                    </div>
+                    <div class="category-badge">10 Effects</div>
+                </div>
+                <div class="sound-grid" id="attackSounds"></div>
+            </div>
+            
+            <!-- Impact Sounds Section -->
+            <div class="category-section">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-icon">💥</div>
+                        Impact Sounds
+                    </div>
+                    <div class="category-badge">10 Effects</div>
+                </div>
+                <div class="sound-grid" id="impactSounds"></div>
+            </div>
+            
+            <!-- Launch Sounds Section -->
+            <div class="category-section">
+                <div class="category-header">
+                    <div class="category-title">
+                        <div class="category-icon">🚀</div>
+                        Launch Sounds
+                    </div>
+                    <div class="category-badge">10 Effects</div>
+                </div>
+                <div class="sound-grid" id="launchSounds"></div>
+            </div>
+        </div>
+        
+        <div class="master-controls" style="display: none;" id="masterControls">
+            <div class="master-volume">
+                <span class="master-label">Master Volume:</span>
+                <input type="range" class="volume-slider" id="masterVolume" min="0" max="100" value="70">
+                <span class="volume-label" id="masterVolumeLabel">70%</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate starfield
+        function createStarfield() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStarfield();
+
+        class SpaceSoundEngine {
+            constructor() {
+                this.audioContext = null;
+                this.masterGainNode = null;
+                this.masterVolume = 0.7;
+                this.sounds = {
+                    attack: [],
+                    impact: [],
+                    launch: []
+                };
+            }
+
+            init() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                this.masterGainNode = this.audioContext.createGain();
+                this.masterGainNode.gain.value = this.masterVolume;
+                this.masterGainNode.connect(this.audioContext.destination);
+                
+                this.initializeSounds();
+                return true;
+            }
+
+            setMasterVolume(value) {
+                this.masterVolume = value;
+                if (this.masterGainNode) {
+                    this.masterGainNode.gain.value = value;
+                }
+            }
+
+            createNoiseBuffer(duration) {
+                const bufferSize = this.audioContext.sampleRate * duration;
+                const buffer = this.audioContext.createBuffer(1, bufferSize, this.audioContext.sampleRate);
+                const output = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+                
+                return buffer;
+            }
+
+            // Attack Sound 1: Plasma Burst
+            playPlasmaBurst(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Clarity layer - mid frequency ping
+                const clarityOsc = this.audioContext.createOscillator();
+                clarityOsc.type = 'triangle';
+                clarityOsc.frequency.setValueAtTime(800, now);
+                clarityOsc.frequency.exponentialRampToValueAtTime(600, now + 0.1);
+                
+                const clarityGain = this.audioContext.createGain();
+                clarityGain.gain.setValueAtTime(0.6, now);
+                clarityGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                clarityOsc.connect(clarityGain);
+                clarityGain.connect(gainNode);
+                clarityOsc.start(now);
+                clarityOsc.stop(now + 0.1);
+
+                // Body layer - energy discharge
+                const bodyOsc = this.audioContext.createOscillator();
+                bodyOsc.type = 'sawtooth';
+                bodyOsc.frequency.setValueAtTime(400, now);
+                bodyOsc.frequency.exponentialRampToValueAtTime(200, now + 0.15);
+                
+                const bodyGain = this.audioContext.createGain();
+                bodyGain.gain.setValueAtTime(0.5, now);
+                bodyGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const bodyFilter = this.audioContext.createBiquadFilter();
+                bodyFilter.type = 'lowpass';
+                bodyFilter.frequency.value = 1000;
+                
+                bodyOsc.connect(bodyFilter);
+                bodyFilter.connect(bodyGain);
+                bodyGain.connect(gainNode);
+                bodyOsc.start(now);
+                bodyOsc.stop(now + 0.15);
+
+                // Weight layer - sub bass
+                const subOsc = this.audioContext.createOscillator();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(80, now);
+                subOsc.frequency.exponentialRampToValueAtTime(40, now + 0.2);
+                
+                const subGain = this.audioContext.createGain();
+                subGain.gain.setValueAtTime(0.3, now);
+                subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                subOsc.connect(subGain);
+                subGain.connect(gainNode);
+                subOsc.start(now);
+                subOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 2: Ion Cannon
+            playIonCannon(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Charge up
+                const chargeOsc = this.audioContext.createOscillator();
+                chargeOsc.type = 'sine';
+                chargeOsc.frequency.setValueAtTime(200, now);
+                chargeOsc.frequency.exponentialRampToValueAtTime(1000, now + 0.1);
+                
+                const chargeGain = this.audioContext.createGain();
+                chargeGain.gain.setValueAtTime(0, now);
+                chargeGain.gain.linearRampToValueAtTime(0.4, now + 0.1);
+                chargeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                chargeOsc.connect(chargeGain);
+                chargeGain.connect(gainNode);
+                chargeOsc.start(now);
+                chargeOsc.stop(now + 0.15);
+
+                // Main beam
+                const beamOsc = this.audioContext.createOscillator();
+                beamOsc.type = 'square';
+                beamOsc.frequency.setValueAtTime(600, now + 0.05);
+                beamOsc.frequency.exponentialRampToValueAtTime(300, now + 0.2);
+                
+                const beamGain = this.audioContext.createGain();
+                beamGain.gain.setValueAtTime(0.6, now + 0.05);
+                beamGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                const beamFilter = this.audioContext.createBiquadFilter();
+                beamFilter.type = 'bandpass';
+                beamFilter.frequency.value = 500;
+                beamFilter.Q.value = 5;
+                
+                beamOsc.connect(beamFilter);
+                beamFilter.connect(beamGain);
+                beamGain.connect(gainNode);
+                beamOsc.start(now + 0.05);
+                beamOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 3: Pulse Laser
+            playPulseLaser(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Rapid pulses
+                for (let i = 0; i < 3; i++) {
+                    const pulseTime = now + (i * 0.05);
+                    
+                    const pulseOsc = this.audioContext.createOscillator();
+                    pulseOsc.type = 'sawtooth';
+                    pulseOsc.frequency.setValueAtTime(1200 - (i * 200), pulseTime);
+                    pulseOsc.frequency.exponentialRampToValueAtTime(400, pulseTime + 0.04);
+                    
+                    const pulseGain = this.audioContext.createGain();
+                    pulseGain.gain.setValueAtTime(0.5, pulseTime);
+                    pulseGain.gain.exponentialRampToValueAtTime(0.001, pulseTime + 0.04);
+                    
+                    pulseOsc.connect(pulseGain);
+                    pulseGain.connect(gainNode);
+                    pulseOsc.start(pulseTime);
+                    pulseOsc.stop(pulseTime + 0.04);
+                }
+
+                // Metallic resonance
+                const resonanceOsc = this.audioContext.createOscillator();
+                resonanceOsc.type = 'triangle';
+                resonanceOsc.frequency.value = 800;
+                
+                const resonanceGain = this.audioContext.createGain();
+                resonanceGain.gain.setValueAtTime(0.2, now);
+                resonanceGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                resonanceOsc.connect(resonanceGain);
+                resonanceGain.connect(gainNode);
+                resonanceOsc.start(now);
+                resonanceOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 4: Quantum Strike
+            playQuantumStrike(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Dimensional warp effect
+                const warpOsc = this.audioContext.createOscillator();
+                warpOsc.type = 'sine';
+                warpOsc.frequency.setValueAtTime(100, now);
+                
+                const warpLFO = this.audioContext.createOscillator();
+                warpLFO.frequency.value = 20;
+                const warpLFOGain = this.audioContext.createGain();
+                warpLFOGain.gain.value = 50;
+                
+                warpLFO.connect(warpLFOGain);
+                warpLFOGain.connect(warpOsc.frequency);
+                warpLFO.start(now);
+                warpLFO.stop(now + 0.15);
+                
+                const warpGain = this.audioContext.createGain();
+                warpGain.gain.setValueAtTime(0.5, now);
+                warpGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                warpOsc.connect(warpGain);
+                warpGain.connect(gainNode);
+                warpOsc.start(now);
+                warpOsc.stop(now + 0.15);
+
+                // Sub-bass impact
+                const subOsc = this.audioContext.createOscillator();
+                subOsc.type = 'sine';
+                subOsc.frequency.setValueAtTime(60, now);
+                subOsc.frequency.exponentialRampToValueAtTime(30, now + 0.2);
+                
+                const subGain = this.audioContext.createGain();
+                subGain.gain.setValueAtTime(0.6, now);
+                subGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                subOsc.connect(subGain);
+                subGain.connect(gainNode);
+                subOsc.start(now);
+                subOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 5: Rail Gun
+            playRailGun(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Kinetic acceleration
+                const accelOsc = this.audioContext.createOscillator();
+                accelOsc.type = 'square';
+                accelOsc.frequency.setValueAtTime(200, now);
+                accelOsc.frequency.exponentialRampToValueAtTime(1000, now + 0.08);
+                
+                const accelGain = this.audioContext.createGain();
+                accelGain.gain.setValueAtTime(0.4, now);
+                accelGain.gain.setValueAtTime(0.4, now + 0.08);
+                accelGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                accelOsc.connect(accelGain);
+                accelGain.connect(gainNode);
+                accelOsc.start(now);
+                accelOsc.stop(now + 0.1);
+
+                // Metallic crack
+                const crackNoise = this.createNoiseBuffer(0.05);
+                const crackSource = this.audioContext.createBufferSource();
+                crackSource.buffer = crackNoise;
+                
+                const crackGain = this.audioContext.createGain();
+                crackGain.gain.setValueAtTime(0.6, now + 0.08);
+                crackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+                
+                const crackFilter = this.audioContext.createBiquadFilter();
+                crackFilter.type = 'highpass';
+                crackFilter.frequency.value = 2000;
+                
+                crackSource.connect(crackFilter);
+                crackFilter.connect(crackGain);
+                crackGain.connect(gainNode);
+                crackSource.start(now + 0.08);
+            }
+
+            // Attack Sound 6: Photon Torpedo
+            playPhotonTorpedo(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Energy launch
+                const launchOsc = this.audioContext.createOscillator();
+                launchOsc.type = 'triangle';
+                launchOsc.frequency.setValueAtTime(400, now);
+                launchOsc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+                launchOsc.frequency.exponentialRampToValueAtTime(300, now + 0.18);
+                
+                const launchGain = this.audioContext.createGain();
+                launchGain.gain.setValueAtTime(0.5, now);
+                launchGain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                
+                launchOsc.connect(launchGain);
+                launchGain.connect(gainNode);
+                launchOsc.start(now);
+                launchOsc.stop(now + 0.18);
+
+                // Trailing harmonics
+                const harmOsc = this.audioContext.createOscillator();
+                harmOsc.type = 'sine';
+                harmOsc.frequency.setValueAtTime(1200, now + 0.05);
+                harmOsc.frequency.exponentialRampToValueAtTime(600, now + 0.2);
+                
+                const harmGain = this.audioContext.createGain();
+                harmGain.gain.setValueAtTime(0.3, now + 0.05);
+                harmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                harmOsc.connect(harmGain);
+                harmGain.connect(gainNode);
+                harmOsc.start(now + 0.05);
+                harmOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 7: Neutron Beam
+            playNeutronBeam(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Sustained beam with modulation
+                const beamOsc = this.audioContext.createOscillator();
+                beamOsc.type = 'sawtooth';
+                beamOsc.frequency.value = 500;
+                
+                const modOsc = this.audioContext.createOscillator();
+                modOsc.frequency.value = 8;
+                const modGain = this.audioContext.createGain();
+                modGain.gain.value = 100;
+                
+                modOsc.connect(modGain);
+                modGain.connect(beamOsc.frequency);
+                modOsc.start(now);
+                modOsc.stop(now + 0.2);
+                
+                const beamGain = this.audioContext.createGain();
+                beamGain.gain.setValueAtTime(0.4, now);
+                beamGain.gain.setValueAtTime(0.4, now + 0.15);
+                beamGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                const beamFilter = this.audioContext.createBiquadFilter();
+                beamFilter.type = 'lowpass';
+                beamFilter.frequency.value = 800;
+                beamFilter.Q.value = 3;
+                
+                beamOsc.connect(beamFilter);
+                beamFilter.connect(beamGain);
+                beamGain.connect(gainNode);
+                beamOsc.start(now);
+                beamOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 8: Solar Flare
+            playSolarFlare(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Wide spectrum energy
+                const noise = this.createNoiseBuffer(0.15);
+                const noiseSource = this.audioContext.createBufferSource();
+                noiseSource.buffer = noise;
+                
+                const noiseGain = this.audioContext.createGain();
+                noiseGain.gain.setValueAtTime(0.3, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const noiseFilter = this.audioContext.createBiquadFilter();
+                noiseFilter.type = 'bandpass';
+                noiseFilter.frequency.setValueAtTime(2000, now);
+                noiseFilter.frequency.exponentialRampToValueAtTime(400, now + 0.15);
+                noiseFilter.Q.value = 2;
+                
+                noiseSource.connect(noiseFilter);
+                noiseFilter.connect(noiseGain);
+                noiseGain.connect(gainNode);
+                noiseSource.start(now);
+
+                // Energy core
+                const coreOsc = this.audioContext.createOscillator();
+                coreOsc.type = 'sine';
+                coreOsc.frequency.setValueAtTime(300, now);
+                coreOsc.frequency.exponentialRampToValueAtTime(150, now + 0.2);
+                
+                const coreGain = this.audioContext.createGain();
+                coreGain.gain.setValueAtTime(0.5, now);
+                coreGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                coreOsc.connect(coreGain);
+                coreGain.connect(gainNode);
+                coreOsc.start(now);
+                coreOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 9: Gravity Hammer
+            playGravityHammer(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Gravitational distortion
+                const distortOsc = this.audioContext.createOscillator();
+                distortOsc.type = 'square';
+                distortOsc.frequency.setValueAtTime(40, now);
+                distortOsc.frequency.exponentialRampToValueAtTime(20, now + 0.15);
+                
+                const distortGain = this.audioContext.createGain();
+                distortGain.gain.setValueAtTime(0.6, now);
+                distortGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const waveshaper = this.audioContext.createWaveShaper();
+                const curve = new Float32Array(256);
+                for (let i = 0; i < 256; i++) {
+                    curve[i] = Math.tanh((i - 128) / 32);
+                }
+                waveshaper.curve = curve;
+                
+                distortOsc.connect(waveshaper);
+                waveshaper.connect(distortGain);
+                distortGain.connect(gainNode);
+                distortOsc.start(now);
+                distortOsc.stop(now + 0.15);
+
+                // Heavy impact
+                const impactOsc = this.audioContext.createOscillator();
+                impactOsc.type = 'sine';
+                impactOsc.frequency.setValueAtTime(80, now);
+                impactOsc.frequency.exponentialRampToValueAtTime(30, now + 0.2);
+                
+                const impactGain = this.audioContext.createGain();
+                impactGain.gain.setValueAtTime(0.7, now);
+                impactGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                impactOsc.connect(impactGain);
+                impactGain.connect(gainNode);
+                impactOsc.start(now);
+                impactOsc.stop(now + 0.2);
+            }
+
+            // Attack Sound 10: Arc Lightning
+            playArcLightning(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Electrical discharge
+                for (let i = 0; i < 5; i++) {
+                    const sparkTime = now + (i * 0.03);
+                    const sparkFreq = 1200 + (Math.random() * 800);
+                    
+                    const sparkOsc = this.audioContext.createOscillator();
+                    sparkOsc.type = 'square';
+                    sparkOsc.frequency.setValueAtTime(sparkFreq, sparkTime);
+                    sparkOsc.frequency.exponentialRampToValueAtTime(200, sparkTime + 0.02);
+                    
+                    const sparkGain = this.audioContext.createGain();
+                    sparkGain.gain.setValueAtTime(0.3, sparkTime);
+                    sparkGain.gain.exponentialRampToValueAtTime(0.001, sparkTime + 0.02);
+                    
+                    sparkOsc.connect(sparkGain);
+                    sparkGain.connect(gainNode);
+                    sparkOsc.start(sparkTime);
+                    sparkOsc.stop(sparkTime + 0.02);
+                }
+
+                // Crackling texture
+                const crackleNoise = this.createNoiseBuffer(0.15);
+                const crackleSource = this.audioContext.createBufferSource();
+                crackleSource.buffer = crackleNoise;
+                
+                const crackleGain = this.audioContext.createGain();
+                crackleGain.gain.setValueAtTime(0.2, now);
+                crackleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const crackleFilter = this.audioContext.createBiquadFilter();
+                crackleFilter.type = 'highpass';
+                crackleFilter.frequency.value = 3000;
+                
+                crackleSource.connect(crackleFilter);
+                crackleFilter.connect(crackleGain);
+                crackleGain.connect(gainNode);
+                crackleSource.start(now);
+            }
+
+            // Impact Sound 1: Shield Hit
+            playShieldHit(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Energy absorption layer
+                const absorbOsc = this.audioContext.createOscillator();
+                absorbOsc.type = 'sine';
+                absorbOsc.frequency.setValueAtTime(600, now);
+                absorbOsc.frequency.exponentialRampToValueAtTime(200, now + 0.15);
+                
+                const absorbGain = this.audioContext.createGain();
+                absorbGain.gain.setValueAtTime(0.5, now);
+                absorbGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                absorbOsc.connect(absorbGain);
+                absorbGain.connect(gainNode);
+                absorbOsc.start(now);
+                absorbOsc.stop(now + 0.15);
+
+                // Resonance layer
+                const resonanceOsc = this.audioContext.createOscillator();
+                resonanceOsc.type = 'triangle';
+                resonanceOsc.frequency.value = 800;
+                
+                const resonanceGain = this.audioContext.createGain();
+                resonanceGain.gain.setValueAtTime(0, now);
+                resonanceGain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+                resonanceGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                const resonanceFilter = this.audioContext.createBiquadFilter();
+                resonanceFilter.type = 'bandpass';
+                resonanceFilter.frequency.value = 1000;
+                resonanceFilter.Q.value = 10;
+                
+                resonanceOsc.connect(resonanceFilter);
+                resonanceFilter.connect(resonanceGain);
+                resonanceGain.connect(gainNode);
+                resonanceOsc.start(now);
+                resonanceOsc.stop(now + 0.25);
+
+                // Impact thud
+                const thudOsc = this.audioContext.createOscillator();
+                thudOsc.type = 'sine';
+                thudOsc.frequency.setValueAtTime(100, now);
+                thudOsc.frequency.exponentialRampToValueAtTime(50, now + 0.2);
+                
+                const thudGain = this.audioContext.createGain();
+                thudGain.gain.setValueAtTime(0.3, now);
+                thudGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                thudOsc.connect(thudGain);
+                thudGain.connect(gainNode);
+                thudOsc.start(now);
+                thudOsc.stop(now + 0.2);
+            }
+
+            // Impact Sound 2: Hull Breach
+            playHullBreach(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Metal deformation
+                const metalOsc = this.audioContext.createOscillator();
+                metalOsc.type = 'square';
+                metalOsc.frequency.setValueAtTime(150, now);
+                metalOsc.frequency.exponentialRampToValueAtTime(80, now + 0.2);
+                
+                const metalGain = this.audioContext.createGain();
+                metalGain.gain.setValueAtTime(0.6, now);
+                metalGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                const metalFilter = this.audioContext.createBiquadFilter();
+                metalFilter.type = 'lowpass';
+                metalFilter.frequency.value = 400;
+                
+                metalOsc.connect(metalFilter);
+                metalFilter.connect(metalGain);
+                metalGain.connect(gainNode);
+                metalOsc.start(now);
+                metalOsc.stop(now + 0.2);
+
+                // Decompression hiss
+                const hissNoise = this.createNoiseBuffer(0.3);
+                const hissSource = this.audioContext.createBufferSource();
+                hissSource.buffer = hissNoise;
+                
+                const hissGain = this.audioContext.createGain();
+                hissGain.gain.setValueAtTime(0, now);
+                hissGain.gain.linearRampToValueAtTime(0.4, now + 0.05);
+                hissGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                
+                const hissFilter = this.audioContext.createBiquadFilter();
+                hissFilter.type = 'highpass';
+                hissFilter.frequency.value = 2000;
+                
+                hissSource.connect(hissFilter);
+                hissFilter.connect(hissGain);
+                hissGain.connect(gainNode);
+                hissSource.start(now);
+            }
+
+            // Impact Sound 3: Energy Deflection
+            playEnergyDeflection(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Harmonic dispersal
+                const harmonics = [400, 600, 800, 1000];
+                harmonics.forEach((freq, i) => {
+                    const harmOsc = this.audioContext.createOscillator();
+                    harmOsc.type = 'sine';
+                    harmOsc.frequency.setValueAtTime(freq, now);
+                    harmOsc.frequency.exponentialRampToValueAtTime(freq * 0.5, now + 0.2);
+                    
+                    const harmGain = this.audioContext.createGain();
+                    harmGain.gain.setValueAtTime(0.3 / (i + 1), now);
+                    harmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    
+                    harmOsc.connect(harmGain);
+                    harmGain.connect(gainNode);
+                    harmOsc.start(now);
+                    harmOsc.stop(now + 0.2);
+                });
+
+                // Deflection ping
+                const pingOsc = this.audioContext.createOscillator();
+                pingOsc.type = 'triangle';
+                pingOsc.frequency.setValueAtTime(1200, now);
+                pingOsc.frequency.exponentialRampToValueAtTime(2000, now + 0.1);
+                
+                const pingGain = this.audioContext.createGain();
+                pingGain.gain.setValueAtTime(0.4, now);
+                pingGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                pingOsc.connect(pingGain);
+                pingGain.connect(gainNode);
+                pingOsc.start(now);
+                pingOsc.stop(now + 0.1);
+            }
+
+            // Impact Sound 4: Armor Crack
+            playArmorCrack(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Structural failure
+                const crackOsc = this.audioContext.createOscillator();
+                crackOsc.type = 'sawtooth';
+                crackOsc.frequency.setValueAtTime(300, now);
+                crackOsc.frequency.setValueAtTime(100, now + 0.02);
+                crackOsc.frequency.exponentialRampToValueAtTime(50, now + 0.15);
+                
+                const crackGain = this.audioContext.createGain();
+                crackGain.gain.setValueAtTime(0.7, now);
+                crackGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                crackOsc.connect(crackGain);
+                crackGain.connect(gainNode);
+                crackOsc.start(now);
+                crackOsc.stop(now + 0.15);
+
+                // Debris scatter
+                const debrisNoise = this.createNoiseBuffer(0.2);
+                const debrisSource = this.audioContext.createBufferSource();
+                debrisSource.buffer = debrisNoise;
+                
+                const debrisGain = this.audioContext.createGain();
+                debrisGain.gain.setValueAtTime(0.3, now + 0.02);
+                debrisGain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+                
+                const debrisFilter = this.audioContext.createBiquadFilter();
+                debrisFilter.type = 'bandpass';
+                debrisFilter.frequency.value = 1500;
+                debrisFilter.Q.value = 2;
+                
+                debrisSource.connect(debrisFilter);
+                debrisFilter.connect(debrisGain);
+                debrisGain.connect(gainNode);
+                debrisSource.start(now + 0.02);
+            }
+
+            // Impact Sound 5: Plasma Splash
+            playPlasmaSplash(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Energy dispersion
+                const splashOsc = this.audioContext.createOscillator();
+                splashOsc.type = 'sine';
+                splashOsc.frequency.setValueAtTime(800, now);
+                
+                const splashLFO = this.audioContext.createOscillator();
+                splashLFO.frequency.value = 30;
+                const splashLFOGain = this.audioContext.createGain();
+                splashLFOGain.gain.value = 200;
+                
+                splashLFO.connect(splashLFOGain);
+                splashLFOGain.connect(splashOsc.frequency);
+                splashLFO.start(now);
+                splashLFO.stop(now + 0.2);
+                
+                const splashGain = this.audioContext.createGain();
+                splashGain.gain.setValueAtTime(0.5, now);
+                splashGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                splashOsc.connect(splashGain);
+                splashGain.connect(gainNode);
+                splashOsc.start(now);
+                splashOsc.stop(now + 0.2);
+
+                // Sizzle effect
+                const sizzleNoise = this.createNoiseBuffer(0.25);
+                const sizzleSource = this.audioContext.createBufferSource();
+                sizzleSource.buffer = sizzleNoise;
+                
+                const sizzleGain = this.audioContext.createGain();
+                sizzleGain.gain.setValueAtTime(0.2, now);
+                sizzleGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                const sizzleFilter = this.audioContext.createBiquadFilter();
+                sizzleFilter.type = 'highpass';
+                sizzleFilter.frequency.value = 4000;
+                
+                sizzleSource.connect(sizzleFilter);
+                sizzleFilter.connect(sizzleGain);
+                sizzleGain.connect(gainNode);
+                sizzleSource.start(now);
+            }
+
+            // Impact Sound 6: Kinetic Impact
+            playKineticImpact(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Physical collision
+                const collisionOsc = this.audioContext.createOscillator();
+                collisionOsc.type = 'square';
+                collisionOsc.frequency.setValueAtTime(200, now);
+                collisionOsc.frequency.exponentialRampToValueAtTime(60, now + 0.1);
+                
+                const collisionGain = this.audioContext.createGain();
+                collisionGain.gain.setValueAtTime(0.8, now);
+                collisionGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                collisionOsc.connect(collisionGain);
+                collisionGain.connect(gainNode);
+                collisionOsc.start(now);
+                collisionOsc.stop(now + 0.1);
+
+                // Mass transfer boom
+                const boomOsc = this.audioContext.createOscillator();
+                boomOsc.type = 'sine';
+                boomOsc.frequency.setValueAtTime(50, now);
+                boomOsc.frequency.exponentialRampToValueAtTime(25, now + 0.25);
+                
+                const boomGain = this.audioContext.createGain();
+                boomGain.gain.setValueAtTime(0.6, now);
+                boomGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                boomOsc.connect(boomGain);
+                boomGain.connect(gainNode);
+                boomOsc.start(now);
+                boomOsc.stop(now + 0.25);
+            }
+
+            // Impact Sound 7: EMP Pulse
+            playEMPPulse(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Electronic disruption wave
+                const empOsc = this.audioContext.createOscillator();
+                empOsc.type = 'sawtooth';
+                empOsc.frequency.setValueAtTime(2000, now);
+                empOsc.frequency.exponentialRampToValueAtTime(100, now + 0.15);
+                
+                const empGain = this.audioContext.createGain();
+                empGain.gain.setValueAtTime(0.5, now);
+                empGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                const empFilter = this.audioContext.createBiquadFilter();
+                empFilter.type = 'notch';
+                empFilter.frequency.setValueAtTime(1000, now);
+                empFilter.frequency.exponentialRampToValueAtTime(200, now + 0.15);
+                empFilter.Q.value = 5;
+                
+                empOsc.connect(empFilter);
+                empFilter.connect(empGain);
+                empGain.connect(gainNode);
+                empOsc.start(now);
+                empOsc.stop(now + 0.15);
+
+                // Static burst
+                const staticNoise = this.createNoiseBuffer(0.1);
+                const staticSource = this.audioContext.createBufferSource();
+                staticSource.buffer = staticNoise;
+                
+                const staticGain = this.audioContext.createGain();
+                staticGain.gain.setValueAtTime(0.4, now);
+                staticGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                staticSource.connect(staticGain);
+                staticGain.connect(gainNode);
+                staticSource.start(now);
+            }
+
+            // Impact Sound 8: Fusion Core Hit
+            playFusionCoreHit(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Critical damage alarm
+                const alarmOsc = this.audioContext.createOscillator();
+                alarmOsc.type = 'square';
+                alarmOsc.frequency.setValueAtTime(440, now);
+                alarmOsc.frequency.setValueAtTime(880, now + 0.05);
+                alarmOsc.frequency.setValueAtTime(440, now + 0.1);
+                
+                const alarmGain = this.audioContext.createGain();
+                alarmGain.gain.setValueAtTime(0.4, now);
+                alarmGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+                
+                alarmOsc.connect(alarmGain);
+                alarmGain.connect(gainNode);
+                alarmOsc.start(now);
+                alarmOsc.stop(now + 0.15);
+
+                // Energy leak
+                const leakOsc = this.audioContext.createOscillator();
+                leakOsc.type = 'sine';
+                leakOsc.frequency.setValueAtTime(150, now);
+                
+                const leakLFO = this.audioContext.createOscillator();
+                leakLFO.frequency.value = 15;
+                const leakLFOGain = this.audioContext.createGain();
+                leakLFOGain.gain.value = 50;
+                
+                leakLFO.connect(leakLFOGain);
+                leakLFOGain.connect(leakOsc.frequency);
+                leakLFO.start(now);
+                leakLFO.stop(now + 0.3);
+                
+                const leakGain = this.audioContext.createGain();
+                leakGain.gain.setValueAtTime(0.5, now);
+                leakGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                
+                leakOsc.connect(leakGain);
+                leakGain.connect(gainNode);
+                leakOsc.start(now);
+                leakOsc.stop(now + 0.3);
+            }
+
+            // Impact Sound 9: Barrier Shatter
+            playBarrierShatter(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Force field collapse
+                const collapseOsc = this.audioContext.createOscillator();
+                collapseOsc.type = 'triangle';
+                collapseOsc.frequency.setValueAtTime(1000, now);
+                collapseOsc.frequency.exponentialRampToValueAtTime(100, now + 0.2);
+                
+                const collapseGain = this.audioContext.createGain();
+                collapseGain.gain.setValueAtTime(0.6, now);
+                collapseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                collapseOsc.connect(collapseGain);
+                collapseGain.connect(gainNode);
+                collapseOsc.start(now);
+                collapseOsc.stop(now + 0.2);
+
+                // Shattering harmonics
+                for (let i = 0; i < 5; i++) {
+                    const shardTime = now + (i * 0.02);
+                    const shardFreq = 2000 + (i * 300);
+                    
+                    const shardOsc = this.audioContext.createOscillator();
+                    shardOsc.type = 'sine';
+                    shardOsc.frequency.setValueAtTime(shardFreq, shardTime);
+                    shardOsc.frequency.exponentialRampToValueAtTime(shardFreq * 0.5, shardTime + 0.1);
+                    
+                    const shardGain = this.audioContext.createGain();
+                    shardGain.gain.setValueAtTime(0.2, shardTime);
+                    shardGain.gain.exponentialRampToValueAtTime(0.001, shardTime + 0.1);
+                    
+                    shardOsc.connect(shardGain);
+                    shardGain.connect(gainNode);
+                    shardOsc.start(shardTime);
+                    shardOsc.stop(shardTime + 0.1);
+                }
+            }
+
+            // Impact Sound 10: System Overload
+            playSystemOverload(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Cascading failure
+                for (let i = 0; i < 4; i++) {
+                    const failTime = now + (i * 0.05);
+                    
+                    const failOsc = this.audioContext.createOscillator();
+                    failOsc.type = 'square';
+                    failOsc.frequency.setValueAtTime(800 - (i * 150), failTime);
+                    failOsc.frequency.exponentialRampToValueAtTime(100, failTime + 0.1);
+                    
+                    const failGain = this.audioContext.createGain();
+                    failGain.gain.setValueAtTime(0.4, failTime);
+                    failGain.gain.exponentialRampToValueAtTime(0.001, failTime + 0.1);
+                    
+                    failOsc.connect(failGain);
+                    failGain.connect(gainNode);
+                    failOsc.start(failTime);
+                    failOsc.stop(failTime + 0.1);
+                }
+
+                // Electrical arcing
+                const arcNoise = this.createNoiseBuffer(0.25);
+                const arcSource = this.audioContext.createBufferSource();
+                arcSource.buffer = arcNoise;
+                
+                const arcGain = this.audioContext.createGain();
+                arcGain.gain.setValueAtTime(0, now);
+                arcGain.gain.linearRampToValueAtTime(0.3, now + 0.05);
+                arcGain.gain.setValueAtTime(0.3, now + 0.15);
+                arcGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                const arcFilter = this.audioContext.createBiquadFilter();
+                arcFilter.type = 'highpass';
+                arcFilter.frequency.value = 5000;
+                
+                arcSource.connect(arcFilter);
+                arcFilter.connect(arcGain);
+                arcGain.connect(gainNode);
+                arcSource.start(now);
+            }
+
+            // Launch Sound 1: Missile Deploy
+            playMissileDeploy(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Mechanical release
+                const mechOsc = this.audioContext.createOscillator();
+                mechOsc.type = 'square';
+                mechOsc.frequency.setValueAtTime(200, now);
+                mechOsc.frequency.setValueAtTime(150, now + 0.05);
+                
+                const mechGain = this.audioContext.createGain();
+                mechGain.gain.setValueAtTime(0.4, now);
+                mechGain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                
+                mechOsc.connect(mechGain);
+                mechGain.connect(gainNode);
+                mechOsc.start(now);
+                mechOsc.stop(now + 0.1);
+
+                // Ignition sequence
+                const igniteOsc = this.audioContext.createOscillator();
+                igniteOsc.type = 'sawtooth';
+                igniteOsc.frequency.setValueAtTime(100, now + 0.1);
+                igniteOsc.frequency.exponentialRampToValueAtTime(800, now + 0.4);
+                
+                const igniteGain = this.audioContext.createGain();
+                igniteGain.gain.setValueAtTime(0, now + 0.1);
+                igniteGain.gain.linearRampToValueAtTime(0.6, now + 0.2);
+                igniteGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                
+                const igniteFilter = this.audioContext.createBiquadFilter();
+                igniteFilter.type = 'lowpass';
+                igniteFilter.frequency.value = 1000;
+                
+                igniteOsc.connect(igniteFilter);
+                igniteFilter.connect(igniteGain);
+                igniteGain.connect(gainNode);
+                igniteOsc.start(now + 0.1);
+                igniteOsc.stop(now + 0.4);
+
+                // Thrust noise
+                const thrustNoise = this.createNoiseBuffer(0.5);
+                const thrustSource = this.audioContext.createBufferSource();
+                thrustSource.buffer = thrustNoise;
+                
+                const thrustGain = this.audioContext.createGain();
+                thrustGain.gain.setValueAtTime(0, now + 0.15);
+                thrustGain.gain.linearRampToValueAtTime(0.3, now + 0.25);
+                thrustGain.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
+                
+                const thrustFilter = this.audioContext.createBiquadFilter();
+                thrustFilter.type = 'bandpass';
+                thrustFilter.frequency.value = 500;
+                thrustFilter.Q.value = 2;
+                
+                thrustSource.connect(thrustFilter);
+                thrustFilter.connect(thrustGain);
+                thrustGain.connect(gainNode);
+                thrustSource.start(now + 0.15);
+            }
+
+            // Launch Sound 2: Warp Drive Engage
+            playWarpDriveEngage(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Space-time distortion buildup
+                const buildupOsc = this.audioContext.createOscillator();
+                buildupOsc.type = 'sine';
+                buildupOsc.frequency.setValueAtTime(50, now);
+                buildupOsc.frequency.exponentialRampToValueAtTime(400, now + 0.6);
+                
+                const buildupGain = this.audioContext.createGain();
+                buildupGain.gain.setValueAtTime(0, now);
+                buildupGain.gain.linearRampToValueAtTime(0.5, now + 0.5);
+                buildupGain.gain.setValueAtTime(0.5, now + 0.6);
+                buildupGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                buildupOsc.connect(buildupGain);
+                buildupGain.connect(gainNode);
+                buildupOsc.start(now);
+                buildupOsc.stop(now + 0.8);
+
+                // Warp effect
+                const warpOsc = this.audioContext.createOscillator();
+                warpOsc.type = 'triangle';
+                warpOsc.frequency.setValueAtTime(200, now + 0.5);
+                warpOsc.frequency.exponentialRampToValueAtTime(2000, now + 0.7);
+                warpOsc.frequency.exponentialRampToValueAtTime(100, now + 0.8);
+                
+                const warpGain = this.audioContext.createGain();
+                warpGain.gain.setValueAtTime(0, now + 0.5);
+                warpGain.gain.linearRampToValueAtTime(0.6, now + 0.6);
+                warpGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                warpOsc.connect(warpGain);
+                warpGain.connect(gainNode);
+                warpOsc.start(now + 0.5);
+                warpOsc.stop(now + 0.8);
+            }
+
+            // Launch Sound 3: Torpedo Launch
+            playTorpedoLaunch(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Tube pressurization
+                const pressureNoise = this.createNoiseBuffer(0.2);
+                const pressureSource = this.audioContext.createBufferSource();
+                pressureSource.buffer = pressureNoise;
+                
+                const pressureGain = this.audioContext.createGain();
+                pressureGain.gain.setValueAtTime(0, now);
+                pressureGain.gain.linearRampToValueAtTime(0.4, now + 0.1);
+                pressureGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                const pressureFilter = this.audioContext.createBiquadFilter();
+                pressureFilter.type = 'lowpass';
+                pressureFilter.frequency.value = 800;
+                
+                pressureSource.connect(pressureFilter);
+                pressureFilter.connect(pressureGain);
+                pressureGain.connect(gainNode);
+                pressureSource.start(now);
+
+                // Release thunk
+                const thunkOsc = this.audioContext.createOscillator();
+                thunkOsc.type = 'sine';
+                thunkOsc.frequency.setValueAtTime(80, now + 0.15);
+                thunkOsc.frequency.exponentialRampToValueAtTime(40, now + 0.25);
+                
+                const thunkGain = this.audioContext.createGain();
+                thunkGain.gain.setValueAtTime(0.7, now + 0.15);
+                thunkGain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                
+                thunkOsc.connect(thunkGain);
+                thunkGain.connect(gainNode);
+                thunkOsc.start(now + 0.15);
+                thunkOsc.stop(now + 0.25);
+
+                // Propulsion whoosh
+                const whooshOsc = this.audioContext.createOscillator();
+                whooshOsc.type = 'triangle';
+                whooshOsc.frequency.setValueAtTime(200, now + 0.2);
+                whooshOsc.frequency.exponentialRampToValueAtTime(1000, now + 0.4);
+                
+                const whooshGain = this.audioContext.createGain();
+                whooshGain.gain.setValueAtTime(0, now + 0.2);
+                whooshGain.gain.linearRampToValueAtTime(0.4, now + 0.25);
+                whooshGain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+                
+                whooshOsc.connect(whooshGain);
+                whooshGain.connect(gainNode);
+                whooshOsc.start(now + 0.2);
+                whooshOsc.stop(now + 0.4);
+            }
+
+            // Launch Sound 4: Fighter Scramble
+            playFighterScramble(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Multiple engine ignitions
+                for (let i = 0; i < 3; i++) {
+                    const engineTime = now + (i * 0.15);
+                    
+                    const engineOsc = this.audioContext.createOscillator();
+                    engineOsc.type = 'sawtooth';
+                    engineOsc.frequency.setValueAtTime(100, engineTime);
+                    engineOsc.frequency.exponentialRampToValueAtTime(400 + (i * 100), engineTime + 0.3);
+                    
+                    const engineGain = this.audioContext.createGain();
+                    engineGain.gain.setValueAtTime(0, engineTime);
+                    engineGain.gain.linearRampToValueAtTime(0.3, engineTime + 0.1);
+                    engineGain.gain.setValueAtTime(0.3, engineTime + 0.25);
+                    engineGain.gain.exponentialRampToValueAtTime(0.001, engineTime + 0.4);
+                    
+                    const engineFilter = this.audioContext.createBiquadFilter();
+                    engineFilter.type = 'lowpass';
+                    engineFilter.frequency.value = 800;
+                    
+                    engineOsc.connect(engineFilter);
+                    engineFilter.connect(engineGain);
+                    engineGain.connect(gainNode);
+                    engineOsc.start(engineTime);
+                    engineOsc.stop(engineTime + 0.4);
+                }
+
+                // Afterburner roar
+                const afterburnerNoise = this.createNoiseBuffer(0.6);
+                const afterburnerSource = this.audioContext.createBufferSource();
+                afterburnerSource.buffer = afterburnerNoise;
+                
+                const afterburnerGain = this.audioContext.createGain();
+                afterburnerGain.gain.setValueAtTime(0, now + 0.2);
+                afterburnerGain.gain.linearRampToValueAtTime(0.2, now + 0.3);
+                afterburnerGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                const afterburnerFilter = this.audioContext.createBiquadFilter();
+                afterburnerFilter.type = 'bandpass';
+                afterburnerFilter.frequency.value = 600;
+                afterburnerFilter.Q.value = 2;
+                
+                afterburnerSource.connect(afterburnerFilter);
+                afterburnerFilter.connect(afterburnerGain);
+                afterburnerGain.connect(gainNode);
+                afterburnerSource.start(now + 0.2);
+            }
+
+            // Launch Sound 5: Jump Gate Activation
+            playJumpGateActivation(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Portal energy charging
+                const chargeOsc = this.audioContext.createOscillator();
+                chargeOsc.type = 'sine';
+                chargeOsc.frequency.setValueAtTime(100, now);
+                chargeOsc.frequency.exponentialRampToValueAtTime(600, now + 0.5);
+                
+                const chargeLFO = this.audioContext.createOscillator();
+                chargeLFO.frequency.value = 10;
+                const chargeLFOGain = this.audioContext.createGain();
+                chargeLFOGain.gain.setValueAtTime(0, now);
+                chargeLFOGain.gain.linearRampToValueAtTime(50, now + 0.5);
+                
+                chargeLFO.connect(chargeLFOGain);
+                chargeLFOGain.connect(chargeOsc.frequency);
+                chargeLFO.start(now);
+                chargeLFO.stop(now + 0.6);
+                
+                const chargeGain = this.audioContext.createGain();
+                chargeGain.gain.setValueAtTime(0, now);
+                chargeGain.gain.linearRampToValueAtTime(0.5, now + 0.4);
+                chargeGain.gain.setValueAtTime(0.5, now + 0.5);
+                chargeGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+                
+                chargeOsc.connect(chargeGain);
+                chargeGain.connect(gainNode);
+                chargeOsc.start(now);
+                chargeOsc.stop(now + 0.6);
+
+                // Gate opening
+                const gateOsc = this.audioContext.createOscillator();
+                gateOsc.type = 'triangle';
+                gateOsc.frequency.setValueAtTime(300, now + 0.4);
+                gateOsc.frequency.setValueAtTime(300, now + 0.6);
+                gateOsc.frequency.exponentialRampToValueAtTime(100, now + 0.8);
+                
+                const gateGain = this.audioContext.createGain();
+                gateGain.gain.setValueAtTime(0, now + 0.4);
+                gateGain.gain.linearRampToValueAtTime(0.6, now + 0.5);
+                gateGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                const gateFilter = this.audioContext.createBiquadFilter();
+                gateFilter.type = 'bandpass';
+                gateFilter.frequency.value = 400;
+                gateFilter.Q.value = 8;
+                
+                gateOsc.connect(gateFilter);
+                gateFilter.connect(gateGain);
+                gateGain.connect(gainNode);
+                gateOsc.start(now + 0.4);
+                gateOsc.stop(now + 0.8);
+            }
+
+            // Launch Sound 6: Orbital Strike Call
+            playOrbitalStrikeCall(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Satellite targeting lock
+                const targetOsc = this.audioContext.createOscillator();
+                targetOsc.type = 'square';
+                targetOsc.frequency.value = 1000;
+                
+                const targetGain = this.audioContext.createGain();
+                for (let i = 0; i < 3; i++) {
+                    targetGain.gain.setValueAtTime(0.3, now + (i * 0.15));
+                    targetGain.gain.setValueAtTime(0, now + (i * 0.15) + 0.05);
+                }
+                targetGain.gain.setValueAtTime(0, now + 0.5);
+                
+                targetOsc.connect(targetGain);
+                targetGain.connect(gainNode);
+                targetOsc.start(now);
+                targetOsc.stop(now + 0.5);
+
+                // Beam charge
+                const beamOsc = this.audioContext.createOscillator();
+                beamOsc.type = 'sine';
+                beamOsc.frequency.setValueAtTime(200, now + 0.3);
+                beamOsc.frequency.exponentialRampToValueAtTime(1200, now + 0.7);
+                
+                const beamGain = this.audioContext.createGain();
+                beamGain.gain.setValueAtTime(0, now + 0.3);
+                beamGain.gain.linearRampToValueAtTime(0.5, now + 0.6);
+                beamGain.gain.setValueAtTime(0.5, now + 0.7);
+                beamGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                const beamFilter = this.audioContext.createBiquadFilter();
+                beamFilter.type = 'bandpass';
+                beamFilter.frequency.setValueAtTime(400, now + 0.3);
+                beamFilter.frequency.exponentialRampToValueAtTime(1000, now + 0.7);
+                beamFilter.Q.value = 5;
+                
+                beamOsc.connect(beamFilter);
+                beamFilter.connect(beamGain);
+                beamGain.connect(gainNode);
+                beamOsc.start(now + 0.3);
+                beamOsc.stop(now + 0.8);
+            }
+
+            // Launch Sound 7: Drone Swarm Release
+            playDroneSwarmRelease(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Mass deployment clicks
+                for (let i = 0; i < 8; i++) {
+                    const clickTime = now + (i * 0.05);
+                    
+                    const clickOsc = this.audioContext.createOscillator();
+                    clickOsc.type = 'square';
+                    clickOsc.frequency.value = 800 + (i * 50);
+                    
+                    const clickGain = this.audioContext.createGain();
+                    clickGain.gain.setValueAtTime(0.2, clickTime);
+                    clickGain.gain.exponentialRampToValueAtTime(0.001, clickTime + 0.02);
+                    
+                    clickOsc.connect(clickGain);
+                    clickGain.connect(gainNode);
+                    clickOsc.start(clickTime);
+                    clickOsc.stop(clickTime + 0.02);
+                }
+
+                // Synchronized motors
+                const motorOsc = this.audioContext.createOscillator();
+                motorOsc.type = 'sawtooth';
+                motorOsc.frequency.setValueAtTime(200, now + 0.1);
+                motorOsc.frequency.setValueAtTime(400, now + 0.3);
+                motorOsc.frequency.setValueAtTime(400, now + 0.5);
+                motorOsc.frequency.exponentialRampToValueAtTime(800, now + 0.6);
+                
+                const motorGain = this.audioContext.createGain();
+                motorGain.gain.setValueAtTime(0, now + 0.1);
+                motorGain.gain.linearRampToValueAtTime(0.3, now + 0.2);
+                motorGain.gain.setValueAtTime(0.3, now + 0.5);
+                motorGain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+                
+                const motorFilter = this.audioContext.createBiquadFilter();
+                motorFilter.type = 'lowpass';
+                motorFilter.frequency.value = 1000;
+                
+                motorOsc.connect(motorFilter);
+                motorFilter.connect(motorGain);
+                motorGain.connect(gainNode);
+                motorOsc.start(now + 0.1);
+                motorOsc.stop(now + 0.6);
+            }
+
+            // Launch Sound 8: Nuke Launch Sequence
+            playNukeLaunchSequence(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Warning tones
+                for (let i = 0; i < 3; i++) {
+                    const warnTime = now + (i * 0.2);
+                    
+                    const warnOsc = this.audioContext.createOscillator();
+                    warnOsc.type = 'sine';
+                    warnOsc.frequency.value = 440;
+                    
+                    const warnGain = this.audioContext.createGain();
+                    warnGain.gain.setValueAtTime(0.3, warnTime);
+                    warnGain.gain.exponentialRampToValueAtTime(0.001, warnTime + 0.15);
+                    
+                    warnOsc.connect(warnGain);
+                    warnGain.connect(gainNode);
+                    warnOsc.start(warnTime);
+                    warnOsc.stop(warnTime + 0.15);
+                }
+
+                // Silo activation
+                const siloOsc = this.audioContext.createOscillator();
+                siloOsc.type = 'square';
+                siloOsc.frequency.setValueAtTime(60, now + 0.6);
+                siloOsc.frequency.exponentialRampToValueAtTime(200, now + 0.8);
+                
+                const siloGain = this.audioContext.createGain();
+                siloGain.gain.setValueAtTime(0, now + 0.6);
+                siloGain.gain.linearRampToValueAtTime(0.5, now + 0.7);
+                siloGain.gain.setValueAtTime(0.5, now + 0.8);
+                siloGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+                
+                siloOsc.connect(siloGain);
+                siloGain.connect(gainNode);
+                siloOsc.start(now + 0.6);
+                siloOsc.stop(now + 1.0);
+
+                // Launch rumble
+                const rumbleNoise = this.createNoiseBuffer(0.5);
+                const rumbleSource = this.audioContext.createBufferSource();
+                rumbleSource.buffer = rumbleNoise;
+                
+                const rumbleGain = this.audioContext.createGain();
+                rumbleGain.gain.setValueAtTime(0, now + 0.7);
+                rumbleGain.gain.linearRampToValueAtTime(0.4, now + 0.8);
+                rumbleGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+                
+                const rumbleFilter = this.audioContext.createBiquadFilter();
+                rumbleFilter.type = 'lowpass';
+                rumbleFilter.frequency.value = 200;
+                
+                rumbleSource.connect(rumbleFilter);
+                rumbleFilter.connect(rumbleGain);
+                rumbleGain.connect(gainNode);
+                rumbleSource.start(now + 0.7);
+            }
+
+            // Launch Sound 9: Hyperspace Jump
+            playHyperspaceJump(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Reality tear buildup
+                const tearOsc = this.audioContext.createOscillator();
+                tearOsc.type = 'sine';
+                tearOsc.frequency.setValueAtTime(50, now);
+                
+                const tearLFO = this.audioContext.createOscillator();
+                tearLFO.frequency.setValueAtTime(2, now);
+                tearLFO.frequency.exponentialRampToValueAtTime(30, now + 0.6);
+                const tearLFOGain = this.audioContext.createGain();
+                tearLFOGain.gain.setValueAtTime(10, now);
+                tearLFOGain.gain.exponentialRampToValueAtTime(200, now + 0.6);
+                
+                tearLFO.connect(tearLFOGain);
+                tearLFOGain.connect(tearOsc.frequency);
+                tearLFO.start(now);
+                tearLFO.stop(now + 0.6);
+                
+                const tearGain = this.audioContext.createGain();
+                tearGain.gain.setValueAtTime(0, now);
+                tearGain.gain.linearRampToValueAtTime(0.5, now + 0.5);
+                tearGain.gain.setValueAtTime(0.5, now + 0.6);
+                tearGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+                
+                tearOsc.connect(tearGain);
+                tearGain.connect(gainNode);
+                tearOsc.start(now);
+                tearOsc.stop(now + 0.7);
+
+                // Dimensional shift
+                const shiftOsc = this.audioContext.createOscillator();
+                shiftOsc.type = 'triangle';
+                shiftOsc.frequency.setValueAtTime(100, now + 0.5);
+                shiftOsc.frequency.exponentialRampToValueAtTime(3000, now + 0.65);
+                shiftOsc.frequency.setValueAtTime(50, now + 0.65);
+                
+                const shiftGain = this.audioContext.createGain();
+                shiftGain.gain.setValueAtTime(0, now + 0.5);
+                shiftGain.gain.linearRampToValueAtTime(0.7, now + 0.6);
+                shiftGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+                
+                const shiftFilter = this.audioContext.createBiquadFilter();
+                shiftFilter.type = 'notch';
+                shiftFilter.frequency.setValueAtTime(500, now + 0.5);
+                shiftFilter.frequency.exponentialRampToValueAtTime(2000, now + 0.65);
+                shiftFilter.Q.value = 10;
+                
+                shiftOsc.connect(shiftFilter);
+                shiftFilter.connect(shiftGain);
+                shiftGain.connect(gainNode);
+                shiftOsc.start(now + 0.5);
+                shiftOsc.stop(now + 0.8);
+            }
+
+            // Launch Sound 10: Station Undock
+            playStationUndock(volume = 0.7) {
+                const now = this.audioContext.currentTime;
+                const gainNode = this.audioContext.createGain();
+                gainNode.gain.value = volume;
+                gainNode.connect(this.masterGainNode);
+
+                // Magnetic clamp release
+                const clampOsc = this.audioContext.createOscillator();
+                clampOsc.type = 'square';
+                clampOsc.frequency.setValueAtTime(150, now);
+                clampOsc.frequency.setValueAtTime(100, now + 0.1);
+                clampOsc.frequency.setValueAtTime(80, now + 0.15);
+                
+                const clampGain = this.audioContext.createGain();
+                clampGain.gain.setValueAtTime(0.5, now);
+                clampGain.gain.setValueAtTime(0.5, now + 0.1);
+                clampGain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                
+                clampOsc.connect(clampGain);
+                clampGain.connect(gainNode);
+                clampOsc.start(now);
+                clampOsc.stop(now + 0.2);
+
+                // Hydraulic hiss
+                const hissNoise = this.createNoiseBuffer(0.3);
+                const hissSource = this.audioContext.createBufferSource();
+                hissSource.buffer = hissNoise;
+                
+                const hissGain = this.audioContext.createGain();
+                hissGain.gain.setValueAtTime(0, now + 0.05);
+                hissGain.gain.linearRampToValueAtTime(0.3, now + 0.1);
+                hissGain.gain.setValueAtTime(0.3, now + 0.2);
+                hissGain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                
+                const hissFilter = this.audioContext.createBiquadFilter();
+                hissFilter.type = 'highpass';
+                hissFilter.frequency.value = 3000;
+                
+                hissSource.connect(hissFilter);
+                hissFilter.connect(hissGain);
+                hissGain.connect(gainNode);
+                hissSource.start(now + 0.05);
+
+                // Thruster engage
+                const thrusterOsc = this.audioContext.createOscillator();
+                thrusterOsc.type = 'sawtooth';
+                thrusterOsc.frequency.setValueAtTime(80, now + 0.3);
+                thrusterOsc.frequency.exponentialRampToValueAtTime(300, now + 0.6);
+                
+                const thrusterGain = this.audioContext.createGain();
+                thrusterGain.gain.setValueAtTime(0, now + 0.3);
+                thrusterGain.gain.linearRampToValueAtTime(0.4, now + 0.4);
+                thrusterGain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+                
+                const thrusterFilter = this.audioContext.createBiquadFilter();
+                thrusterFilter.type = 'lowpass';
+                thrusterFilter.frequency.value = 600;
+                
+                thrusterOsc.connect(thrusterFilter);
+                thrusterFilter.connect(thrusterGain);
+                thrusterGain.connect(gainNode);
+                thrusterOsc.start(now + 0.3);
+                thrusterOsc.stop(now + 0.7);
+            }
+
+            initializeSounds() {
+                // Attack sounds
+                this.sounds.attack = [
+                    { name: 'Plasma Burst', description: 'Layered energy discharge', method: this.playPlasmaBurst.bind(this) },
+                    { name: 'Ion Cannon', description: 'Charged particle beam', method: this.playIonCannon.bind(this) },
+                    { name: 'Pulse Laser', description: 'Rapid staccato bursts', method: this.playPulseLaser.bind(this) },
+                    { name: 'Quantum Strike', description: 'Dimensional warping effect', method: this.playQuantumStrike.bind(this) },
+                    { name: 'Rail Gun', description: 'Kinetic acceleration', method: this.playRailGun.bind(this) },
+                    { name: 'Photon Torpedo', description: 'Energy launch with harmonics', method: this.playPhotonTorpedo.bind(this) },
+                    { name: 'Neutron Beam', description: 'Sustained energy stream', method: this.playNeutronBeam.bind(this) },
+                    { name: 'Solar Flare', description: 'Wide-spectrum energy', method: this.playSolarFlare.bind(this) },
+                    { name: 'Gravity Hammer', description: 'Heavy distortion impact', method: this.playGravityHammer.bind(this) },
+                    { name: 'Arc Lightning', description: 'Electrical discharge', method: this.playArcLightning.bind(this) }
+                ];
+
+                // Impact sounds
+                this.sounds.impact = [
+                    { name: 'Shield Hit', description: 'Energy absorption layers', method: this.playShieldHit.bind(this) },
+                    { name: 'Hull Breach', description: 'Metal deformation', method: this.playHullBreach.bind(this) },
+                    { name: 'Energy Deflection', description: 'Harmonic dispersal', method: this.playEnergyDeflection.bind(this) },
+                    { name: 'Armor Crack', description: 'Structural failure', method: this.playArmorCrack.bind(this) },
+                    { name: 'Plasma Splash', description: 'Energy dispersion', method: this.playPlasmaSplash.bind(this) },
+                    { name: 'Kinetic Impact', description: 'Physical collision', method: this.playKineticImpact.bind(this) },
+                    { name: 'EMP Pulse', description: 'Electronic disruption', method: this.playEMPPulse.bind(this) },
+                    { name: 'Fusion Core Hit', description: 'Critical system damage', method: this.playFusionCoreHit.bind(this) },
+                    { name: 'Barrier Shatter', description: 'Force field collapse', method: this.playBarrierShatter.bind(this) },
+                    { name: 'System Overload', description: 'Cascading failure', method: this.playSystemOverload.bind(this) }
+                ];
+
+                // Launch sounds
+                this.sounds.launch = [
+                    { name: 'Missile Deploy', description: 'Mechanical release & ignition', method: this.playMissileDeploy.bind(this) },
+                    { name: 'Warp Drive Engage', description: 'Space-time distortion', method: this.playWarpDriveEngage.bind(this) },
+                    { name: 'Torpedo Launch', description: 'Tube pressurization', method: this.playTorpedoLaunch.bind(this) },
+                    { name: 'Fighter Scramble', description: 'Multiple engine ignitions', method: this.playFighterScramble.bind(this) },
+                    { name: 'Jump Gate Activation', description: 'Portal energy charging', method: this.playJumpGateActivation.bind(this) },
+                    { name: 'Orbital Strike Call', description: 'Satellite targeting', method: this.playOrbitalStrikeCall.bind(this) },
+                    { name: 'Drone Swarm Release', description: 'Mass deployment', method: this.playDroneSwarmRelease.bind(this) },
+                    { name: 'Nuke Launch Sequence', description: 'Warning & silo activation', method: this.playNukeLaunchSequence.bind(this) },
+                    { name: 'Hyperspace Jump', description: 'Reality tear & shift', method: this.playHyperspaceJump.bind(this) },
+                    { name: 'Station Undock', description: 'Clamp release & thrusters', method: this.playStationUndock.bind(this) }
+                ];
+            }
+        }
+
+        // Initialize
+        const soundEngine = new SpaceSoundEngine();
+        let audioInitialized = false;
+
+        // Create sound cards
+        function createSoundCard(sound, category) {
+            const card = document.createElement('div');
+            card.className = 'sound-card';
+            card.innerHTML = `
+                <div class="waveform-visual"></div>
+                <div class="sound-name">${sound.name}</div>
+                <div class="sound-description">${sound.description}</div>
+                <div class="sound-controls">
+                    <button class="play-button">▶ Play</button>
+                    <input type="range" class="volume-slider" min="0" max="100" value="70">
+                    <span class="volume-label">70%</span>
+                </div>
+            `;
+
+            const playButton = card.querySelector('.play-button');
+            const volumeSlider = card.querySelector('.volume-slider');
+            const volumeLabel = card.querySelector('.volume-label');
+
+            playButton.addEventListener('click', () => {
+                if (!audioInitialized) return;
+                
+                card.classList.add('playing');
+                const volume = volumeSlider.value / 100;
+                sound.method(volume);
+                
+                // Remove playing class after animation
+                setTimeout(() => {
+                    card.classList.remove('playing');
+                }, 500);
+            });
+
+            volumeSlider.addEventListener('input', () => {
+                volumeLabel.textContent = volumeSlider.value + '%';
+            });
+
+            return card;
+        }
+
+        // Initialize button
+        document.getElementById('initButton').addEventListener('click', () => {
+            if (soundEngine.init()) {
+                audioInitialized = true;
+                document.getElementById('initButton').disabled = true;
+                document.getElementById('initButton').textContent = '✓ Audio System Initialized';
+                document.getElementById('soundContainer').style.display = 'block';
+                document.getElementById('masterControls').style.display = 'block';
+
+                // Populate sound grids
+                const attackGrid = document.getElementById('attackSounds');
+                soundEngine.sounds.attack.forEach(sound => {
+                    attackGrid.appendChild(createSoundCard(sound, 'attack'));
+                });
+
+                const impactGrid = document.getElementById('impactSounds');
+                soundEngine.sounds.impact.forEach(sound => {
+                    impactGrid.appendChild(createSoundCard(sound, 'impact'));
+                });
+
+                const launchGrid = document.getElementById('launchSounds');
+                soundEngine.sounds.launch.forEach(sound => {
+                    launchGrid.appendChild(createSoundCard(sound, 'launch'));
+                });
+            }
+        });
+
+        // Master volume control
+        const masterVolume = document.getElementById('masterVolume');
+        const masterVolumeLabel = document.getElementById('masterVolumeLabel');
+        
+        masterVolume.addEventListener('input', () => {
+            const value = masterVolume.value / 100;
+            soundEngine.setMasterVolume(value);
+            masterVolumeLabel.textContent = masterVolume.value + '%';
+        });
+    </script>
+</body>
+</html>
