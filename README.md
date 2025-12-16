@@ -1,5 +1,7 @@
 # SolarFront
 
+This is a fork of OpenFrontIO, the best browser game of all time; https://github.com/openfrontio/OpenFrontIO -- www.openfront.io
+
 A multiplayer real-time strategy browser game.
 
 ## Prerequisites
